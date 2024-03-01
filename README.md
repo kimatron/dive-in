@@ -49,4 +49,33 @@ Provide step-by-step instructions on how to install and set up your Django blog 
 
 Explain how to use your Django blog project. Provide examples and code snippets if necessary. Include any configuration options or settings that need to be modified.
 
+# Project Planning
+
+With a major time constraint in getting the project together, by using the MoSCoW method, I could prioritize the project requirements, focus on the must-haves and should-haves to deliver key functionalities, and then consider the could-haves based on available resources and time.
+
+## Must-haves:
+
+* User authentication and authorization for logging in, creating posts, and comments.
+* Database models for blog posts, comments, and travel-related content.
+* Basic UI for displaying blog posts, travel content, and user profiles.
+
+## Should-haves:
+
+* Enhanced user profile management with additional information such as profile picture, bio, etc.
+* HTML/CSS styling for the UI to improve the overall look and feel.
+* Comment moderation functionality to manage and moderate user comments.
+
+## Could-haves:
+
+* Rich text editing for creating and editing blog posts.
+* Integration with a third-party API for fetching travel-related information or images.
+* User notification system for new comments, likes, etc.
+
+## Won't-haves:
+
+* Advanced features like real-time chat functionality.
+* Social media integration for sharing blog posts or travel content.
+* Implementing a comprehensive search functionality.
 ```bash
+
+## Project Planning
