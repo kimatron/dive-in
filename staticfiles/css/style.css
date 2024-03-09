@@ -1,0 +1,139 @@
+/* Reset */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+/* Colors */
+body {
+  background-color: #007580;
+  /* Deep ocean blue */
+  color: #fff;
+  /* White text */
+}
+
+.brand {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #FFDD00;
+  /* Yellow */
+}
+
+.red-o {
+  color: #FF6F61;
+  /* Red */
+}
+
+/* Interactive Buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #FF6F61;
+  /* Red */
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #FF4B33;
+  /* Darker red */
+}
+
+/* Card Styles */
+.card {
+  background-color: rgba(255, 255, 255, 0.2);
+  /* Semi-transparent white */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Image Styles */
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Overlay Styles */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent black */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+/* Text Styles */
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.7);
+  /* Semi-transparent white */
+}
+
+/* Masthead Styles */
+.masthead {
+  padding: 100px 0;
+  background-image: url('/static/images/diveinlogo.png');
+  /* Path to your image */
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+}
+
+.masthead-heading {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.masthead-subheading {
+  font-size: 1.5rem;
+  margin-bottom: 50px;
+}
+
+/* Link Styles */
+.link {
+  color: #FFDD00;
+  /* Yellow */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #FFB700;
+  /* Darker yellow */
+}
