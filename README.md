@@ -76,6 +76,10 @@ With a major time constraint in getting the project together, by using the MoSCo
 * Advanced features like real-time chat functionality.
 * Social media integration for sharing blog posts or travel content.
 * Implementing a comprehensive search functionality.
+
+# BUGS
+
+Page not loading css styling when DEBUG is set to False. Can't figure out why.
 ```bash
 
 ## Project Planning

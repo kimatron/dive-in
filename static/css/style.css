@@ -107,7 +107,7 @@ body {
 /* Masthead Styles */
 .masthead {
   padding: 100px 0;
-  background-image: url('/static/images/underwater.jpg');
+  background-image: url('/static/images/diveinlogo.png');
   /* Path to your image */
   background-size: cover;
   background-position: center;
