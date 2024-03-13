@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+
+<div class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="sm:flex items-center sm:justify-between">
+            <div class="mb-8 sm:mb-0">
+                <h1 class="text-3xl font-bold text-gray-800">{{ post.title }}</h1>
+                <p class="text-sm text-gray-600">{{ post.author }} | {{ post.created_on }}</p>
+            </div>
+            <div class="hidden sm:block ml-8">
+                <img src="{% static 'images/diveinlogo.png' %}" class="w-64 h-auto" alt="Post Image">
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <div class="rounded-lg bg-white shadow-lg p-6">
+                <p class="text-lg text-gray-700">
+                    {{ post.content | safe }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
