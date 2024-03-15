@@ -5,27 +5,31 @@ html {
   padding: 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-}
-
-/* Colors */
-body {
   background-color: #007580;
   /* Deep ocean blue */
   color: #fff;
   /* White text */
 }
 
+/* Brand Styles */
 .brand {
   font-family: 'Lato', sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
   color: #FFDD00;
   /* Yellow */
+  text-transform: uppercase;
+  /* Convert the brand text to uppercase */
+  letter-spacing: 2px;
+  /* Add letter spacing for a modern look */
 }
 
+/* Red Styles */
 .red-o {
   color: #FF6F61;
   /* Red */
+  font-weight: 600;
+  /* Increase font weight for emphasis */
 }
 
 /* Interactive Buttons */
@@ -39,34 +43,39 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  /* Add transform animation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Add subtle shadow */
 }
 
 .btn:hover {
   background-color: #FF4B33;
   /* Darker red */
+  transform: scale(1.05);
+  /* Scale up on hover */
 }
 
 /* Card Styles */
 .card {
-  background-color: rgba(255, 255, 255, 0.2);
-  /* Semi-transparent white */
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Slightly transparent white */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Add box-shadow transition */
+  margin: 20px;
+  /* Add margin for space between cards */
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  /* Enhance shadow on hover */
 }
 
 /* Image Styles */
-.image-container {
-  position: relative;
-  overflow: hidden;
-}
-
 .image-container img {
   width: 100%;
   height: auto;
@@ -84,56 +93,78 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   /* Semi-transparent black */
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .image-container:hover .overlay {
-  opacity: 1;
+  opacity: 0.8;
+  /* Darken overlay on hover */
 }
 
 /* Text Styles */
 .text-center {
   text-align: center;
+  line-height: 1.6;
+  /* Increase line height for better readability */
 }
 
 .text-muted {
   color: rgba(255, 255, 255, 0.7);
   /* Semi-transparent white */
+  font-size: 0.9rem;
+  /* Reduce font size for smaller text */
 }
 
 /* Masthead Styles */
 .masthead {
   padding: 100px 0;
   background-image: url('/static/images/diveinlogo.png');
-  /* Path to your image */
   background-size: cover;
   background-position: center;
   color: #fff;
   text-align: center;
+  position: relative;
+  /* Add position for pseudo-elements */
+  overflow: hidden;
+  /* Hide overflow for better positioning */
+}
+
+.masthead:before {
+  content: '';
+  /* Add pseudo-element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent black */
+  z-index: 0;
+  /* Place behind text */
 }
 
 .masthead-heading {
   font-size: 3.5rem;
   margin-bottom: 20px;
+  position: relative;
+  /* Add position for stacking context */
+  z-index: 1;
+  /* Place above pseudo-element */
 }
 
 .masthead-subheading {
   font-size: 1.5rem;
   margin-bottom: 50px;
+  position: relative;
+  /* Add position for stacking context */
+  z-index: 1;
+  /* Place above pseudo-element */
 }
 
 /* Link Styles */
 .link {
   color: #FFDD00;
-  /* Yellow */
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.link:hover {
-  color: #FFB700;
-  /* Darker yellow */
 }

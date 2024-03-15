@@ -77,9 +77,29 @@ With a major time constraint in getting the project together, by using the MoSCo
 * Social media integration for sharing blog posts or travel content.
 * Implementing a comprehensive search functionality.
 
+# ERD's
+
+## Post Model:
+
+
+## About Model: 
+
+| About        |                | Blog       | 
+|--------------|----------------|------------|
+| id           |                | id         |
+| title        |                | title      |
+| content      |                | content    |
+| created_at   |                | created_at |
+| updated_at   |                | updated_at |
+| blog_id (FK) | 1:1            |            |
+
+
+
 # BUGS
 
 Page not loading css styling when DEBUG is set to False. Can't figure out why.
+
+
 ```bash
 
 ## Project Planning
