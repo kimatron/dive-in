@@ -7,16 +7,28 @@
       <img src="{% static 'images/splash.jpg' %}" width="75%" />
     </div>
     <div class="col-8">
-      <!-- Title goes between these h2 tags -->
-      <h2>{{ about.title }}</h2>
-      <!-- Content goes directly underneath this -->
-      {{ about.content | safe }}
+      <!-- Display company name -->
+      <h2>{{ about.company_name }}</h2>
+
+      <!-- Display founding date -->
+      <p><strong>Founding Date:</strong> {{ about.founding_date }}</p>
+
+      <!-- Display mission -->
+      <h4>Mission:</h4>
+      <p>{{ about.mission | linebreaks }}</p>
+
+      <!-- Display offerings -->
+      <h4>Offerings:</h4>
+      <p>{{ about.offerings | linebreaks }}</p>
+
+      <!-- Display content -->
+      <h4>Content:</h4>
+      <p>{{ about.content | linebreaks | safe }}</p>
     </div>
   </div>
   <div class="row">
     <div class="col text-right">
-      <!-- Updated on field goes in here -->
-
+      <!-- Display updated on date -->
       <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
     </div>
   </div>
