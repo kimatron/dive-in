@@ -72,11 +72,25 @@
                 <span class="navbar-text text-muted">
                     Explore the Depths
                 </span>
+                <p class="text-end m-3">
+                    {% if user.is_authenticated %} 
+                        You are logged in as {{ user }}
+                    {% else %}
+                        You are not logged in
+                    {% endif %}
+                </p>
             </div>
         </div>
     </nav>
 
     <main class="flex-shrink-0 main-bg">
+        <p class="text-end m-3">
+            {% if user.is_authenticated %} 
+                You are logged in as {{ user }}
+            {% else %}
+                You are not logged in
+            {% endif %}
+        </p>
 
         {% block content %}
         <!-- Content Goes here -->
