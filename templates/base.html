@@ -82,8 +82,21 @@
             </div>
         </div>
     </nav>
-
+    <!-- Notification Management using Django -->
+    <div class="container">
+     <div class="row">
+       <div class="col-md-8 offset-md-2">
+         {% for message in messages %}
+         <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+           {{ message | safe }}
+           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+         {% endfor %}
+       </div>
+     </div>
+    </div>
     <main class="flex-shrink-0 main-bg">
+    
         <p class="text-end m-3">
             {% if user.is_authenticated %} 
                 You are logged in as {{ user }}
