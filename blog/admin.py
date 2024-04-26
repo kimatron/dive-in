@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, Category, Tag, Subscriber
+from .models import Post, Comment, Category, Tag, Subscriber, FeaturedPost
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -36,5 +36,9 @@ class SubscriberAdmin(admin.ModelAdmin):
     list_display = ('email', 'name', 'subscribed_on', 'active')
     list_filter = ('active', 'subscribed_on')
     search_fields = ['email', 'name']
+
+
+admin.site.register(FeaturedPost)
+
 
 # Register your models here.

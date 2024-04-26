@@ -5,6 +5,7 @@ from .models import Post
 from django.shortcuts import get_object_or_404
 from .models import Post
 from .forms import CommentForm
+from .models import FeaturedPost
 # Create your views here.
 
 
@@ -55,3 +56,15 @@ def post_detail(request, slug):
             "comment_form": comment_form,
         },
     )
+
+
+def blog_home(request):
+    featured_posts = FeaturedPost.objects.filter(is_featured=True)
+    # Add other logic to retrieve non-featured posts or additional data
+
+    context = {
+        'featured_posts': featured_posts,
+        # Add other context data as needed
+    }
+
+    return render(request, 'blog_home.html', context)

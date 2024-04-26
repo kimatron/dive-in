@@ -5,6 +5,15 @@
 <!-- index.html content starts here -->
 <div class="container-fluid">
     <div class="row">
+        <!-- Example usage in blog_home.html -->
+{% for post in featured_posts %}
+<div class="featured-post">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <!-- Add other post details or formatting as needed -->
+</div>
+{% endfor %}
+
 
         <!-- Blog Entries Column -->
         <div class="col-12 mt-3">

@@ -73,3 +73,8 @@ class Subscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class FeaturedPost(models.Model):
+    post = models.OneToOneField(Post, on_delete=models.CASCADE)
+    is_featured = models.BooleanField(default=False)
