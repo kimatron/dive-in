@@ -4,8 +4,7 @@ Dive In is a blog based on scuba diving, travel, and the lifestyle that comes wi
 
 Unfortunately I ran out of time with this project to get everything I needed done, I learned a lot and it was a lot of information to get through. I look forward to finishing it in the near future!
 
-superuser: kimmy
-password: kim1234
+
 
 ![Logo](static/images/diveinlogo.png)
 
