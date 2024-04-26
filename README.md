@@ -2,7 +2,10 @@
 
 Dive In is a blog based on scuba diving, travel, and the lifestyle that comes with it. Users can view blogs, comment, share and add to the conversation.
 
-Unfortunately I ran out of time with this project and did not receive any reply to my request for an extension when applied for with detailed reasons.
+Unfortunately I ran out of time with this project to get everything I needed done, I learned a lot and it was a lot of information to get through. I look forward to finishing it in the near future!
+
+superuser: kimmy
+password: kim1234
 
 ![Logo](static/images/diveinlogo.png)
 
@@ -11,118 +14,107 @@ Unfortunately I ran out of time with this project and did not receive any reply 
 ...
 
 
+
+
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
+- [Models Overview](#models-overview)
 - [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
+- [Project Planning](#project-planning)
+- [Technologies Used](#technologies-used)
+- [Deployment](#deployment)
+- [Credits](#credits)
 
 ## Project Overview
 
-Provide an overview of your project, explaining its purpose and goals. Include any relevant background information.
-
-
-## Features
-
-The key features of the Dive In Blog Project are designed to empower users and create an immersive experience. Here's a rundown of the core functionalities:
-
-- **User Authentication and**: We've implemented a robust user authentication system to ensure secure access to the platform and enable users to create and interact with content safely.
-
-- **Blog Post Management**: Our database models facilitate seamless creation, management, and display of compelling blog, enabling users to share their stories and experiences effortlessly.
-
-- **Comments Functionality**: An interactive comment section allows users to engage in meaningful discussions share feedback, and cultivate a vibrant community within the platform.
+Dive In is a scuba diving and travel-oriented blog project that aims to provide users with a platform to explore narratives, engage in discussions, and share experiences related to scuba diving adventures. The project is designed to incorporate various features to enhance user interaction and create a vibrant community around scuba diving and travel lifestyle.
 
 ## Features
 
+Dive In Blog Project encapsulates several key features tailored to enrich the user experience and foster community engagement:
 
-| Feature | Description |
-|---------|-------------|
-| Feature 1 | Description of feature 1 |
-| Feature 2 | Description of feature 2 |
-| Feature 3 | Description of feature 3 |
+- **User Authentication**: Implementing a secure login and registration system for users to access and interact with the blog.
+- **Blog Post Management**: Utilizing database models to create, edit, and display blog posts, enabling users to share their stories.
+- **Comments Functionality**: Enabling an interactive comments section for users to engage, share feedback, and build a vibrant community.
+
+### Detailed Features
+
+| Feature                | Description                                                                                                 |
+|------------------------|-------------------------------------------------------------------------------------------------------------|
+| User Authentication     | Robust user authentication system ensuring secure access and interaction within the platform.            |
+| Blog Post Management    | Database models facilitate seamless creation, management, and display of captivating blog posts.          |
+| Comments Functionality  | Interactive comment section allows users to participate in discussions and provide feedback.
 
 ## Installation
 
-We've curated a step-by-step installation process to streamline the setup of the Dive In Blog Project. Here's how you can get started:
+To set up the Dive In Blog Project, follow these steps:
 
-1. **Clone the Repository**: Begin cloning the project repository from GitHub to access the source code and files.
+1. **Clone the Repository**: Clone the project repository from GitHub to access the source code.
+2. **Install Dependencies**: Use the `pip` package manager to install dependencies listed in the `requirements.txt` file.
+3. **Database Configuration**: Customize database settings in `settings.py` for seamless interaction with the database.
 
-2. **Install Dependencies**: Utilize the `pip` package manager to install the dependencies listed in the `requirements.txt` file, ensuring a smooth and efficient setup process.
+## Models Overview
 
-3. **Database Configuration**: Customize the database settings in `settings.py` to align with your specific environment, enabling seamless interaction with the underlying database.
+### Post Model
 
+**Fields**:
+- Title (CharField)
+- Slug (SlugField)
+- Author (ForeignKey to User)
+- Content (TextField)
+- Created On (DateTimeField)
+- Status (Draft or Published)
+- Excerpt (TextField)
+- Updated On (DateTimeField)
 
-## Usage
+### Comment Model
 
-Explain how to use your Django blog project. Provide examples and code snippets if necessary. Include any configuration options or settings that need to be modified.
+**Fields**:
+- Post (ForeignKey to Post)
+- Author (ForeignKey to User)
+- Body (TextField)
+- Approved (Boolean)
+- Created On (DateTimeField)
 
-# Project Planning
+### About Model
 
-With a major time constraint in getting the project together, by using the MoSCoW method, I could prioritize the project requirements, focus on the must-haves and should-haves to deliver key functionalities, and then consider the could-haves based on available resources and time.
+**Fields**:
+- Company Name (CharField)
+- Founding Date (DateField)
+- Mission (TextField)
+- Offerings (TextField)
+- Updated On (DateTimeField)
+- Content (TextField)
 
-## Must-haves:
+#### Additional Models
 
-* User authentication and authorization for logging in, creating posts, and comments.
-* Database models for blog posts, comments, and travel-related content.
-* Basic UI for displaying blog posts, travel content, and user profiles.
+- Category
+- Tag
+- Subscriber
+- FeaturedPost
 
-## Should-haves:
+## Testing
 
-* Enhanced user profile management with additional information such as profile picture, bio, etc.
-* HTML/CSS styling for the UI to improve the overall look and feel.
-* Comment moderation functionality to manage and moderate user comments.
+The Dive In Blog Project employs manual and/or automated procedures for assessing functionality, usability, and data management within the web application. Testing processes are documented for reference.
 
-## Could-haves:
+## Project Planning
 
-* Rich text editing for creating and editing blog posts.
-* Integration with a third-party API for fetching travel-related information or images.
-* User notification system for new comments, likes, etc.
+Utilizing the MoSCoW method, project requirements were prioritized into Must-haves, Should-haves, Could-haves, and Won't-haves to deliver key functionalities efficiently within time constraints.
 
-## Won't-haves:
+## Technologies Used
 
-* Advanced features like real-time chat functionality.
-* Social media integration for sharing blog posts or travel content.
-* Implementing a comprehensive search functionality.
+The technology stack includes Django, HTML, CSS, Bootstrap, Tailwind, Crispy Forms, and Allauth aimed at delivering an immersive and user-friendly blogging experience.
 
-# ERD's
+## Deployment
 
-## Post Model:
+Detailed deployment procedures from GitHub to platforms like Heroku are documented to facilitate a seamless deployment process, ensuring a secure and efficient live version of the blog.
 
+## Credits
 
-## About Model: 
-
-| About        |                | Blog       | 
-|--------------|----------------|------------|
-| id           |                | id         |
-| title        |                | title      |
-| content      |                | content    |
-| created_at   |                | created_at |
-| updated_at   |                | updated_at |
-| blog_id (FK) | 1:1            |            |
-
-
-
-# BUGS
-
-Page not loading css styling when DEBUG is set to False. Can't figure out why.
-
-## Project Details
-
-### Technologies
-
-The Dive In Blog Project leverages a range of technologies to deliver a seamless and immersive experience. Our technology stack includes Django, HTML, CSS, Bootstrap, Tailwind and additional libraries and frameworks tailored to enrich the user experience.
-
-### Deployment
-
-Detailed information on deploying the Dive Blog Project from GitHub to platforms like Heroku will be provided in the project documentation, ensuring a smooth and efficient deployment process for interested users.
-
-### Credits
-
-Acknowledging the invaluable contributions of all, contributors, and external resources forms an integral part of the project. We express our gratitude to all individuals and entities who have been instrumental in bringing Dive In to fruition.
 
 Utilized code institutes "I think Therefore I Blog" tutorial in setting up my Django model as I learn a lot better with doing than reading. From the base of the blog walkthrough I morphed and changed the models and details to create my own Dive Blog.
 
