@@ -5,35 +5,56 @@ html {
   padding: 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  line-height: 1.6;
+  /* Increased line height for readability */
 }
 
 /* Colors */
 body {
-  background-color: #007580;
-  /* Deep ocean blue */
-  color: #83dfe3;
-  /* White text */
+  background-color: #e0f7fa;
+  /* Light cyan background */
+  color: #004d40;
+  /* Dark teal for text */
 }
 
-.brand {
-  font-family: 'Lato', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #FFDD00;
-  /* Yellow */
+/* Text Styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #00796b;
+  /* Teal for headings */
+  line-height: 1.4;
+  /* Improve readability of headings */
 }
 
-.red-o {
-  color: #FF6F61;
-  /* Red */
+p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Card Styles */
+.card {
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Almost opaque white */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 /* Interactive Buttons */
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #FF6F61;
-  /* Red */
+  background-color: #00796b;
+  /* Teal */
   color: #fff;
   text-decoration: none;
   border: none;
@@ -43,23 +64,9 @@ body {
 }
 
 .btn:hover {
-  background-color: #FF4B33;
-  /* Darker red */
+  background-color: #004d40;
+  /* Darker teal */
   transform: scale(1.05);
-}
-
-/* Card Styles */
-.card {
-  background-color: rgba(255, 255, 255, 0.318);
-  /* Semi-transparent white */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
 }
 
 /* Image Styles */
@@ -85,8 +92,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.3);
+  /* Darker semi-transparent overlay */
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -95,21 +102,20 @@ body {
   opacity: 1;
 }
 
-/* Text Styles */
+/* Text Center */
 .text-center {
   text-align: center;
 }
 
 .text-muted {
-  color: rgba(255, 255, 255, 0.7);
-  /* Semi-transparent white */
+  color: rgba(0, 0, 0, 0.7);
+  /* Slightly muted text */
 }
 
 /* Masthead Styles */
 .masthead {
   padding: 100px 0;
   background-image: url('/static/images/diveinlogo.png');
-  /* Path to your image */
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -131,20 +137,20 @@ body {
 
 /* Link Styles */
 a {
-  color: #FFDD00;
-  /* Yellow */
+  color: #004d40;
+  /* Teal */
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 a:visited {
-  color: #FFDD00;
-  /* Yellow */
+  color: #004d40;
+  /* Teal */
 }
 
 a:hover {
-  color: #FFB700;
-  /* Darker yellow */
+  color: #00796b;
+  /* Lighter teal */
 }
 
 /* Keyframes */
@@ -186,54 +192,101 @@ a:hover {
 .author-bio {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
+  padding: 15px;
+  background-color: #ffffff;
+  /* White background for bio */
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
 }
 
 .author-bio img {
   border-radius: 50%;
   margin-right: 20px;
+  width: 80px;
+  height: 80px;
 }
 
-.author-bio h4 {
-  font-size: 1.25rem;
-  color: #333;
-  margin-bottom: 5px;
+/* Comment Section */
+.comments {
+  margin-bottom: 1.5rem;
 }
 
-.author-bio p {
-  color: #555;
+.comments .approval {
   font-size: 0.875rem;
-  margin: 0;
+  color: #f44336;
+  /* Red for unapproved comments */
 }
 
 /* Related Posts */
 .related-posts a {
-  display: block;
   padding: 15px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
 }
 
 .related-posts a:hover {
-  background-color: #e9e9e9;
+  background-color: #e0f2f1;
+  /* Light teal */
 }
 
 /* Social Sharing */
 .social-sharing a {
-  display: inline-flex;
-  align-items: center;
   font-size: 1.25rem;
-  color: #007580;
-  margin-right: 10px;
+  color: #004d40;
+  /* Teal */
   transition: color 0.3s ease;
 }
 
 .social-sharing a:hover {
-  color: #005f5a;
+  color: #00796b;
+  /* Lighter teal */
+}
+
+/* Custom Colors */
+.bg-light-blue {
+  background-color: #e0f7fa;
+  /* Light cyan */
+}
+
+.text-dark-blue {
+  color: #004d40;
+  /* Dark teal */
+}
+
+.text-dark-gray {
+  color: #004d40;
+  /* Darker text for better readability */
+}
+
+.bg-light-white {
+  background-color: #f5f5f5;
+  /* Light gray for comments */
+}
+
+.text-facebook-blue {
+  color: #1877f2;
+  /* Facebook blue */
+}
+
+.text-twitter-blue {
+  color: #1da1f2;
+  /* Twitter blue */
+}
+
+.text-linkedin-blue {
+  color: #0077b5;
+  /* LinkedIn blue */
+}
+
+.btn-primary {
+  background-color: #00796b;
+  /* Teal button */
+  color: #ffffff;
+  /* White text */
+}
+
+.btn-primary:hover {
+  background-color: #004d40;
+  /* Darker teal */
 }

@@ -4,102 +4,88 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-<div class="bg-gray-100 py-8 px-4">
-  <div class="max-w-3xl mx-auto">
-    <div class="sm:flex justify-between items-center mb-8">
-      <div class="w-full sm:w-9/12">
-        <h1 class="text-4xl font-bold text-gray-800 mb-2">{{ post.title }}</h1>
-        <p class="text-sm text-gray-600">
-          By <span class="font-semibold">{{ post.author }}</span> on {{ post.created_on|date:"F j, Y" }}
-        </p>
+<div class="bg-light-blue py-8 px-4">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex flex-col sm:flex-row justify-between items-start mb-8">
+      <div class="flex-1">
+        <h1 class="text-4xl font-bold text-dark-blue mb-4">{{ post.title }}</h1>
+        <p class="text-lg text-dark-gray">{{ post.author.username }} | {{ post.created_on|date:"F j, Y" }}</p>
       </div>
-      <div class="hidden sm:block w-3/12">
-        <img src="{{ post.featured_image.url }}" class="w-full h-auto rounded-lg shadow-lg" alt="Post Image">
+      <div class="hidden sm:block w-1/3">
+        <img src="{{ post.image.url }}" class="w-full h-auto rounded-lg shadow-md" alt="{{ post.title }}">
       </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-lg p-8 mb-8 post-content">
-      <div class="text-gray-800 leading-relaxed">
-        {{ post.content | safe }}
+    <div class="bg-white rounded-lg shadow-lg p-8 leading-relaxed text-dark-gray">
+      {{ post.content | safe }}
+    </div>
+
+    <!-- Social Sharing -->
+    <div class="mt-8">
+      <h3 class="text-2xl font-bold text-dark-blue">Share This Post</h3>
+      <div class="flex space-x-4 mt-4">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-facebook-blue">
+          <i class="fab fa-facebook-square"></i> Facebook
+        </a>
+        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" class="text-twitter-blue">
+          <i class="fab fa-twitter-square"></i> Twitter
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" class="text-linkedin-blue">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
       </div>
     </div>
 
     <!-- Author Bio Section -->
-    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-      <div class="flex items-center">
-        <img src="{{ post.author.profile.picture.url }}" class="w-16 h-16 rounded-full mr-4" alt="{{ post.author }}">
-        <div>
-          <h4 class="text-xl font-bold text-gray-800">{{ post.author }}</h4>
-          <p class="text-sm text-gray-600">{{ post.author.profile.bio }}</p>
-        </div>
+    <div class="author-bio mt-12 p-6 bg-white rounded-lg shadow-lg flex items-center">
+      <img src="{{ post.author.profile_picture.url }}" alt="{{ post.author.username }}" class="rounded-full w-20 h-20 mr-6">
+      <div>
+        <h4 class="text-xl font-semibold text-dark-blue">{{ post.author.username }}</h4>
+        <p class="text-md text-dark-gray">{{ post.author.bio }}</p>
       </div>
     </div>
-
-    <!-- Related Posts Section -->
-    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-      <h3 class="text-2xl font-bold text-gray-800">Related Posts</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-        {% for related_post in related_posts %}
-        <a href="{{ related_post.get_absolute_url }}" class="block bg-white rounded-lg shadow-lg p-4 hover:bg-gray-100 transition-transform duration-300">
-          <h4 class="text-lg font-semibold text-gray-800">{{ related_post.title }}</h4>
-          <p class="text-sm text-gray-600">{{ related_post.created_on|date:"F j, Y" }}</p>
-        </a>
-        {% endfor %}
-      </div>
-    </div>
-
-
-        <!-- Social Sharing Buttons -->
-        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <h3 class="text-2xl font-bold text-gray-800">Share This Post</h3>
-          <div class="flex space-x-4 mt-4">
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-blue-600">
-              <i class="fab fa-facebook-square"></i> Facebook
-            </a>
-            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" class="text-blue-400">
-              <i class="fab fa-twitter-square"></i> Twitter
-            </a>
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" class="text-blue-700">
-              <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-          </div>
-        </div>
 
     <!-- Comments Section -->
-    <div class="bg-white rounded-lg shadow-lg p-8">
-      <div class="mb-6">
-        <h3 class="text-2xl font-bold text-gray-800">Comments ({{ comment_count }})</h3>
-        <hr class="my-4">
+    <div class="mt-12">
+      <h3 class="text-2xl font-bold text-dark-blue mb-4">
+        Comments ({{ comment_count }})
+      </h3>
 
-        <!-- Displaying Comments -->
+      <!-- Displaying Comments -->
+      <div class="space-y-6">
         {% for comment in comments %}
-          <div class="mb-6">
-            <p class="font-semibold text-gray-700">{{ comment.author }}</p>
-            <p class="text-sm text-gray-500 mb-2">{{ comment.created_on|date:"F j, Y, g:i a" }}</p>
-            <div class="bg-gray-50 p-4 rounded-lg">
-              {{ comment.body | linebreaks }}
-            </div>
-            {% if not comment.approved and comment.author == user %}
-              <p class="text-sm text-yellow-600 mt-2">This comment is awaiting approval</p>
-            {% endif %}
+        <div class="p-4 bg-light-white rounded-lg shadow-md {% if not comment.approved and comment.author == user %}border border-yellow-400{% elif not comment.approved %} hidden{% endif %}">
+          <p class="font-semibold text-dark-gray">
+            {{ comment.author.username }} 
+            <span class="font-normal text-sm text-gray-500">
+              {{ comment.created_on|date:"F j, Y" }}
+            </span>
+          </p>
+          <div id="comment{{ comment.id }}" class="mt-2">
+            {{ comment.body | linebreaks }}
           </div>
+          {% if not comment.approved and comment.author == user %}
+          <p class="mt-2 text-red-600">
+            This comment is awaiting approval
+          </p>
+          {% endif %}
+        </div>
         {% endfor %}
       </div>
 
-      <!-- New comment section -->
-      {% if user.is_authenticated %}
-        <div class="mt-8">
-          <h3 class="text-2xl font-bold text-gray-800">Add a Comment</h3>
-          <p class="text-sm text-gray-600 mb-4">Posting as: {{ user.username }}</p>
-          <form id="commentForm" method="post" class="space-y-4">
-            {{ comment_form | crispy }}
-            {% csrf_token %}
-            <button id="submitButton" type="submit" class="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-500">Submit</button>
-          </form>
-        </div>
-      {% else %}
-        <p class="text-gray-600 mt-4">Please <a href="{% url 'account_login' %}" class="text-blue-600 hover:underline">log in</a> to leave a comment.</p>
-      {% endif %}
+      <!-- New Comment Section -->
+      <div class="mt-8">
+        {% if user.is_authenticated %}
+        <h3 class="text-xl font-bold text-dark-blue">Add a Comment</h3>
+        <form id="commentForm" method="post" class="mt-4">
+          {{ comment_form | crispy }}
+          {% csrf_token %}
+          <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% else %}
+        <p class="text-gray-600">Log in to leave a comment.</p>
+        {% endif %}
+      </div>
     </div>
   </div>
 </div>
