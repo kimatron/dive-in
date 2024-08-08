@@ -36,14 +36,14 @@
       </div>
     </div>
 
-    <!-- Author Bio Section -->
-    <div class="author-bio mt-12 p-6 bg-white rounded-lg shadow-lg flex items-center">
-      <img src="{{ post.author.profile_picture.url }}" alt="{{ post.author.username }}" class="rounded-full w-20 h-20 mr-6">
-      <div>
-        <h4 class="text-xl font-semibold text-dark-blue">{{ post.author.username }}</h4>
-        <p class="text-md text-dark-gray">{{ post.author.bio }}</p>
-      </div>
-    </div>
+<!-- Author Bio Section -->
+<div class="author-bio mt-10 p-6 bg-white rounded-lg shadow-lg flex items-center">
+  <img src="{{ post.author.userprofile.profile_picture.url }}" alt="{{ post.author.username }}" class="rounded-full w-16 h-16 mr-4">
+  <div>
+      <h4 class="text-lg font-semibold text-gray-900">{{ post.author.username }}</h4>
+      <p class="text-sm text-gray-600">{{ post.author.userprofile.bio }}</p>
+  </div>
+</div>
 
     <!-- Comments Section -->
     <div class="mt-12">

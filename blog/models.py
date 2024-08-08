@@ -78,3 +78,13 @@ class Subscriber(models.Model):
 class FeaturedPost(models.Model):
     post = models.OneToOneField(Post, on_delete=models.CASCADE)
     is_featured = models.BooleanField(default=False)
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(
+        upload_to='profile_pics/', blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username

@@ -1,6 +1,14 @@
 from django.contrib import admin
-from .models import Post, Comment, Category, Tag, Subscriber, FeaturedPost
+from .models import Post, Comment, Category, Tag, Subscriber, UserProfile, FeaturedPost
 from django_summernote.admin import SummernoteModelAdmin
+
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'profile_picture', 'bio')
+    search_fields = ('user__username', 'bio')
+
+
+admin.site.register(UserProfile, UserProfileAdmin)
 
 
 @admin.register(Post)
