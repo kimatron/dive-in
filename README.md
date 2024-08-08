@@ -56,45 +56,69 @@ To set up the Dive In Blog Project, follow these steps:
 2. **Install Dependencies**: Use the `pip` package manager to install dependencies listed in the `requirements.txt` file.
 3. **Database Configuration**: Customize database settings in `settings.py` for seamless interaction with the database.
 
-## Models Overview
+# Models
 
-### Post Model
+## Overview
 
-**Fields**:
-- Title (CharField)
-- Slug (SlugField)
-- Author (ForeignKey to User)
-- Content (TextField)
-- Created On (DateTimeField)
-- Status (Draft or Published)
-- Excerpt (TextField)
-- Updated On (DateTimeField)
+This document provides an overview of the key models used in the blog application. Each model represents a core entity within the system, and this section explains their purpose and key attributes.
 
-### Comment Model
+## Models
 
-**Fields**:
-- Post (ForeignKey to Post)
-- Author (ForeignKey to User)
-- Body (TextField)
-- Approved (Boolean)
-- Created On (DateTimeField)
+### Post
 
-### About Model
+The `Post` model represents a blog post. It contains the following fields:
 
-**Fields**:
-- Company Name (CharField)
-- Founding Date (DateField)
-- Mission (TextField)
-- Offerings (TextField)
-- Updated On (DateTimeField)
-- Content (TextField)
+- **title**: A `CharField` with a maximum length of 200 characters and a unique constraint to ensure that each post has a distinct title.
+- **slug**: A `SlugField` used to generate URL-friendly versions of the title. Unique for each post.
+- **author**: A `ForeignKey` linking to the `User` model, representing the author of the post. Uses `related_name` to reference blog posts by the user.
+- **content**: A `TextField` containing the main content of the post.
+- **created_on**: A `DateTimeField` that records when the post was created.
+- **status**: An `IntegerField` with choices (`Draft`, `Published`) indicating the publication status of the post.
+- **excerpt**: A `TextField` for a brief summary or excerpt of the post, which can be left blank.
+- **updated_on**: A `DateTimeField` that updates automatically with the current time whenever the post is modified.
 
-#### Additional Models
+**Meta Information:**
+- **ordering**: Orders posts by creation date in descending order.
 
-- Category
-- Tag
-- Subscriber
-- FeaturedPost
+**String Representation:**
+```python
+def __str__(self):
+    return f"{self.title} | scribed by {self.author}"
+```
+## Comment Model
+
+The `Comment` model represents user comments on blog posts and includes the following fields:
+
+- **post** (`ForeignKey` to `Post`): The blog post that the comment is associated with.
+- **author** (`ForeignKey` to `User`): The user who wrote the comment.
+- **body** (`TextField`): The content of the comment.
+- **approved** (`BooleanField`): Indicates whether the comment has been approved.
+- **created_on** (`DateTimeField`): The date and time when the comment was created.
+
+**Meta Information:**
+
+- **ordering**: Orders comments by creation date in ascending order.
+
+**String Representation:**
+
+```python
+def __str__(self):
+    return f"Comment {self.body} by {self.author}"
+```
+
+## Category Model
+
+The `Category` model helps organize blog posts into categories. It includes the following fields:
+
+- **name** (`CharField`): The name of the category, limited to 100 characters.
+- **description** (`TextField`): A description of the category.
+
+**String Representation:**
+
+```python
+def __str__(self):
+    return self.name
+```
 
 # Author Profile Picture Feature
 
@@ -106,6 +130,7 @@ The Author Profile Picture feature allows displaying an author's profile image a
 
 ### 1. Model Update
 - **UserProfile Model**: Added a `profile_picture` field to the `UserProfile` model to support profile images.
+
   ```python
   from django.db import models
   from django.contrib.auth.models import User
@@ -116,8 +141,7 @@ The Author Profile Picture feature allows displaying an author's profile image a
       bio = models.TextField(max_length=500, blank=True)
   
       def __str__(self):
-          return self.user.username
-
+          return self.user.username```
 
 ## Testing
 
