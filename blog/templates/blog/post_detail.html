@@ -48,21 +48,22 @@
       </div>
     </div>
 
-    <!-- Social Sharing Buttons -->
-    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-      <h3 class="text-2xl font-bold text-gray-800">Share This Post</h3>
-      <div class="flex space-x-4 mt-4">
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-blue-600">
-          <i class="fab fa-facebook-square"></i> Facebook
-        </a>
-        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" class="text-blue-400">
-          <i class="fab fa-twitter-square"></i> Twitter
-        </a>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" class="text-blue-700">
-          <i class="fab fa-linkedin"></i> LinkedIn
-        </a>
-      </div>
-    </div>
+
+        <!-- Social Sharing Buttons -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+          <h3 class="text-2xl font-bold text-gray-800">Share This Post</h3>
+          <div class="flex space-x-4 mt-4">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-blue-600">
+              <i class="fab fa-facebook-square"></i> Facebook
+            </a>
+            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" class="text-blue-400">
+              <i class="fab fa-twitter-square"></i> Twitter
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" class="text-blue-700">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+          </div>
+        </div>
 
     <!-- Comments Section -->
     <div class="bg-white rounded-lg shadow-lg p-8">
