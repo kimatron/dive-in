@@ -96,6 +96,29 @@ To set up the Dive In Blog Project, follow these steps:
 - Subscriber
 - FeaturedPost
 
+# Author Profile Picture Feature
+
+## Overview
+
+The Author Profile Picture feature allows displaying an author's profile image and bio on blog posts. This enhancement provides a more personalized and engaging experience for readers by showcasing the author alongside their content.
+
+## Key Changes
+
+### 1. Model Update
+- **UserProfile Model**: Added a `profile_picture` field to the `UserProfile` model to support profile images.
+  ```python
+  from django.db import models
+  from django.contrib.auth.models import User
+  
+  class UserProfile(models.Model):
+      user = models.OneToOneField(User, on_delete=models.CASCADE)
+      profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+      bio = models.TextField(max_length=500, blank=True)
+  
+      def __str__(self):
+          return self.user.username
+
+
 ## Testing
 
 The Dive In Blog Project employs manual and/or automated procedures for assessing functionality, usability, and data management within the web application. Testing processes are documented for reference.
