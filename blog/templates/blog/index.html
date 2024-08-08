@@ -2,68 +2,74 @@
 {% load static %}
 {% block content %}
 
-<!-- index.html content starts here -->
-<div class="container-fluid">
-   <div class="row">
-       <!-- Featured Blog Posts Section -->
-       {% for post in featured_posts %}
-       <div class="featured-post">
-           <h2>{{ post.title }}</h2>
-           <p>{{ post.content }}</p>
-           <!-- Add other post details or formatting as needed -->
-       </div>
-       {% endfor %}
+<!-- Main Container -->
+<div class="container-fluid py-5">
+    <!-- Page Title -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">Dive In Blog</h1>
+        <p class="lead">Explore the latest insights and updates from the depths of our community.</p>
+    </div>
 
-       <!-- Blog Entries Column -->
-       <div class="col-12 mt-3">
-           <div class="row">
-               {% for post in post_list %}
-               <div class="col-md-4">
-                   <div class="card mb-4">
-                       <div class="card-body">
-                           <div class="image-container">
-                               <img src="{% static 'images/diveinlogo.png' %}" alt="Dive Image" class="card-img-top">
-                               <div class="overlay"></div>
-                               <div class="author-info">
-                                   <p class="author">Author: {{ post.author }}</p>
-                               </div>
-                           </div>
-                           <a href="{% url 'post_detail' post.slug %}" class="post-link"> 
-                            <h2 class="card-title">{{ post.title }}</h2>
-                            <p class="card-text">{{ post.excerpt }}</p>
-                          </a>
-                           <hr />
-                           <p class="card-text text-muted small">{{ post.created_on }}</p>
-                       </div>
-                   </div>
-               </div>
-               {% if forloop.counter|divisibleby:2 %}
-           </div> <!-- Close the previous row -->
-           <div class="row"> <!-- Open a new row -->
-               {% endif %}
-               {% endfor %}
-               <!-- End blog post loop -->
-           </div> <!-- Close container-fluid -->
-       </div> <!-- Close the row -->
+    <!-- Featured Blog Posts Section -->
+    <div class="row mb-4">
+        {% for post in featured_posts %}
+        <div class="col-md-6 mb-3">
+            <div class="card featured-card">
+                <img src="{% static 'images/featured-placeholder.jpg' %}" alt="{{ post.title }}" class="card-img-top">
+                <div class="card-body">
+                    <h3 class="card-title">{{ post.title }}</h3>
+                    <p class="card-text">{{ post.excerpt }}</p>
+                    <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
-       <!-- Pagination -->
-       {% if is_paginated %}
-       <nav aria-label="Page navigation">
-           <ul class="pagination justify-content-center">
-               {% if page_obj.has_previous %}
-               <li>
-                   <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a>
-               </li>
-               {% endif %}
-               {% for num in page_obj.paginator.page_range %}
-               {% if page_obj.number == num %}
-               {% if page_obj.has_next %}
-               <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-               {% endif %}
-               {% endif %}
-               {% endfor %}
-           </ul>
-       </nav>
-       {% endif %}
-       {% endblock %}
-       ```  
+    <!-- Blog Entries Section -->
+    <div class="row">
+        {% for post in post_list %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{% static 'images/divinlogolight.png' %}" alt="{{ post.title }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h5>
+                    <p class="card-text">{{ post.excerpt|truncatewords:20 }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Posted on {{ post.created_on|date:"F j, Y" }} by {{ post.author }}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo; Prev</span>
+                </a>
+            </li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">Next &raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+{% endblock %}
