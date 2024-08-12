@@ -14,14 +14,13 @@
     <div class="row mb-4">
         {% for post in featured_posts %}
         <div class="col-md-6 mb-3">
-            <div class="card featured-card">
+            <a href="{% url 'post_detail' post.slug %}" class="card featured-card h-100 text-decoration-none text-dark">
                 <img src="{% static 'images/featured-placeholder.jpg' %}" alt="{{ post.title }}" class="card-img-top">
                 <div class="card-body">
                     <h3 class="card-title">{{ post.title }}</h3>
                     <p class="card-text">{{ post.excerpt }}</p>
-                    <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read More</a>
                 </div>
-            </div>
+            </a>
         </div>
         {% endfor %}
     </div>
@@ -30,16 +29,16 @@
     <div class="row">
         {% for post in post_list %}
         <div class="col-md-4 mb-4">
-            <div class="card h-100">
+            <a href="{% url 'post_detail' post.slug %}" class="card h-100 text-decoration-none text-dark">
                 <img src="{% static 'images/divinlogolight.png' %}" alt="{{ post.title }}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h5>
+                    <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.excerpt|truncatewords:20 }}</p>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Posted on {{ post.created_on|date:"F j, Y" }} by {{ post.author }}</small>
                 </div>
-            </div>
+            </a>
         </div>
         {% endfor %}
     </div>
