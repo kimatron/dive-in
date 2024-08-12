@@ -11,6 +11,96 @@ html {
   /* White text */
 }
 
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  /* White background for the navbar */
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1000;
+  /* Ensure navbar is on top */
+}
+
+.navbar .navbar-brand .brand {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FFDD00, #FF6F61);
+  /* Gradient color */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: transform 0.3s ease;
+}
+
+.navbar .navbar-brand .brand:hover {
+  transform: scale(1.1);
+}
+
+.navbar .navbar-nav .nav-link {
+  color: #343a40;
+  /* Dark text color for the links */
+  text-decoration: none;
+  font-size: 1rem;
+  margin: 0 15px;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .navbar-nav .nav-link::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: #FFDD00;
+  /* Underline color */
+  transition: width 0.3s ease;
+}
+
+.navbar .navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+  color: #FFDD00;
+  /* Highlight color */
+  transform: translateY(-2px);
+}
+
+.navbar .navbar-nav .nav-link.active {
+  color: #FFDD00;
+  /* Highlight color for active link */
+  font-weight: 600;
+  border-bottom: 2px solid #FFDD00;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar .navbar-nav .nav-link {
+    margin: 10px 0;
+  }
+}
+
+
+
 /* Brand Styles */
 .brand {
   font-family: 'Lato', sans-serif;
@@ -167,4 +257,92 @@ html {
 /* Link Styles */
 .link {
   color: #FFDD00;
+}
+
+/* Basic Styling */
+.footer {
+  background-color: #101820;
+  color: #fff;
+  padding: 20px 0;
+  position: relative;
+}
+
+.footer .container p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.footer .social-icons {
+  margin-top: 20px;
+}
+
+.footer .icon {
+  display: inline-block;
+  margin: 0 10px;
+  color: #fff;
+  font-size: 1.5rem;
+  position: relative;
+  text-decoration: none;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Social Icon Hover Effects */
+.footer .icon:hover {
+  transform: translateY(-5px);
+  color: #00b4d8;
+  /* Change to a bright color */
+}
+
+.footer .icon i {
+  display: block;
+}
+
+/* Tooltip Styling */
+.footer .tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* Show tooltip on hover */
+.footer .icon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Keyframes for Icon Animation */
+@keyframes icon-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Applying Keyframes */
+.footer .icon:hover {
+  animation: icon-bounce 0.6s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer .icon {
+    font-size: 1.25rem;
+    margin: 0 8px;
+  }
 }
