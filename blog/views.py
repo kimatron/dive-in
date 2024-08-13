@@ -1,37 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.contrib import messages
-from .models import Post
-from django.shortcuts import get_object_or_404
-from .models import Post
+from .models import Post, FeaturedPost, Comment
+from django.http import HttpResponseRedirect
 from .forms import CommentForm
-from .models import FeaturedPost
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
 class PostList(generic.ListView):
-    queryset = queryset = Post.objects.filter(status=1).order_by("-created_on")
+    queryset = Post.objects.filter(status=1).order_by("-created_on")
     template_name = "blog/index.html"
     paginate_by = 6
 
 
 def post_detail(request, slug):
-    """
-    Display an individual :model:`blog.Post`.
-
-    **Context**
-
-    ``post``
-        An instance of :model:`blog.Post`.
-
-    **Template:**
-
-    :template:`blog/post_detail.html`
-    """
-
     post = get_object_or_404(Post, status=1, slug=slug)
     comments = post.comments.all().order_by("-created_on")
     comment_count = post.comments.filter(approved=True).count()
+
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -41,8 +28,9 @@ def post_detail(request, slug):
             comment.save()
             messages.add_message(
                 request, messages.SUCCESS,
-                'Comment submitted and will be approved shortly, as long as you"re not a rudey'
+                'Comment submitted and will be approved shortly, as long as you\'re not a rudey'
             )
+            return redirect('post_detail', slug=slug)
     else:
         comment_form = CommentForm()
 
@@ -68,3 +56,37 @@ def blog_home(request):
     }
 
     return render(request, 'blog_home.html', context)
+
+
+@login_required
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    # Ensure the user is the author or staff
+    if comment.author != request.user and not request.user.is_staff:
+        return redirect('post_detail', slug=comment.post.slug)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', slug=comment.post.slug)
+    else:
+        form = CommentForm(instance=comment)
+
+    return render(request, 'blog/edit_comment.html', {'form': form, 'comment': comment})
+
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    # Ensure the user is the author or staff
+    if comment.author != request.user and not request.user.is_staff:
+        return redirect('post_detail', slug=comment.post.slug)
+
+    if request.method == 'POST':
+        comment.delete()
+        return redirect('post_detail', slug=comment.post.slug)
+
+    return render(request, 'blog/delete_comment.html', {'comment': comment})
