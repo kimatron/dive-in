@@ -68,6 +68,13 @@
             <div id="comment{{ comment.id }}" class="mt-2">
                 {{ comment.body | linebreaks }}
             </div>
+            {% if not comment.approved %}
+                {% if user.is_authenticated and comment.author == user %}
+                    <p class="text-sm text-yellow-600 mt-2">Your comment is awaiting approval and will be visible once it's approved.</p>
+                {% else %}
+                    <p class="text-sm text-gray-500 mt-2">This comment is awaiting approval.</p>
+                {% endif %}
+            {% endif %}
             {% if user.is_authenticated and comment.author == user %}
                 <button class="btn btn-edit btn-outline-primary btn-sm mt-2" comment_id="{{ comment.id }}">Edit</button>
                 <button class="btn btn-delete btn-outline-danger btn-sm mt-2" comment_id="{{ comment.id }}">Delete</button>
@@ -89,11 +96,6 @@
         <p class="text-gray-600">Log in to leave a comment.</p>
         {% endif %}
       </div>
-
-      <!-- Notification for Pending Comments -->
-      {% if user.is_authenticated and not user.is_staff %}
-        <p class="text-sm text-red-500 mt-4">Note: Your comment will be visible once it is approved by an admin.</p>
-      {% endif %}
     </div>
   </div>
 </div>

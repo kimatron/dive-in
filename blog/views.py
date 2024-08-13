@@ -20,8 +20,7 @@ class PostList(generic.ListView):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    # Only display approved comments
-    comments = post.comments.filter(approved=True)
+    comments = post.comments.all()
     comment_count = comments.count()
 
     if request.method == 'POST' and request.user.is_authenticated:
@@ -31,11 +30,10 @@ def post_detail(request, slug):
             comment.post = post
             comment.author = request.user
             comment.save()
-            messages.success(
-                request, 'Your comment has been submitted and is awaiting approval.')
     else:
         comment_form = CommentForm()
 
+    # Pass the comments to the template
     context = {
         'post': post,
         'comments': comments,
