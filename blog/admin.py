@@ -22,9 +22,15 @@ class PostAdmin(SummernoteModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('post', 'author', 'approved', 'created_on')
-    list_filter = ('approved', 'created_on')
-    search_fields = ['author', 'body']
+    list_display = ('author', 'post', 'created_on', 'approved')
+    list_filter = ('approved',)
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(approved=True)
+        self.message_user(request, "Selected comments have been approved.")
+
+    approve_comments.short_description = "Approve selected comments"
 
 
 @admin.register(Category)
@@ -47,6 +53,3 @@ class SubscriberAdmin(admin.ModelAdmin):
 
 
 admin.site.register(FeaturedPost)
-
-
-# Register your models here.

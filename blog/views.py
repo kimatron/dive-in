@@ -8,6 +8,7 @@ from .models import Post, FeaturedPost, Comment
 # from django.http import HttpResponseForbidden
 from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 
 
@@ -19,7 +20,8 @@ class PostList(generic.ListView):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    comments = post.comments.all()
+    # Only display approved comments
+    comments = post.comments.filter(approved=True)
     comment_count = comments.count()
 
     if request.method == 'POST' and request.user.is_authenticated:
@@ -29,6 +31,8 @@ def post_detail(request, slug):
             comment.post = post
             comment.author = request.user
             comment.save()
+            messages.success(
+                request, 'Your comment has been submitted and is awaiting approval.')
     else:
         comment_form = CommentForm()
 
@@ -87,3 +91,19 @@ def comment_delete(request, slug, comment_id):
         messages.error(request, 'You can only delete your own comments!')
 
     return redirect('post_detail', slug=slug)
+
+
+@staff_member_required
+def comment_approval(request):
+    comments = Comment.objects.filter(
+        approved=False)  # List of unapproved comments
+
+    if request.method == 'POST':
+        for comment_id in request.POST.getlist('approve'):
+            comment = get_object_or_404(Comment, pk=comment_id)
+            comment.approved = True
+            comment.save()
+        messages.success(request, 'Comments approved successfully.')
+        return redirect('comment_approval')
+
+    return render(request, 'admin/comment_approval.html', {'comments': comments})
