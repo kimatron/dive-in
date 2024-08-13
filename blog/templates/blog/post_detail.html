@@ -56,24 +56,27 @@
       <!-- Displaying Comments -->
       <div class="space-y-6">
         {% for comment in comments %}
-        <div class="p-4 bg-light-white rounded-lg shadow-md {% if not comment.approved and comment.author == user %}border border-yellow-400{% elif not comment.approved %} hidden{% endif %}">
-          <p class="font-semibold text-dark-gray">
-            {{ comment.author.username }} 
-            <span class="font-normal text-sm text-gray-500">
-              {{ comment.created_on|date:"F j, Y" }}
-            </span>
-          </p>
-          <div id="comment{{ comment.id }}" class="mt-2">
-            {{ comment.body | linebreaks }}
-          </div>
-          {% if not comment.approved and comment.author == user %}
-          <p class="mt-2 text-red-600">
-            This comment is awaiting approval
-          </p>
-          {% endif %}
-        </div>
+            {% if comment.approved or user.is_authenticated and comment.author == user %}
+                <div class="p-4 bg-light-white rounded-lg shadow-md">
+                    <p class="font-semibold text-dark-gray">
+                        {{ comment.author.username }}
+                        <span class="font-normal text-sm text-gray-500">
+                            {{ comment.created_on|date:"F j, Y" }}
+                        </span>
+                    </p>
+                    <div id="comment{{ comment.id }}" class="mt-2">
+                        {{ comment.body | linebreaks }}
+                    </div>
+                    {% if not comment.approved and comment.author == user %}
+                        <p class="mt-2 text-red-600">
+                            This comment is awaiting approval
+                        </p>
+                    {% endif %}
+                </div>
+            {% endif %}
         {% endfor %}
-      </div>
+    </div>
+    
 
       <!-- New Comment Section -->
       <div class="mt-8">
