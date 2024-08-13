@@ -66,22 +66,22 @@
                 </span>
             </p>
             <div id="comment{{ comment.id }}" class="mt-2">
-                {{ comment.body | linebreaks }}
-            </div>
-            {% if not comment.approved %}
-                {% if user.is_authenticated and comment.author == user %}
-                    <p class="text-sm text-yellow-600 mt-2">Your comment is awaiting approval and will be visible once it's approved.</p>
+                {% if comment.approved %}
+                    {{ comment.body | linebreaks }}
                 {% else %}
-                    <p class="text-sm text-gray-500 mt-2">This comment is awaiting approval.</p>
+                    {% if comment.author == user %}
+                        <p class="text-sm text-yellow-600">Your comment is awaiting approval and will be visible once it's approved.</p>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            </div>
             {% if user.is_authenticated and comment.author == user %}
                 <button class="btn btn-edit btn-outline-primary btn-sm mt-2" comment_id="{{ comment.id }}">Edit</button>
                 <button class="btn btn-delete btn-outline-danger btn-sm mt-2" comment_id="{{ comment.id }}">Delete</button>
             {% endif %}
         </div>
         {% endfor %}
-      </div>
+    </div>
+    
 
       <!-- New Comment Section -->
       <div class="mt-8">
