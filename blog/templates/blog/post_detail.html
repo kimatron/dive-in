@@ -26,13 +26,13 @@
     <div class="mt-8 text-center">
       <h3 class="text-2xl font-bold text-dark-blue mb-4">Share This Post</h3>
       <div class="flex justify-center space-x-6">
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-facebook-blue">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-facebook-blue" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square text-2xl"></i>
         </a>
-        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" class="text-twitter-blue">
+        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" class="text-twitter-blue" aria-label="Share on Twitter">
           <i class="fab fa-twitter-square text-2xl"></i>
         </a>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" class="text-linkedin-blue">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" class="text-linkedin-blue" aria-label="Share on LinkedIn">
           <i class="fab fa-linkedin text-2xl"></i>
         </a>
       </div>
@@ -83,8 +83,8 @@
         {% if user.is_authenticated %}
         <h3 class="text-xl font-bold text-dark-blue mb-4">Add a Comment</h3>
         <form id="commentForm" method="post" class="mt-4">
-          {{ comment_form | crispy }}
           {% csrf_token %}
+          {{ comment_form | crispy }}
           <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
         </form>
         {% else %}
