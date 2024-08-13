@@ -16,6 +16,9 @@
       {% endif %}
     </div>
 
+    <!-- Hidden element for JavaScript -->
+    <div id="postSlug" data-slug="{{ post.slug }}" style="display:none;"></div>
+
     <!-- Post Content -->
     <div class="bg-white rounded-lg shadow-lg p-8 leading-relaxed text-dark-gray">
       {{ post.content | safe }}
