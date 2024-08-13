@@ -2,34 +2,44 @@
 {% block content %}
 {% load static %}
 <div class="container mt-5">
+  <!-- Hero Section -->
+  <div class="jumbotron text-center bg-light-blue py-5 mb-4">
+    <h1 class="display-4 text-dark-blue">{{ about.company_name }}</h1>
+    <p class="lead text-dark-gray">Dedicated to excellence since {{ about.founding_date|date:"Y" }}</p>
+  </div>
+
   <div class="row">
-    <div class="col-4 text-center">
-      <img src="{% static 'images/splash.jpg' %}" width="75%" />
+    <!-- Image Section -->
+    <div class="col-md-4 text-center mb-4">
+      <img src="{% static 'images/splash.jpg' %}" class="img-fluid rounded shadow-lg" alt="{{ about.company_name }}">
     </div>
-    <div class="col-8">
-      <!-- Display company name -->
-      <h2>{{ about.company_name }}</h2>
 
-      <!-- Display founding date -->
-      <p><strong>Founding Date:</strong> {{ about.founding_date }}</p>
+    <!-- Content Section -->
+    <div class="col-md-8">
+      <!-- Mission Section -->
+      <div class="bg-white p-4 rounded shadow-sm mb-4">
+        <h4 class="text-dark-blue"><i class="fas fa-bullseye"></i> Our Mission</h4>
+        <p class="text-dark-gray">{{ about.mission | linebreaks }}</p>
+      </div>
 
-      <!-- Display mission -->
-      <h4>Mission:</h4>
-      <p>{{ about.mission | linebreaks }}</p>
+      <!-- Offerings Section -->
+      <div class="bg-white p-4 rounded shadow-sm mb-4">
+        <h4 class="text-dark-blue"><i class="fas fa-gift"></i> What We Offer</h4>
+        <p class="text-dark-gray">{{ about.offerings | linebreaks }}</p>
+      </div>
 
-      <!-- Display offerings -->
-      <h4>Offerings:</h4>
-      <p>{{ about.offerings | linebreaks }}</p>
-
-      <!-- Display content -->
-      <h4>Content:</h4>
-      <p>{{ about.content | linebreaks | safe }}</p>
+      <!-- Additional Content Section -->
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h4 class="text-dark-blue"><i class="fas fa-info-circle"></i> More About Us</h4>
+        <p class="text-dark-gray">{{ about.content | linebreaks | safe }}</p>
+      </div>
     </div>
   </div>
-  <div class="row">
+
+  <!-- Footer Section -->
+  <div class="row mt-4">
     <div class="col text-right">
-      <!-- Display updated on date -->
-      <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
+      <p class="text-muted"><em>Last updated on: {{ about.updated_on|date:"F j, Y" }}</em></p>
     </div>
   </div>
 </div>
