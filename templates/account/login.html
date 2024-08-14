@@ -3,32 +3,26 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}{% trans "Sign In" %}{% endblock head_title %}
 
 {% block content %}
+<div class="login-container">
+    <h1 class="login-heading">{% trans "Sign In" %}</h1>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
-            <h3>{% trans "Sign In" %}</h3>
+    <p class="login-text">
+        {% blocktrans %}Nice to see you again at Dive In! To add to the conversation or validate our humor by liking a post, please log in. If you haven't created an account yet, please <a class="login-link" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+    </p>
 
-            <p>{% blocktrans %} Nice to see you again at the Dive In! To add to the conversation or validate our humor by liking a post, please log in. If
-  you
-  have not created an account yet, then <a class="link" href="{{ signup_url }}">sign up</a>
-  first.{% endblocktrans %}</p>
+    <form class="login-form" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        
+        {{ form.as_p|safe }}
+        
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        
+        <button class="login-button" type="submit">{% trans "Sign In" %} &raquo;</button>
+    </form>
 </div>
-</div>
-<div class="row">
-<div class="col-md-8 mt-3 offset-md-2">
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button class="btn btn-signup right" type="submit">{% trans "Sign In" %}</button>
-</form>
-</div>
-</div>
-</div>
-{% endblock %}
+{% endblock content %}
