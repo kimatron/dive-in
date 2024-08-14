@@ -55,32 +55,31 @@
         Comments ({{ comment_count }})
       </h3>
 
-      <!-- Displaying Comments -->
-      <div class="space-y-6">
-        {% for comment in comments %}
-        <div class="p-4 bg-light-white rounded-lg shadow-md">
-            <p class="font-semibold text-dark-gray">
-                {{ comment.author.username }}
-                <span class="font-normal text-sm text-gray-500">
-                    {{ comment.created_on|date:"F j, Y" }}
-                </span>
-            </p>
-            <div id="comment{{ comment.id }}" class="mt-2">
-                {% if comment.approved %}
-                    {{ comment.body | linebreaks }}
-                {% else %}
-                    {% if comment.author == user %}
-                        <p class="text-sm text-yellow-600">Your comment is awaiting approval and will be visible once it's approved.</p>
-                    {% endif %}
-                {% endif %}
-            </div>
-            {% if user.is_authenticated and comment.author == user %}
-                <button class="btn btn-edit btn-outline-primary btn-sm mt-2" comment_id="{{ comment.id }}">Edit</button>
-                <button class="btn btn-delete btn-outline-danger btn-sm mt-2" comment_id="{{ comment.id }}">Delete</button>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </div>
+<!-- Displaying Comments -->
+<div class="space-y-6">
+  {% for comment in comments %}
+  <div class="p-4 bg-light-white rounded-lg shadow-md">
+      <p class="font-semibold text-dark-gray">
+          {{ comment.author.username }}
+          <span class="font-normal text-sm text-gray-500">
+              {{ comment.created_on|date:"F j, Y" }}
+          </span>
+      </p>
+      <div id="comment{{ comment.id }}" class="mt-2">
+          {{ comment.body | linebreaks }}
+      </div>
+      {% if not comment.approved and comment.author == user %}
+          <p class="text-sm text-yellow-600">Your comment is awaiting approval and will be visible once it's approved.</p>
+      {% endif %}
+      {% if user.is_authenticated and comment.author == user %}
+          <button class="btn btn-edit btn-outline-primary btn-sm mt-2" comment_id="{{ comment.id }}">Edit</button>
+          <button class="btn btn-delete btn-outline-danger btn-sm mt-2" comment_id="{{ comment.id }}">Delete</button>
+      {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+
     
 
       <!-- New Comment Section -->
