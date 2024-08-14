@@ -6,7 +6,6 @@ html {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   line-height: 1.6;
-  /* Increased line height for readability */
 }
 
 /* Colors */
@@ -27,7 +26,6 @@ h6 {
   color: #00796b;
   /* Teal for headings */
   line-height: 1.4;
-  /* Improve readability of headings */
 }
 
 p {
@@ -43,11 +41,7 @@ a {
   transition: color 0.3s ease;
 }
 
-a:visited {
-  color: #004d40;
-  /* Teal */
-}
-
+a:visited,
 a:hover {
   color: #00796b;
   /* Lighter teal */
@@ -62,7 +56,6 @@ a:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
-  /* Ensures content stays within the card bounds */
 }
 
 .card:hover {
@@ -80,7 +73,8 @@ a:hover {
 }
 
 /* Button Styles */
-.btn {
+.btn,
+.btn-primary {
   display: inline-block;
   padding: 10px 20px;
   background-color: #00796b;
@@ -93,7 +87,8 @@ a:hover {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn:hover {
+.btn:hover,
+.btn-primary:hover {
   background-color: #004d40;
   /* Darker teal */
   transform: scale(1.05);
@@ -304,7 +299,6 @@ a:hover {
 }
 
 .footer .social-icons .icon {
-  position: relative;
   background: #ffffff;
   border-radius: 50%;
   padding: 15px;
@@ -318,6 +312,18 @@ a:hover {
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.footer .social-icons .icon:hover {
+  background: var(--color);
+  color: white;
+}
+
+.footer .social-icons .icon:hover i,
+.footer .social-icons .icon:hover .tooltip,
+.footer .social-icons .icon:hover .tooltip::before {
+  background: var(--color);
+  color: white;
 }
 
 .footer .social-icons .icon .tooltip {
@@ -352,36 +358,37 @@ a:hover {
   opacity: 1;
 }
 
-.footer .facebook {
-  --color: #1877f2;
+/* Author Bio Styles */
+.author-bio {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #ffffff;
+  /* White background for bio */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.footer .twitter {
-  --color: #1da1f2;
+.author-bio .bio-image {
+  flex: 0 0 100px;
+  margin-right: 20px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
-.footer .instagram {
-  --color: #e4405f;
+.author-bio .bio-image img {
+  width: 100px;
+  height: 100px;
 }
 
-.footer .github {
-  --color: #333333;
+.author-bio .bio-text h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
-.footer .youtube {
-  --color: #cd201f;
-}
-
-.footer .icon:hover {
-  background: var(--color);
-  color: white;
-}
-
-.footer .icon:hover i,
-.footer .icon:hover .tooltip,
-.footer .icon:hover .tooltip::before {
-  background: var(--color);
-  color: white;
+.author-bio .bio-text p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
 }
 
 /* Base styles for the entire signup page */
@@ -581,126 +588,5 @@ a:hover {
 
   .signup-button {
     font-size: 1em;
-  }
-}
-
-
-/* Author Bio Styles */
-.author-bio {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  background-color: #ffffff;
-  /* White background for bio */
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.author-bio img {
-  border-radius: 50%;
-  margin-right: 20px;
-  width: 80px;
-  height: 80px;
-}
-
-/* Comment Section */
-.comments {
-  margin-bottom: 1.5rem;
-}
-
-.comments .approval {
-  font-size: 0.875rem;
-  color: #f44336;
-  /* Red for unapproved comments */
-}
-
-/* Related Posts */
-.related-posts a {
-  padding: 15px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: block;
-  /* Ensures entire block is clickable */
-  text-decoration: none;
-  color: inherit;
-}
-
-.related-posts a:hover {
-  background-color: #e0f2f1;
-  /* Light teal */
-}
-
-/* Social Sharing */
-.social-sharing a {
-  font-size: 1.25rem;
-  color: #004d40;
-  /* Teal */
-  transition: color 0.3s ease;
-}
-
-.social-sharing a:hover {
-  color: #00796b;
-  /* Lighter teal */
-}
-
-/* Custom Colors */
-.bg-light-blue {
-  /* background-color: #e0f7fa; */
-  /* Light cyan */
-}
-
-.text-dark-blue {
-  color: #004d40;
-  /* Dark teal */
-}
-
-.text-dark-gray {
-  color: #004d40;
-  /* Darker text for better readability */
-}
-
-.bg-light-white {
-  /* background-color: #f5f5f5; */
-  /* Light gray for comments */
-}
-
-/* Social Media Colors */
-.text-facebook-blue {
-  color: #1877f2;
-  /* Facebook blue */
-}
-
-.text-twitter-blue {
-  color: #1da1f2;
-  /* Twitter blue */
-}
-
-.text-linkedin-blue {
-  color: #0077b5;
-  /* LinkedIn blue */
-}
-
-/* Button Variants */
-.btn-primary {
-  background-color: #00796b;
-  /* Teal button */
-  color: #ffffff;
-  /* White text */
-}
-
-.btn-primary:hover {
-  background-color: #004d40;
-  /* Darker teal */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .masthead-heading {
-    font-size: 2.5rem;
-  }
-
-  .masthead-subheading {
-    font-size: 1.25rem;
   }
 }
