@@ -2,11 +2,11 @@
 
 Dive In is a blog based on scuba diving, travel, and the lifestyle that comes with it. Users can view blogs, comment, share and add to the conversation.
 
-Unfortunately I ran out of time with this project to get everything I needed done, I learned a lot and it was a lot of information to get through. I look forward to finishing it in the near future!
 
 
 
-![Logo](static/images/diveinlogo.png)
+
+![Logo](static/images/diveinlogolight.png)
 
 ## Table of Contents
 

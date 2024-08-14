@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block content %}
 
 <!-- Main Container -->
@@ -15,7 +16,11 @@
         {% for post in featured_posts %}
         <div class="col-md-6 mb-3">
             <a href="{% url 'post_detail' post.slug %}" class="card featured-card h-100 text-decoration-none text-dark">
-                <img src="{% static 'images/featured-placeholder.jpg' %}" alt="{{ post.title }}" class="card-img-top">
+                {% if post.featured_image %}
+                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="card-img-top">
+                {% else %}
+                <img src="{% static 'images/divinlogolight.png' %}" alt="{{ post.title }}" class="card-img-top">
+                {% endif %}
                 <div class="card-body">
                     <h3 class="card-title">{{ post.title }}</h3>
                     <p class="card-text">{{ post.excerpt }}</p>
@@ -30,7 +35,11 @@
         {% for post in post_list %}
         <div class="col-md-4 mb-4">
             <a href="{% url 'post_detail' post.slug %}" class="card h-100 text-decoration-none text-dark">
+                {% if post.featured_image %}
+                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="card-img-top">
+                {% else %}
                 <img src="{% static 'images/divinlogolight.png' %}" alt="{{ post.title }}" class="card-img-top">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.excerpt|truncatewords:20 }}</p>
