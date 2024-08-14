@@ -4,9 +4,11 @@ Dive In is a blog based on scuba diving, travel, and the lifestyle that comes wi
 
 
 
+![Logo](static/images/divinlogolight.png)
 
+## Live Site
 
-![Logo](static/images/diveinlogolight.png)
+You can view the deployed site here: [View the deployed site](https://dive-inn-c4449bc967b4.herokuapp.com/)
 
 ## Table of Contents
 
