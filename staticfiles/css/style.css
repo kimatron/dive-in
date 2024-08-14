@@ -5,167 +5,106 @@ html {
   padding: 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  background-color: #007580;
-  /* Deep ocean blue */
-  color: #fff;
-  /* White text */
+  line-height: 1.6;
+  /* Increased line height for readability */
 }
 
-/* Navbar Styles */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  /* White background for the navbar */
-  padding: 15px 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1000;
-  /* Ensure navbar is on top */
+/* Colors */
+body {
+  background-color: #e0f7fa;
+  /* Light cyan background */
+  color: #004d40;
+  /* Dark teal for text */
 }
 
-.navbar .navbar-brand .brand {
-  font-family: 'Lato', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #FFDD00, #FF6F61);
-  /* Gradient color */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: transform 0.3s ease;
+/* Text Styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #00796b;
+  /* Teal for headings */
+  line-height: 1.4;
+  /* Improve readability of headings */
 }
 
-.navbar .navbar-brand .brand:hover {
-  transform: scale(1.1);
-}
-
-.navbar .navbar-nav .nav-link {
-  color: #343a40;
-  /* Dark text color for the links */
-  text-decoration: none;
+p {
   font-size: 1rem;
-  margin: 0 15px;
-  position: relative;
-  padding-bottom: 5px;
-  transition: color 0.3s ease, transform 0.3s ease;
+  margin-bottom: 1.5rem;
 }
 
-.navbar .navbar-nav .nav-link::after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  width: 0;
-  background: #FFDD00;
-  /* Underline color */
-  transition: width 0.3s ease;
+/* Link Styles */
+a {
+  color: #004d40;
+  /* Teal */
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.navbar .navbar-nav .nav-link:hover::after {
-  width: 100%;
+a:visited {
+  color: #004d40;
+  /* Teal */
 }
 
-.navbar .navbar-nav .nav-link:hover {
-  color: #FFDD00;
-  /* Highlight color */
-  transform: translateY(-2px);
+a:hover {
+  color: #00796b;
+  /* Lighter teal */
 }
 
-.navbar .navbar-nav .nav-link.active {
-  color: #FFDD00;
-  /* Highlight color for active link */
-  font-weight: 600;
-  border-bottom: 2px solid #FFDD00;
+/* Card Styles */
+.card {
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Almost opaque white */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  /* Ensures content stays within the card bounds */
 }
 
-/* Responsive Navbar */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar .navbar-nav {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .navbar .navbar-nav .nav-link {
-    margin: 10px 0;
-  }
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-
-
-/* Brand Styles */
-.brand {
-  font-family: 'Lato', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #FFDD00;
-  /* Yellow */
-  text-transform: uppercase;
-  /* Convert the brand text to uppercase */
-  letter-spacing: 2px;
-  /* Add letter spacing for a modern look */
+.card a {
+  color: inherit;
+  /* Ensures link color matches text color */
 }
 
-/* Red Styles */
-.red-o {
-  color: #FF6F61;
-  /* Red */
-  font-weight: 600;
-  /* Increase font weight for emphasis */
+.card-body {
+  padding: 20px;
 }
 
-/* Interactive Buttons */
+/* Button Styles */
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #FF6F61;
-  /* Red */
+  background-color: #00796b;
+  /* Teal */
   color: #fff;
   text-decoration: none;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  /* Add transform animation */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Add subtle shadow */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #FF4B33;
-  /* Darker red */
+  background-color: #004d40;
+  /* Darker teal */
   transform: scale(1.05);
-  /* Scale up on hover */
-}
-
-/* Card Styles */
-.card {
-  background-color: rgba(255, 255, 255, 0.1);
-  /* Slightly transparent white */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Add box-shadow transition */
-  margin: 20px;
-  /* Add margin for space between cards */
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-  /* Enhance shadow on hover */
 }
 
 /* Image Styles */
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
 .image-container img {
   width: 100%;
   height: auto;
@@ -183,29 +122,24 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  /* Semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.3);
+  /* Darker semi-transparent overlay */
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .image-container:hover .overlay {
-  opacity: 0.8;
-  /* Darken overlay on hover */
+  opacity: 1;
 }
 
-/* Text Styles */
+/* Text Center */
 .text-center {
   text-align: center;
-  line-height: 1.6;
-  /* Increase line height for better readability */
 }
 
 .text-muted {
-  color: rgba(255, 255, 255, 0.7);
-  /* Semi-transparent white */
-  font-size: 0.9rem;
-  /* Reduce font size for smaller text */
+  color: rgba(0, 0, 0, 0.7);
+  /* Slightly muted text */
 }
 
 /* Masthead Styles */
@@ -216,133 +150,172 @@ html {
   background-position: center;
   color: #fff;
   text-align: center;
-  position: relative;
-  /* Add position for pseudo-elements */
-  overflow: hidden;
-  /* Hide overflow for better positioning */
-}
-
-.masthead:before {
-  content: '';
-  /* Add pseudo-element */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Semi-transparent black */
-  z-index: 0;
-  /* Place behind text */
+  animation: fadeIn 2s ease-in-out;
 }
 
 .masthead-heading {
   font-size: 3.5rem;
   margin-bottom: 20px;
-  position: relative;
-  /* Add position for stacking context */
-  z-index: 1;
-  /* Place above pseudo-element */
+  animation: slideInFromLeft 1s ease-out;
 }
 
 .masthead-subheading {
   font-size: 1.5rem;
   margin-bottom: 50px;
-  position: relative;
-  /* Add position for stacking context */
-  z-index: 1;
-  /* Place above pseudo-element */
+  animation: slideInFromRight 1s ease-out;
 }
 
-/* Link Styles */
-.link {
-  color: #FFDD00;
+/* Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-/* Basic Styling */
-.footer {
-  background-color: #101820;
-  color: #fff;
-  padding: 20px 0;
-  position: relative;
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.footer .container p {
-  margin: 0;
-  font-size: 1rem;
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.footer .social-icons {
-  margin-top: 20px;
+/* Author Bio Styles */
+.author-bio {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #ffffff;
+  /* White background for bio */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.footer .icon {
-  display: inline-block;
-  margin: 0 10px;
-  color: #fff;
-  font-size: 1.5rem;
-  position: relative;
-  text-decoration: none;
-  transition: transform 0.3s ease, color 0.3s ease;
+.author-bio img {
+  border-radius: 50%;
+  margin-right: 20px;
+  width: 80px;
+  height: 80px;
 }
 
-/* Social Icon Hover Effects */
-.footer .icon:hover {
-  transform: translateY(-5px);
-  color: #00b4d8;
-  /* Change to a bright color */
+/* Comment Section */
+.comments {
+  margin-bottom: 1.5rem;
 }
 
-.footer .icon i {
-  display: block;
+.comments .approval {
+  font-size: 0.875rem;
+  color: #f44336;
+  /* Red for unapproved comments */
 }
 
-/* Tooltip Styling */
-.footer .tooltip {
-  visibility: hidden;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 5px;
+/* Related Posts */
+.related-posts a {
+  padding: 15px;
+  background-color: #ffffff;
   border-radius: 5px;
-  position: absolute;
-  bottom: 150%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  font-size: 0.75rem;
-  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block;
+  /* Ensures entire block is clickable */
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Show tooltip on hover */
-.footer .icon:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
+.related-posts a:hover {
+  background-color: #e0f2f1;
+  /* Light teal */
 }
 
-/* Keyframes for Icon Animation */
-@keyframes icon-bounce {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
+/* Social Sharing */
+.social-sharing a {
+  font-size: 1.25rem;
+  color: #004d40;
+  /* Teal */
+  transition: color 0.3s ease;
 }
 
-/* Applying Keyframes */
-.footer .icon:hover {
-  animation: icon-bounce 0.6s ease-in-out;
+.social-sharing a:hover {
+  color: #00796b;
+  /* Lighter teal */
 }
 
-/* Responsive adjustments */
+/* Custom Colors */
+.bg-light-blue {
+  background-color: #e0f7fa;
+  /* Light cyan */
+}
+
+.text-dark-blue {
+  color: #004d40;
+  /* Dark teal */
+}
+
+.text-dark-gray {
+  color: #004d40;
+  /* Darker text for better readability */
+}
+
+.bg-light-white {
+  background-color: #f5f5f5;
+  /* Light gray for comments */
+}
+
+/* Social Media Colors */
+.text-facebook-blue {
+  color: #1877f2;
+  /* Facebook blue */
+}
+
+.text-twitter-blue {
+  color: #1da1f2;
+  /* Twitter blue */
+}
+
+.text-linkedin-blue {
+  color: #0077b5;
+  /* LinkedIn blue */
+}
+
+/* Button Variants */
+.btn-primary {
+  background-color: #00796b;
+  /* Teal button */
+  color: #ffffff;
+  /* White text */
+}
+
+.btn-primary:hover {
+  background-color: #004d40;
+  /* Darker teal */
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-  .footer .icon {
+  .masthead-heading {
+    font-size: 2.5rem;
+  }
+
+  .masthead-subheading {
     font-size: 1.25rem;
-    margin: 0 8px;
   }
 }
