@@ -261,7 +261,7 @@ a:hover {
 
 /* Custom Colors */
 .bg-light-blue {
-  background-color: #e0f7fa;
+  /* background-color: #e0f7fa; */
   /* Light cyan */
 }
 
@@ -276,7 +276,7 @@ a:hover {
 }
 
 .bg-light-white {
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   /* Light gray for comments */
 }
 
