@@ -112,7 +112,7 @@ During the development and testing phases of the Dive In blog, several issues we
 **Issue:** While trying to access the GitHub repository, users encountered a "502 Bad Gateway" error.
 
 **Resolution:** 
-- Verified GitHub repository URL and corrected any typographical errors.
+- Verified GitHub repository URL and correct any typographical errors.
 - Checked network settings and GitHub status page for outages.
 - Ensured the repository permissions were properly set.
 
@@ -184,18 +184,46 @@ During the development and testing phases of the Dive In blog, several issues we
 Each of these fixes contributed to improving the overall functionality and user experience of the Dive In blog. Ongoing testing and feedback will help in identifying and resolving any further issues.
 
 
+# Known Bugs Not Fixed
+
+---
+
+## 1. Collaboration Function Not Working Correctly
+
+- **Description:** The collaboration feature, which allows multiple users to edit a blog post simultaneously, is currently experiencing issues. Some users report that their changes are not being saved or are being overwritten by others.
+- **Status:** Under Investigation
+- **Image Placeholder:**
+
+  ![Collaboration Bug](#) <!-- Replace # with the image URL or path -->
+
+- **Notes:** This bug appears sporadically and is difficult to replicate consistently, making it challenging to diagnose and resolve. We are working to identify the root cause and will update this section once more information is available.
+
+---
+
+## 2. HTML Validation Errors Due to Django and Bootstrap
+
+- **Description:** Running the site through the W3C Nu HTML Checker flags several validation errors. However, I think these errors stem from Django’s templating syntax and Bootstrap’s pre-defined classes rather than actual issues within the custom code, as when I search for the code causing the errors in my code they do not appear.
+- **Status:** Unfixable Due to Framework Constraints
+- **Image Placeholder:**
+
+  ![HTML Validation Errors](#)
+- **Notes:** The reported validation errors do not correspond to any identifiable code in the project when searched. These errors are artifacts of using Bootstrap's pre-defined classes and Django's templating engine, which often injects code in ways that cause false positives in HTML validation.
+
+
 ## Screenshots and Logs
 
 Below are the screenshots and logs captured during the testing process. These visual aids help to contextualize the test results and provide evidence of the testing procedures.
 
 ### Screenshots
 
-- **New Post Creation**: ![New Post Creation](screenshots/new_post_creation.png)
+- **New Post Creation**: ![New Post Creation](static/images/documentation/testingnewcomment.gif)
 - **Comment Updated Modal**: ![Comment Updated](static/images/documentation/commentupdated.png)
 - **Comment Deleted Modal**: ![Comment Deleted](static/images/documentation/commentdeleted.png)
-- **Comment Approval Notice**: ![Comment Approval Notice](screenshots/comment_approval_notice.png)
+- **Comment Approval Notice**: ![Comment Approval Notice](static/images/documentation/commentapproval.png)
 - **Sign In and Out**: ![Sign in and Out](static/images/documentation/navbardivein.gif)
 - **Admin Panel Access**: ![Admin Panel Access](static/images/documentation/wrongstafflogin.png)
+
+
 
 ### Logs
 

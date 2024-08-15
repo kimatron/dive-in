@@ -91,7 +91,7 @@ This project integrates a user-friendly interface with powerful backend function
 - **Deployment**: Deploy the blog to a live environment, such as [Heroku](https://www.heroku.com/).
 - **Configuration**: Ensure all settings and configurations are correctly set for a smooth and successful launch.
 
-![Logo](static/images/documentation/diveinflowchart.png)
+![Flowchart](static/images/documentation/diveinflowchart.png)
 
 ## Future Features
 
@@ -255,6 +255,8 @@ The Author Profile Picture feature allows displaying an author's profile image a
       def __str__(self):
           return self.user.username```
 
+
+![Logo](static/images/documentation/authorbio.png)
 ### Testing
 
 Testing for the Dive In Blog Project ensures that the application functions correctly and meets user expectations. Testing is conducted through both manual and automated procedures:
@@ -307,7 +309,7 @@ For more detailed deployment instructions, refer to the [Heroku Deployment Docum
 Special thanks to the following resources and individuals for their contributions and inspiration:
 
 - **[Code Institute](https://codeinstitute.net/)**: The "I Think Therefore I Blog" tutorial was essential for understanding Django's ORM and setting up initial models.
-- **[Django Documentation](https://docs.djangoproject.com/)**: Official documentation guided implementation Django features and best practices.
+- **[Django Documentation](https://docs.djangoproject.com/)**: Official documentation guided implementation of Django features and best practices.
 - **[CodePen](https://codepen.io/)**: Provided valuable front-end code snippets and design ideas.
 - **[Uiverse](https://uiverse.io/)**: Offered inspiration for web design and user experience improvements.
 - **[Bootstrap](https://getbootstrap.com/)**: Used for creating a responsive and modern layout.
