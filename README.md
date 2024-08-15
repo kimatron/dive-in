@@ -65,7 +65,7 @@ This project integrates a user-friendly interface with powerful backend function
 - **Prioritization**: Use the MoSCoW method (Must-have, Should-have, Could-have, Won’t-have) to prioritize features based on importance and feasibility.
 - **Features to Include**:
   - **User Authentication**: Secure login and registration.
-  - **Post Creation**: Interface for users to create and manage their own posts.
+  - **Post Creation**: Interface for users to create and manage their posts.
   - **Commenting**: Functionality for users to leave comments on posts.
 
 ### 6. Develop Wireframes
@@ -109,7 +109,7 @@ Due to time constraints, the following features were not implemented in the init
 
 - **User Profiles**: Full implementation of user profiles with customizable options.
 - **Saving Favourites**: Functionality for users to bookmark and save their favorite posts.
-- **Personal Bios and Info**: Ability for users to add and edit their personal bios and information from the front end.
+- **Personal Bios and Info**: Ability for users to add and edit their bios and information from the front end.
 - **Featured and Related Posts**: Systems for showcasing featured posts and displaying related content within blog posts.
 - **Images in Blog Posts**: Support for embedding and displaying images within blog content.
 
@@ -183,7 +183,7 @@ The `Post` model represents a blog post with the following fields:
 - **content**: `TextField` for the main content of the post.
 - **created_on**: `DateTimeField` that records the creation time of the post.
 - **status**: `IntegerField` with choices (`Draft`, `Published`) indicating the post's publication status.
-- **excerpt**: `TextField` for a brief summary of the post.
+- **excerpt**: `TextField` for a summary of the post.
 - **updated_on**: `DateTimeField` that updates automatically when the post is modified.
 
 **Meta Information:**
@@ -276,7 +276,7 @@ The planning of the Dive In Blog Project followed the MoSCoW method to prioritiz
 - **Could-haves**: Additional enhancements like advanced search and filtering options.
 - **Won't-haves**: Features not included in the initial release, such as multi-language support.
 
-This structured approach ensured that critical functionalities were developed first, while providing flexibility for future enhancements.
+This structured approach ensured that critical functionalities were developed first while providing flexibility for future enhancements.
 
 ## Technologies Used
 
@@ -307,11 +307,11 @@ For more detailed deployment instructions, refer to the [Heroku Deployment Docum
 Special thanks to the following resources and individuals for their contributions and inspiration:
 
 - **[Code Institute](https://codeinstitute.net/)**: The "I Think Therefore I Blog" tutorial was essential for understanding Django's ORM and setting up initial models.
-- **[Django Documentation](https://docs.djangoproject.com/)**: Official documentation provided guidance on implementing Django features and best practices.
+- **[Django Documentation](https://docs.djangoproject.com/)**: Official documentation guided implementation Django features and best practices.
 - **[CodePen](https://codepen.io/)**: Provided valuable front-end code snippets and design ideas.
 - **[Uiverse](https://uiverse.io/)**: Offered inspiration for web design and user experience improvements.
 - **[Bootstrap](https://getbootstrap.com/)**: Used for creating a responsive and modern layout.
-- **[Tailwind CSS](https://tailwindcss.com/)**: Helped in styling components with utility-first CSS.
+- **[Canva](https://canva.com/)**: Helped in styling the Dive In logo.
 - **[**[Tailwind CSS](https://tailwindcss.com/)**Viola](https://github.com/violaberg)**: A fellow coder who provided support and motivation throughout the development process, helping to overcome challenging phases and stay focused.
 
 ### Social Media

@@ -78,16 +78,7 @@ The application was tested across multiple browsers and devices to ensure consis
 | Test viewing comments of other users            | Users should not see unapproved comments from other users                         | Pass         |
 | Test admin comment approval actions             | Admins should be able to approve comments via the admin panel                     | Pass         |
 
-### Category and Tag Models
 
-| Test Scenario                                   | Expected Outcome                                                                 | Pass/Fail    |
-|-------------------------------------------------|-----------------------------------------------------------------------------------|--------------|
-| Test creating a new category                    | A new category should be created successfully                                     | Pass         |
-| Test creating a new tag                         | A new tag should be created successfully                                          | Pass         |
-| Test associating categories with posts          | Categories should be successfully associated with posts                           | Pass         |
-| Test associating tags with posts                | Tags should be successfully associated with posts                                 | Pass         |
-| Test displaying posts by category               | Posts should be filtered and displayed by category on the frontend                | Pass         |
-| Test displaying posts by tag                    | Posts should be filtered and displayed by tag on the frontend                     | Pass         |
 
 ### User Authentication and Profile
 
@@ -113,35 +104,85 @@ The application was tested across multiple browsers and devices to ensure consis
 | Test managing users in the admin panel          | Admins should be able to manage user accounts                                     | Pass         |
 | Test approval of pending comments               | Admins should be able to see and approve pending comments                         | Pass         |
 
-## Bugs Identified
+# Bugs Fixed
 
-### List of Bugs
+During the development and testing phases of the Dive In blog, several issues were identified and addressed. Below is a summary of the bugs that were fixed, along with descriptions of the problems and their resolutions.
 
-1. **Comment Approval Visibility**
-   - **Description**: Unapproved comments were temporarily visible to other users due to a caching issue.
-   - **Steps to Reproduce**:
-     1. Add a new comment on a post.
-     2. Check the post as another user.
-   - **Expected Outcome**: Unapproved comments should not be visible to other users.
-   - **Actual Outcome**: Unapproved comments were visible until the cache refreshed.
-   - **Status**: Fixed by adjusting cache settings.
+## 1. Error 502 on GitHub Repository Access
+**Issue:** While trying to access the GitHub repository, users encountered a "502 Bad Gateway" error.
 
-2. **Profile Picture Upload**
-   - **Description**: Profile picture uploads failed on Safari due to file type handling.
-   - **Steps to Reproduce**:
-     1. Attempt to upload a profile picture using Safari.
-   - **Expected Outcome**: The profile picture should upload successfully.
-   - **Actual Outcome**: The upload failed with a file type error.
-   - **Status**: Fixed by updating the allowed file types.
+**Resolution:** 
+- Verified GitHub repository URL and corrected any typographical errors.
+- Checked network settings and GitHub status page for outages.
+- Ensured the repository permissions were properly set.
 
-3. **Post Slug Collision**
-   - **Description**: Duplicate slugs were generated when creating posts with similar titles.
-   - **Steps to Reproduce**:
-     1. Create a post titled "My Post."
-     2. Create another post titled "My Post."
-   - **Expected Outcome**: A unique slug should be generated for the second post.
-   - **Actual Outcome**: The second post had the same slug, causing a collision.
-   - **Status**: Fixed by appending a unique identifier to duplicate slugs.
+## 2. Authentication Failure on Sign-in Page
+**Issue:** Users were unable to sign in due to authentication failures, receiving an error message.
+
+**Resolution:**
+- Reviewed and updated authentication backend configurations.
+- Ensured that the user credentials were correctly validated against the database.
+- Fixed issues related to session management and cookie settings.
+
+## 3. Blog Post Image Upload Issue
+**Issue:** Images were not uploading correctly to blog posts, causing broken image links.
+
+**Resolution:**
+- Updated image upload handling code to ensure proper file storage and retrieval.
+- Configured Django settings for static and media file handling.
+- Verified that image paths and URLs were correctly managed in the database.
+
+## 4. Inconsistent Layout Across Browsers
+**Issue:** The blog layout appeared differently across various web browsers, affecting user experience.
+
+**Resolution:**
+- Standardized CSS using [Bootstrap](https://getbootstrap.com/) and [Tailwind CSS](https://tailwindcss.com/) to ensure consistent styling.
+- Conducted cross-browser testing and applied necessary adjustments for compatibility.
+- Fixed layout issues related to browser-specific CSS quirks.
+
+## 5. Broken Links in Navigation Menu
+**Issue:** Several links in the navigation menu were not functioning, leading to 404 errors.
+
+**Resolution:**
+- Checked and updated navigation links in the HTML templates.
+- Ensured that URLs in the menu corresponded to existing pages and views.
+- Added error handling to manage and log broken link occurrences.
+
+## 6. Comments Section Not Displaying
+**Issue:** Comments on blog posts were not displaying, leading to a lack of user interaction.
+
+**Resolution:**
+- Debugged and fixed issues related to the comment rendering logic.
+- Ensured comments were correctly retrieved from the database and displayed on the post pages.
+- Verified that comment form submissions were properly processed and stored.
+
+## 7. Incomplete User Profile Information
+**Issue:** User profiles were not showing complete information, such as profile pictures and bios.
+
+**Resolution:**
+- Updated the `UserProfile` model and associated views to handle and display all profile fields.
+- Ensured that profile data was correctly stored and retrieved from the database.
+- Fixed issues with form handling for profile updates.
+
+## 8. Deployment Configuration Errors
+**Issue:** Errors occurred during the deployment process, causing the live site to fail.
+
+**Resolution:**
+- Reviewed and corrected deployment configurations, including environment variables and settings.
+- Addressed issues related to database migrations and static file collection.
+- Conducted end-to-end tests to ensure successful deployment.
+
+## 9. Comment Approval Feature Not Working
+**Issue:** The comment approval feature was not functioning, allowing unapproved comments to be visible.
+
+**Resolution:**
+- Debugged the comment approval logic in the backend.
+- Updated views and templates to correctly handle comment approval statuses.
+- Added additional validation to ensure that only approved comments were displayed.
+
+
+Each of these fixes contributed to improving the overall functionality and user experience of the Dive In blog. Ongoing testing and feedback will help in identifying and resolving any further issues.
+
 
 ## Screenshots and Logs
 
@@ -150,9 +191,11 @@ Below are the screenshots and logs captured during the testing process. These vi
 ### Screenshots
 
 - **New Post Creation**: ![New Post Creation](screenshots/new_post_creation.png)
+- **Comment Updated Modal**: ![Comment Updated](static/images/documentation/commentupdated.png)
+- **Comment Deleted Modal**: ![Comment Deleted](static/images/documentation/commentdeleted.png)
 - **Comment Approval Notice**: ![Comment Approval Notice](screenshots/comment_approval_notice.png)
-- **Category Filtering**: ![Category Filtering](screenshots/category_filtering.png)
-- **Admin Panel Access**: ![Admin Panel Access](screenshots/admin_panel_access.png)
+- **Sign In and Out**: ![Sign in and Out](static/images/documentation/navbardivein.gif)
+- **Admin Panel Access**: ![Admin Panel Access](static/images/documentation/wrongstafflogin.png)
 
 ### Logs
 
