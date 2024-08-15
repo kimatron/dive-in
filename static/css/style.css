@@ -417,11 +417,7 @@ a:hover {
   /* Lighter teal */
 }
 
-/* Custom Colors */
-.bg-light-blue {
-  /* background-color: #e0f7fa; */
-  /* Light cyan */
-}
+
 
 .text-dark-blue {
   color: #004d40;
@@ -433,10 +429,7 @@ a:hover {
   /* Darker text for better readability */
 }
 
-.bg-light-white {
-  /* background-color: #f5f5f5; */
-  /* Light gray for comments */
-}
+
 
 /* Social Media Colors */
 .text-facebook-blue {
@@ -575,7 +568,7 @@ a:hover {
   margin-bottom: 20px;
 }
 
-/* Text styles */
+/* Text styles for login */
 .login-text {
   text-align: center;
   margin-bottom: 30px;
