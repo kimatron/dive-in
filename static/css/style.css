@@ -11,9 +11,7 @@ html {
 /* Colors */
 body {
   background-color: #e0f7fa;
-  /* Light cyan background */
   color: #004d40;
-  /* Dark teal for text */
 }
 
 /* Text Styles */
@@ -24,7 +22,6 @@ h4,
 h5,
 h6 {
   color: #00796b;
-  /* Teal for headings */
   line-height: 1.4;
 }
 
@@ -36,7 +33,6 @@ p {
 /* Link Styles */
 a {
   color: #004d40;
-  /* Teal */
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -44,13 +40,11 @@ a {
 a:visited,
 a:hover {
   color: #00796b;
-  /* Lighter teal */
 }
 
 /* Card Styles */
 .card {
   background-color: rgba(255, 255, 255, 0.9);
-  /* Almost opaque white */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -65,34 +59,146 @@ a:hover {
 
 .card a {
   color: inherit;
-  /* Ensures link color matches text color */
 }
 
-.card-body {
-  padding: 20px;
+/* Base Button Styles */
+.btn-common {
+  display: inline-block;
+  padding: 12px 25px;
+  /* Adjusted padding for a larger button */
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  /* Rounded corners for a sleek look */
+  font-size: 1.2em;
+  /* Slightly larger font size */
+  font-weight: 600;
+  /* Bolder text for better readability */
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  /* Softer shadow for depth */
 }
 
-/* Button Styles */
-.btn,
-.btn-primary {
+/* Base Button Styles */
+.btn-common {
+  display: inline-block;
+  padding: 15px 30px;
+  /* Larger padding for a more substantial button */
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  /* Fully rounded corners */
+  font-size: 1.3em;
+  /* Larger font size for better readability */
+  font-weight: 700;
+  /* Bolder text for emphasis */
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Softer shadow for depth */
+}
+
+/* Primary Button Style */
+.btn-primary,
+.signup-button,
+.login-button {
+  background: linear-gradient(135deg, #ff6f61, #d83f68);
+  /* Gradient background */
+}
+
+.btn-primary:hover,
+.signup-button:hover,
+.login-button:hover {
+  background: linear-gradient(135deg, #d83f68, #ff6f61);
+  /* Inverted gradient on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  /* Deeper shadow on hover */
+  transform: translateY(-4px);
+  /* Slight lift effect */
+}
+
+.btn-primary:active,
+.signup-button:active,
+.login-button:active {
+  background: linear-gradient(135deg, #ff6f61, #d83f68);
+  /* Original gradient on click */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Shadow on click */
+  transform: translateY(2px);
+  /* Slight depression effect */
+}
+
+/* Pagination Button Styles */
+.page-link {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #00796b;
-  /* Teal */
+  /* Adjust padding for a larger button */
   color: #fff;
-  text-decoration: none;
+  /* Set text color to white */
+  background: linear-gradient(135deg, #00796b, #004d40);
+  /* Teal gradient background */
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
+  /* Fully rounded corners */
+  font-size: 1em;
+  /* Font size consistent with the buttons */
+  font-weight: 700;
+  /* Bolder text for emphasis */
+  text-transform: uppercase;
+  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  /* Remove underline from links */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Softer shadow for depth */
 }
 
-.btn:hover,
-.btn-primary:hover {
-  background-color: #004d40;
-  /* Darker teal */
-  transform: scale(1.05);
+.page-link:hover {
+  background: linear-gradient(135deg, #004d40, #00796b);
+  /* Inverted gradient on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  /* Deeper shadow on hover */
+  transform: translateY(-4px);
+  /* Slight lift effect */
+  color: #07c6b0;
 }
+
+.page-link:active {
+  background: linear-gradient(135deg, #00796b, #004d40);
+  /* Original gradient on click */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Shadow on click */
+  transform: translateY(2px);
+  /* Slight depression effect */
+}
+
+/* Pagination Item Styles */
+.page-item {
+  margin: 0 5px;
+  /* Space between pagination items */
+}
+
+/* Remove default link styles if any */
+.page-item a {
+  text-decoration: none;
+  /* Remove underline */
+}
+
+.page-item.active .page-link {
+  background: #004d40;
+  /* Darker background for active page */
+  color: #fff;
+  /* White text color for active page */
+}
+
+
+
 
 /* Image Styles */
 .image-container {
@@ -118,7 +224,6 @@ a:hover {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-  /* Darker semi-transparent overlay */
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -134,7 +239,6 @@ a:hover {
 
 .text-muted {
   color: rgba(0, 0, 0, 0.7);
-  /* Slightly muted text */
 }
 
 /* Masthead Styles */
@@ -201,12 +305,10 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
-  /* White background for the navbar */
   padding: 15px 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1000;
-  /* Ensure navbar is on top */
 }
 
 .navbar .navbar-brand .brand {
@@ -214,7 +316,6 @@ a:hover {
   font-size: 1.8rem;
   font-weight: 700;
   background: linear-gradient(135deg, #FFDD00, #FF6F61);
-  /* Gradient color */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: transform 0.3s ease;
@@ -226,7 +327,6 @@ a:hover {
 
 .navbar .navbar-nav .nav-link {
   color: #343a40;
-  /* Dark text color for the links */
   text-decoration: none;
   font-size: 1rem;
   margin: 0 15px;
@@ -244,7 +344,6 @@ a:hover {
   height: 2px;
   width: 0;
   background: #FFDD00;
-  /* Underline color */
   transition: width 0.3s ease;
 }
 
@@ -254,13 +353,11 @@ a:hover {
 
 .navbar .navbar-nav .nav-link:hover {
   color: #FFDD00;
-  /* Highlight color */
   transform: translateY(-2px);
 }
 
 .navbar .navbar-nav .nav-link.active {
   color: #FFDD00;
-  /* Highlight color for active link */
   font-weight: 600;
   border-bottom: 2px solid #FFDD00;
 }
@@ -285,7 +382,6 @@ a:hover {
 /* Footer Styles */
 .footer {
   background-color: #343a40;
-  /* Dark background */
   color: #fff;
   padding: 20px 0;
   position: relative;
@@ -315,14 +411,8 @@ a:hover {
 }
 
 .footer .social-icons .icon:hover {
-  background: var(--color);
-  color: white;
-}
-
-.footer .social-icons .icon:hover i,
-.footer .social-icons .icon:hover .tooltip,
-.footer .social-icons .icon:hover .tooltip::before {
-  background: var(--color);
+  background: #00796b;
+  /* Updated color */
   color: white;
 }
 
@@ -364,7 +454,6 @@ a:hover {
   align-items: center;
   padding: 15px;
   background-color: #ffffff;
-  /* White background for bio */
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -384,7 +473,6 @@ a:hover {
 .comments .approval {
   font-size: 0.875rem;
   color: #f44336;
-  /* Red for unapproved comments */
 }
 
 /* Related Posts */
@@ -392,280 +480,97 @@ a:hover {
   padding: 15px;
   background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: block;
-  /* Ensures entire block is clickable */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-decoration: none;
-  color: inherit;
+  color: #00796b;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .related-posts a:hover {
-  background-color: #e0f2f1;
-  /* Light teal */
+  background-color: #e0f7fa;
+  transform: translateY(-2px);
 }
 
-/* Social Sharing */
-.social-sharing a {
-  font-size: 1.25rem;
-  color: #004d40;
-  /* Teal */
-  transition: color 0.3s ease;
+/* Forms */
+form {
+  margin-top: 20px;
 }
 
-.social-sharing a:hover {
-  color: #00796b;
-  /* Lighter teal */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 1rem;
 }
 
-
-
-.text-dark-blue {
-  color: #004d40;
-  /* Dark teal */
-}
-
-.text-dark-gray {
-  color: #004d40;
-  /* Darker text for better readability */
-}
-
-
-
-/* Social Media Colors */
-.text-facebook-blue {
-  color: #1877f2;
-  /* Facebook blue */
-}
-
-.text-twitter-blue {
-  color: #1da1f2;
-  /* Twitter blue */
-}
-
-.text-linkedin-blue {
-  color: #0077b5;
-  /* LinkedIn blue */
-}
-
-/* Button Variants */
-.btn-primary {
+input[type="submit"] {
   background-color: #00796b;
-  /* Teal button */
-  color: #ffffff;
-  /* White text */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-primary:hover {
-  background-color: #004d40;
-  /* Darker teal */
+input[type="submit"]:hover {
+  background-color: #07c6b0;
+  transform: translateY(-2px);
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .masthead-heading {
-    font-size: 2.5rem;
-  }
-
-  .masthead-subheading {
-    font-size: 1.25rem;
-  }
+/* Container */
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Base styles for the entire signup page */
+/* Login and Signup Containers */
+.login-container,
 .signup-container {
-  max-width: 480px;
-  margin: 50px auto;
-  padding: 30px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading styles */
+.login-heading,
 .signup-heading {
   text-align: center;
-  font-size: 2.4em;
-  color: #333;
+  font-size: 2.5rem;
   margin-bottom: 20px;
 }
 
-/* Text styles */
-.signup-text {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #666;
-  font-size: 1em;
-}
-
-.signup-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.signup-link:hover {
-  text-decoration: underline;
-}
-
-/* Form styles */
-.signup-form {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Input field styles */
-.signup-form input[type="text"],
-.signup-form input[type="email"],
-.signup-form input[type="password"] {
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1em;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.signup-form input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
-  outline: none;
-}
-
-/* Button styles */
-.signup-button {
-  padding: 15px;
-  background-color: #00796b;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.signup-button:hover {
-  background-color: #07c6b0;
-  transform: translateY(-2px);
-}
-
-/* Base styles for the entire login page */
-.login-container {
-  max-width: 480px;
-  margin: 50px auto;
-  padding: 30px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
-}
-
-/* Heading styles */
-.login-heading {
-  text-align: center;
-  font-size: 2.4em;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Text styles for login */
-.login-text {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #666;
-  font-size: 1em;
-  line-height: 1.6;
-}
-
-.login-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.login-link:hover {
-  text-decoration: underline;
-}
-
-/* Form styles */
-.login-form {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Input field styles */
-.login-form input[type="text"],
-.login-form input[type="email"],
-.login-form input[type="password"] {
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1em;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.login-form input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
-  outline: none;
-}
-
-/* Button styles */
-.login-button {
-  padding: 15px;
-  background-color: #00796b;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.login-button:hover {
-  background-color: #07c6b0;
-  transform: translateY(-2px);
-}
-
-/* Responsive design */
+/* Responsive design for both login and signup pages */
 @media (max-width: 600px) {
-  .login-container {
+
+  .login-container,
+  .signup-container {
     padding: 20px;
   }
 
-  .login-heading {
+  .login-heading,
+  .signup-heading {
     font-size: 2em;
   }
 
   .login-form input[type="text"],
   .login-form input[type="email"],
-  .login-form input[type="password"] {
-    font-size: 0.9em;
-  }
-
-  .login-button {
-    font-size: 1em;
-  }
-}
-
-
-/* Responsive design */
-@media (max-width: 600px) {
-  .signup-container {
-    padding: 20px;
-  }
-
-  .signup-heading {
-    font-size: 2em;
-  }
-
+  .login-form input[type="password"],
   .signup-form input[type="text"],
   .signup-form input[type="email"],
   .signup-form input[type="password"] {
     font-size: 0.9em;
   }
 
+  .login-button,
   .signup-button {
     font-size: 1em;
   }
