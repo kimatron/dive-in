@@ -125,7 +125,7 @@ During the development and testing phases of the Dive In blog, several issues we
 **Issue:** While trying to access the GitHub repository, users encountered a "502 Bad Gateway" error.
 
 **Resolution:** 
-- Verified GitHub repository URL and corrected any typographical errors.
+- Verified GitHub repository URL and correct any typographical errors.
 - Checked network settings and GitHub status page for outages.
 - Ensured the repository permissions were properly set.
 
@@ -235,9 +235,9 @@ During the development and testing phases of the Dive In blog, several issues we
 
 **Notes:** The subscription model is partially implemented, and work is ongoing to complete the feature. The current implementation allows users to subscribe but lacks full functionality for managing subscriptions and notifications.
 
-## Styling-errors
+## Styling-errors:
 
-- Last minute changes changed the style of my containers, and it looks more squished than I would like.
+- Last-minute changes changed the style of my containers, and they looks more squished than I would like. In my last minute deployed site the author image is not displaying, I can not figure out why as it worked fine before, and it is displaying ok when it is ran locally with Debug set to True, and not when it is set to false. I have collected static, which fixed this issue before, but unfortunately it's not working in this moment.
 
 
 
