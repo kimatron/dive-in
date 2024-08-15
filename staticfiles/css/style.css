@@ -6,7 +6,6 @@ html {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   line-height: 1.6;
-  /* Increased line height for readability */
 }
 
 /* Colors */
@@ -27,12 +26,25 @@ h6 {
   color: #00796b;
   /* Teal for headings */
   line-height: 1.4;
-  /* Improve readability of headings */
 }
 
 p {
   font-size: 1rem;
   margin-bottom: 1.5rem;
+}
+
+/* Link Styles */
+a {
+  color: #004d40;
+  /* Teal */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:visited,
+a:hover {
+  color: #00796b;
+  /* Lighter teal */
 }
 
 /* Card Styles */
@@ -42,15 +54,27 @@ p {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Interactive Buttons */
-.btn {
+.card a {
+  color: inherit;
+  /* Ensures link color matches text color */
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* Button Styles */
+.btn,
+.btn-primary {
   display: inline-block;
   padding: 10px 20px;
   background-color: #00796b;
@@ -63,7 +87,8 @@ p {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn:hover {
+.btn:hover,
+.btn-primary:hover {
   background-color: #004d40;
   /* Darker teal */
   transform: scale(1.05);
@@ -135,24 +160,6 @@ p {
   animation: slideInFromRight 1s ease-out;
 }
 
-/* Link Styles */
-a {
-  color: #004d40;
-  /* Teal */
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:visited {
-  color: #004d40;
-  /* Teal */
-}
-
-a:hover {
-  color: #00796b;
-  /* Lighter teal */
-}
-
 /* Keyframes */
 @keyframes fadeIn {
   from {
@@ -186,6 +193,169 @@ a:hover {
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  /* White background for the navbar */
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1000;
+  /* Ensure navbar is on top */
+}
+
+.navbar .navbar-brand .brand {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FFDD00, #FF6F61);
+  /* Gradient color */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.navbar .navbar-brand .brand:hover {
+  transform: scale(1.1);
+}
+
+.navbar .navbar-nav .nav-link {
+  color: #343a40;
+  /* Dark text color for the links */
+  text-decoration: none;
+  font-size: 1rem;
+  margin: 0 15px;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .navbar-nav .nav-link::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: #FFDD00;
+  /* Underline color */
+  transition: width 0.3s ease;
+}
+
+.navbar .navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+  color: #FFDD00;
+  /* Highlight color */
+  transform: translateY(-2px);
+}
+
+.navbar .navbar-nav .nav-link.active {
+  color: #FFDD00;
+  /* Highlight color for active link */
+  font-weight: 600;
+  border-bottom: 2px solid #FFDD00;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar .navbar-nav .nav-link {
+    margin: 10px 0;
+  }
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #343a40;
+  /* Dark background */
+  color: #fff;
+  padding: 20px 0;
+  position: relative;
+}
+
+.footer .social-icons {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.footer .social-icons .icon {
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 15px;
+  margin: 0 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.footer .social-icons .icon:hover {
+  background: var(--color);
+  color: white;
+}
+
+.footer .social-icons .icon:hover i,
+.footer .social-icons .icon:hover .tooltip,
+.footer .social-icons .icon:hover .tooltip::before {
+  background: var(--color);
+  color: white;
+}
+
+.footer .social-icons .icon .tooltip {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  background: #ffffff;
+  color: #000;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, top 0.3s ease;
+}
+
+.footer .social-icons .icon .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #ffffff;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.footer .social-icons .icon:hover .tooltip {
+  top: -50px;
+  opacity: 1;
 }
 
 /* Author Bio Styles */
@@ -223,6 +393,10 @@ a:hover {
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block;
+  /* Ensures entire block is clickable */
+  text-decoration: none;
+  color: inherit;
 }
 
 .related-posts a:hover {
@@ -243,11 +417,7 @@ a:hover {
   /* Lighter teal */
 }
 
-/* Custom Colors */
-.bg-light-blue {
-  background-color: #e0f7fa;
-  /* Light cyan */
-}
+
 
 .text-dark-blue {
   color: #004d40;
@@ -259,11 +429,9 @@ a:hover {
   /* Darker text for better readability */
 }
 
-.bg-light-white {
-  background-color: #f5f5f5;
-  /* Light gray for comments */
-}
 
+
+/* Social Media Colors */
 .text-facebook-blue {
   color: #1877f2;
   /* Facebook blue */
@@ -279,6 +447,7 @@ a:hover {
   /* LinkedIn blue */
 }
 
+/* Button Variants */
 .btn-primary {
   background-color: #00796b;
   /* Teal button */
@@ -289,4 +458,215 @@ a:hover {
 .btn-primary:hover {
   background-color: #004d40;
   /* Darker teal */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .masthead-heading {
+    font-size: 2.5rem;
+  }
+
+  .masthead-subheading {
+    font-size: 1.25rem;
+  }
+}
+
+/* Base styles for the entire signup page */
+.signup-container {
+  max-width: 480px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Heading styles */
+.signup-heading {
+  text-align: center;
+  font-size: 2.4em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Text styles */
+.signup-text {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 1em;
+}
+
+.signup-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+/* Form styles */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input field styles */
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-form input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+/* Button styles */
+.signup-button {
+  padding: 15px;
+  background-color: #00796b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #07c6b0;
+  transform: translateY(-2px);
+}
+
+/* Base styles for the entire login page */
+.login-container {
+  max-width: 480px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Heading styles */
+.login-heading {
+  text-align: center;
+  font-size: 2.4em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Text styles for login */
+.login-text {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+.login-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+/* Form styles */
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input field styles */
+.login-form input[type="text"],
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+/* Button styles */
+.login-button {
+  padding: 15px;
+  background-color: #00796b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #07c6b0;
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-heading {
+    font-size: 2em;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    font-size: 0.9em;
+  }
+
+  .login-button {
+    font-size: 1em;
+  }
+}
+
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .signup-container {
+    padding: 20px;
+  }
+
+  .signup-heading {
+    font-size: 2em;
+  }
+
+  .signup-form input[type="text"],
+  .signup-form input[type="email"],
+  .signup-form input[type="password"] {
+    font-size: 0.9em;
+  }
+
+  .signup-button {
+    font-size: 1em;
+  }
 }
