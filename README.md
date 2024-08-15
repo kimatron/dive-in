@@ -30,6 +30,89 @@ Dive In is a comprehensive blog platform aimed at scuba diving and travel enthus
 
 This project integrates a user-friendly interface with powerful backend functionalities, making it a robust platform for sharing and discovering diving and travel content.
 
+## Detailed Planning Steps
+
+### 1. Define Blog Objectives
+- **Mission and Vision**: Establish the overarching goals and purpose of the Dive In blog. This includes defining the blog’s unique value proposition and target audience.
+- **Key Goals**:
+  - **User Engagement**: Develop strategies to increase interaction, such as comments, shares, and user contributions.
+  - **Content Sharing**: Implement features that encourage users to share content on social media and other platforms.
+  - **Community Building**: Create features that foster a sense of community among users, such as forums or discussion boards.
+
+### 2. Gather User Requirements
+- **Collect Requirements**: Engage with potential users to understand their needs and expectations for the blog. This can be done through surveys, interviews, or focus groups.
+- **Essential Features**:
+  - **User Authentication**: Secure login and registration system.
+  - **Blog Post Management**: Tools for creating, editing, and managing blog posts.
+  - **Comments Functionality**: Interactive commenting system for user feedback and discussion.
+
+### 3. Design Layout & UI
+- **Layout Development**: Create the layout for various pages, including:
+  - **Home Page**: Overview of recent posts and featured content.
+  - **Post Details Page**: Detailed view of individual blog posts.
+  - **User Profiles**: Pages displaying user information and their posts.
+- **UI Design**: Utilize frameworks like [Bootstrap](https://getbootstrap.com/) and [Tailwind CSS](https://tailwindcss.com/) to ensure a modern, responsive design.
+
+### 4. Create Data Models
+- **Django Models**: Develop the necessary models in Django to represent:
+  - **Post**: Blog posts with fields like title, content, and author.
+  - **Comment**: User comments on posts with fields for content and approval status.
+  - **Category**: Categories to organize posts.
+  - **UserProfile**: Extended user profiles including profile pictures and bios.
+- **Data Relationships**: Define how these models relate to each other, such as foreign keys linking comments to posts and posts to categories.
+
+### 5. Feature Planning
+- **Prioritization**: Use the MoSCoW method (Must-have, Should-have, Could-have, Won’t-have) to prioritize features based on importance and feasibility.
+- **Features to Include**:
+  - **User Authentication**: Secure login and registration.
+  - **Post Creation**: Interface for users to create and manage their own posts.
+  - **Commenting**: Functionality for users to leave comments on posts.
+
+### 6. Develop Wireframes
+- **Wireframes**: Design wireframes for key pages to visualize layout and functionality. Tools like [CodePen](https://codepen.io/) and [Universe](https://universe.com/) can be used for creating and sharing wireframes.
+- **Stakeholder Validation**: Present wireframes to stakeholders for feedback and adjust designs as needed.
+
+### 7. User Feedback & Revisions
+- **Gather Feedback**: Collect feedback on wireframes and initial designs from potential users and stakeholders.
+- **Revisions**: Make necessary changes based on feedback to ensure the final design meets user needs and expectations.
+
+### 8. Implement Features
+- **Development**: Begin coding and integrating prioritized features into the application.
+- **Integration**: Ensure seamless integration with Django models and user interface elements.
+
+### 9. Testing Phase
+- **Testing**: Conduct comprehensive testing, including:
+  - **Functionality**: Verify that all features work as intended.
+  - **Usability**: Ensure the application is user-friendly and intuitive.
+  - **Security**: Test for vulnerabilities and ensure data protection.
+- **Documentation**: Document testing procedures and results. Make necessary improvements based on test outcomes.
+
+### 10. Deployment
+- **Deployment**: Deploy the blog to a live environment, such as [Heroku](https://www.heroku.com/).
+- **Configuration**: Ensure all settings and configurations are correctly set for a smooth and successful launch.
+
+![Logo](static/images/documentation/diveinflowchart.png)
+
+## Future Features
+
+Several enhancements are planned for future versions of the Dive In blog to further improve user experience and functionality:
+
+- **User Profiles**: Allow users to create and customize their profiles, including adding profile pictures, bios, and other personal information directly from the UI.
+- **Saving Favourites**: Enable users to save their favorite blog posts and easily access them later.
+- **Featured Posts**: Highlight popular or recommended blog posts on the home page or in a dedicated section.
+- **Related Posts**: Display related blog posts on individual post pages to encourage further reading.
+- **Images in Blogs**: Incorporate images within blog posts to enhance visual appeal and content engagement.
+
+## Features Not Implemented
+
+Due to time constraints, the following features were not implemented in the initial release but are planned for future updates:
+
+- **User Profiles**: Full implementation of user profiles with customizable options.
+- **Saving Favourites**: Functionality for users to bookmark and save their favorite posts.
+- **Personal Bios and Info**: Ability for users to add and edit their personal bios and information from the front end.
+- **Featured and Related Posts**: Systems for showcasing featured posts and displaying related content within blog posts.
+- **Images in Blog Posts**: Support for embedding and displaying images within blog content.
+
 ## Features
 
 Dive In offers a range of features designed to enhance user experience and foster community interaction:

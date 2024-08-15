@@ -35,24 +35,6 @@ p {
   margin-bottom: 1.5rem;
 }
 
-/* Link Styles */
-a {
-  color: #004d40;
-  /* Teal */
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:visited {
-  color: #004d40;
-  /* Teal */
-}
-
-a:hover {
-  color: #00796b;
-  /* Lighter teal */
-}
-
 /* Card Styles */
 .card {
   background-color: rgba(255, 255, 255, 0.9);
@@ -60,26 +42,14 @@ a:hover {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-  /* Ensures content stays within the card bounds */
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-.card a {
-  color: inherit;
-  /* Ensures link color matches text color */
-}
-
-.card-body {
-  padding: 20px;
-}
-
-/* Button Styles */
+/* Interactive Buttons */
 .btn {
   display: inline-block;
   padding: 10px 20px;
@@ -165,6 +135,24 @@ a:hover {
   animation: slideInFromRight 1s ease-out;
 }
 
+/* Link Styles */
+a {
+  color: #004d40;
+  /* Teal */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:visited {
+  color: #004d40;
+  /* Teal */
+}
+
+a:hover {
+  color: #00796b;
+  /* Lighter teal */
+}
+
 /* Keyframes */
 @keyframes fadeIn {
   from {
@@ -235,10 +223,6 @@ a:hover {
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: block;
-  /* Ensures entire block is clickable */
-  text-decoration: none;
-  color: inherit;
 }
 
 .related-posts a:hover {
@@ -261,7 +245,7 @@ a:hover {
 
 /* Custom Colors */
 .bg-light-blue {
-  /* background-color: #e0f7fa; */
+  background-color: #e0f7fa;
   /* Light cyan */
 }
 
@@ -276,11 +260,10 @@ a:hover {
 }
 
 .bg-light-white {
-  /* background-color: #f5f5f5; */
+  background-color: #f5f5f5;
   /* Light gray for comments */
 }
 
-/* Social Media Colors */
 .text-facebook-blue {
   color: #1877f2;
   /* Facebook blue */
@@ -296,7 +279,6 @@ a:hover {
   /* LinkedIn blue */
 }
 
-/* Button Variants */
 .btn-primary {
   background-color: #00796b;
   /* Teal button */
@@ -307,15 +289,4 @@ a:hover {
 .btn-primary:hover {
   background-color: #004d40;
   /* Darker teal */
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .masthead-heading {
-    font-size: 2.5rem;
-  }
-
-  .masthead-subheading {
-    font-size: 1.25rem;
-  }
 }
