@@ -233,11 +233,15 @@ During the development and testing phases of the Dive In blog, several issues we
 
 **Status:** In Progress
 
-
-
-
-
 **Notes:** The subscription model is partially implemented, and work is ongoing to complete the feature. The current implementation allows users to subscribe but lacks full functionality for managing subscriptions and notifications.
+
+## Styling-errors
+
+- Last minute changes changed the style of my containers, and it looks more squished than I would like.
+
+
+
+
 
 
 ## Screenshots and Logs
