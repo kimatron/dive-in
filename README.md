@@ -312,7 +312,7 @@ Special thanks to the following resources and individuals for their contribution
 - **[Uiverse](https://uiverse.io/)**: Offered inspiration for web design and user experience improvements.
 - **[Bootstrap](https://getbootstrap.com/)**: Used for creating a responsive and modern layout.
 - **[Canva](https://canva.com/)**: Helped in styling the Dive In logo.
-- **[**[Tailwind CSS](https://tailwindcss.com/)**Viola](https://github.com/violaberg)**: A fellow coder who provided support and motivation throughout the development process, helping to overcome challenging phases and stay focused.
+- **[Viola](https://github.com/violaberg)**: A fellow coder who provided support and motivation throughout the development process, helping to overcome challenging phases and stay focused.
 
 ### Social Media
 

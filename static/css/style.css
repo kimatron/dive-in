@@ -369,26 +369,113 @@ a:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.author-bio .bio-image {
-  flex: 0 0 100px;
-  margin-right: 20px;
+.author-bio img {
   border-radius: 50%;
-  overflow: hidden;
+  margin-right: 20px;
+  width: 80px;
+  height: 80px;
 }
 
-.author-bio .bio-image img {
-  width: 100px;
-  height: 100px;
+/* Comment Section */
+.comments {
+  margin-bottom: 1.5rem;
 }
 
-.author-bio .bio-text h2 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+.comments .approval {
+  font-size: 0.875rem;
+  color: #f44336;
+  /* Red for unapproved comments */
 }
 
-.author-bio .bio-text p {
-  margin-bottom: 0;
-  font-size: 0.9rem;
+/* Related Posts */
+.related-posts a {
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block;
+  /* Ensures entire block is clickable */
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-posts a:hover {
+  background-color: #e0f2f1;
+  /* Light teal */
+}
+
+/* Social Sharing */
+.social-sharing a {
+  font-size: 1.25rem;
+  color: #004d40;
+  /* Teal */
+  transition: color 0.3s ease;
+}
+
+.social-sharing a:hover {
+  color: #00796b;
+  /* Lighter teal */
+}
+
+/* Custom Colors */
+.bg-light-blue {
+  /* background-color: #e0f7fa; */
+  /* Light cyan */
+}
+
+.text-dark-blue {
+  color: #004d40;
+  /* Dark teal */
+}
+
+.text-dark-gray {
+  color: #004d40;
+  /* Darker text for better readability */
+}
+
+.bg-light-white {
+  /* background-color: #f5f5f5; */
+  /* Light gray for comments */
+}
+
+/* Social Media Colors */
+.text-facebook-blue {
+  color: #1877f2;
+  /* Facebook blue */
+}
+
+.text-twitter-blue {
+  color: #1da1f2;
+  /* Twitter blue */
+}
+
+.text-linkedin-blue {
+  color: #0077b5;
+  /* LinkedIn blue */
+}
+
+/* Button Variants */
+.btn-primary {
+  background-color: #00796b;
+  /* Teal button */
+  color: #ffffff;
+  /* White text */
+}
+
+.btn-primary:hover {
+  background-color: #004d40;
+  /* Darker teal */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .masthead-heading {
+    font-size: 2.5rem;
+  }
+
+  .masthead-subheading {
+    font-size: 1.25rem;
+  }
 }
 
 /* Base styles for the entire signup page */
