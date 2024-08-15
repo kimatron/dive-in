@@ -1,22 +1,12 @@
 # Dive In
 
-Dive In is a blog based on scuba diving, travel, and the lifestyle that comes with it. Users can view blogs, comment, share and add to the conversation.
-
-
+Dive In is a dynamic blog platform dedicated to scuba diving, travel, and the lifestyle that accompanies these adventures. The site provides a vibrant community where users can read engaging blog posts, share their own experiences, participate in discussions, and connect with other diving enthusiasts.
 
 ![Logo](static/images/divinlogolight.png)
 
 ## Live Site
 
-You can view the deployed site here: [View the deployed site](https://dive-inn-c4449bc967b4.herokuapp.com/)
-
-## Table of Contents
-
-...
-
-
-
-
+Explore the live site here: [Dive In Blog](https://dive-inn-c4449bc967b4.herokuapp.com/)
 
 ## Table of Contents
 
@@ -32,60 +22,97 @@ You can view the deployed site here: [View the deployed site](https://dive-inn-c
 
 ## Project Overview
 
-Dive In is a scuba diving and travel-oriented blog project that aims to provide users with a platform to explore narratives, engage in discussions, and share experiences related to scuba diving adventures. The project is designed to incorporate various features to enhance user interaction and create a vibrant community around scuba diving and travel lifestyle.
+Dive In is a comprehensive blog platform aimed at scuba diving and travel enthusiasts. It allows users to:
+
+- **Discover**: Read and explore a variety of blog posts related to scuba diving and travel.
+- **Engage**: Comment on posts, share insights, and interact with a community of like-minded individuals.
+- **Contribute**: Create and manage blog posts, providing a space for users to share their diving experiences and travel stories.
+
+This project integrates a user-friendly interface with powerful backend functionalities, making it a robust platform for sharing and discovering diving and travel content.
 
 ## Features
 
-Dive In Blog Project encapsulates several key features tailored to enrich the user experience and foster community engagement:
+Dive In offers a range of features designed to enhance user experience and foster community interaction:
 
-- **User Authentication**: Implementing a secure login and registration system for users to access and interact with the blog.
-- **Blog Post Management**: Utilizing database models to create, edit, and display blog posts, enabling users to share their stories.
-- **Comments Functionality**: Enabling an interactive comments section for users to engage, share feedback, and build a vibrant community.
+- **User Authentication**: A secure system for user registration and login. Users can register, log in, and manage their profiles with ease.
+- **Blog Post Management**: Users can create, edit, and publish blog posts. Posts can include rich text, images, and other media.
+- **Comments Functionality**: An interactive comment section where users can engage in discussions, provide feedback, and connect with other readers.
+- **Author Profiles**: Each post features an author's profile picture and bio, adding a personal touch to the content and allowing readers to learn more about the writers.
 
 ### Detailed Features
 
 | Feature                | Description                                                                                                 |
 |------------------------|-------------------------------------------------------------------------------------------------------------|
-| User Authentication     | Robust user authentication system ensuring secure access and interaction within the platform.            |
-| Blog Post Management    | Database models facilitate seamless creation, management, and display of captivating blog posts.          |
-| Comments Functionality  | Interactive comment section allows users to participate in discussions and provide feedback.
+| User Authentication    | Secure login and registration system with optional social authentication through Django Allauth.          |
+| Blog Post Management   | Comprehensive management system for creating, editing, and displaying blog posts with rich text and media support. |
+| Comments Functionality | Interactive comment section supporting threaded discussions and moderation for community engagement.       |
+| Author Profiles        | Displays profile pictures and bios of authors, enhancing personalization and connection with readers.       |
 
 ## Installation
 
-To set up the Dive In Blog Project, follow these steps:
+To set up Dive In locally, follow these steps:
 
-1. **Clone the Repository**: Clone the project repository from GitHub to access the source code.
-2. **Install Dependencies**: Use the `pip` package manager to install dependencies listed in the `requirements.txt` file.
-3. **Database Configuration**: Customize database settings in `settings.py` for seamless interaction with the database.
+1. **Clone the Repository**: Clone the project repository from GitHub:
+    ```bash
+    git clone https://github.com/kimatron/dive-in.git
+    ```
+2. **Install Dependencies**: Install the required dependencies using `pip`:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3. **Database Configuration**: Configure your database settings in `settings.py`. For example, set up PostgreSQL or SQLite depending on your preference:
+    ```python
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'dive_in_db',
+            'USER': 'your_db_user',
+            'PASSWORD': 'your_db_password',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
+    ```
+4. **Run Migrations**: Apply database migrations to set up your database schema:
+    ```bash
+    python manage.py migrate
+    ```
+5. **Create a Superuser**: Create a superuser to access the Django admin interface:
+    ```bash
+    python manage.py createsuperuser
+    ```
+6. **Run the Server**: Start the Django development server:
+    ```bash
+    python manage.py runserver
+    ```
 
-# Models
+## Models Overview
 
-## Overview
+Dive In utilizes several key models to structure and manage the content on the site.
 
-This document provides an overview of the key models used in the blog application. Each model represents a core entity within the system, and this section explains their purpose and key attributes.
+### Post Model
 
-## Models
+The `Post` model represents a blog post with the following fields:
 
-### Post
-
-The `Post` model represents a blog post. It contains the following fields:
-
-- **title**: A `CharField` with a maximum length of 200 characters and a unique constraint to ensure that each post has a distinct title.
-- **slug**: A `SlugField` used to generate URL-friendly versions of the title. Unique for each post.
-- **author**: A `ForeignKey` linking to the `User` model, representing the author of the post. Uses `related_name` to reference blog posts by the user.
-- **content**: A `TextField` containing the main content of the post.
-- **created_on**: A `DateTimeField` that records when the post was created.
-- **status**: An `IntegerField` with choices (`Draft`, `Published`) indicating the publication status of the post.
-- **excerpt**: A `TextField` for a brief summary or excerpt of the post, which can be left blank.
-- **updated_on**: A `DateTimeField` that updates automatically with the current time whenever the post is modified.
+- **title**: `CharField` with a maximum length of 200 characters, unique for each post.
+- **slug**: `SlugField` for creating URL-friendly versions of the title.
+- **author**: `ForeignKey` linking to the `User` model, representing the post's author.
+- **content**: `TextField` for the main content of the post.
+- **created_on**: `DateTimeField` that records the creation time of the post.
+- **status**: `IntegerField` with choices (`Draft`, `Published`) indicating the post's publication status.
+- **excerpt**: `TextField` for a brief summary of the post.
+- **updated_on**: `DateTimeField` that updates automatically when the post is modified.
 
 **Meta Information:**
+
 - **ordering**: Orders posts by creation date in descending order.
 
 **String Representation:**
+
 ```python
 def __str__(self):
     return f"{self.title} | scribed by {self.author}"
+
 ```
 ## Comment Model
 
@@ -145,35 +172,72 @@ The Author Profile Picture feature allows displaying an author's profile image a
       def __str__(self):
           return self.user.username```
 
-## Testing
+### Testing
 
-The Dive In Blog Project employs manual and/or automated procedures for assessing functionality, usability, and data management within the web application. Testing processes are documented for reference.
+Testing for the Dive In Blog Project ensures that the application functions correctly and meets user expectations. Testing is conducted through both manual and automated procedures:
+
+- **Unit Tests**: Automated tests to validate individual components and functions of the application.
+- **Integration Tests**: Tests to verify that different components of the application work together as expected.
+- **User Acceptance Testing (UAT)**: Manual testing to ensure that the application meets the needs of its users and is easy to navigate.
+- **Cross-Browser Testing**: Ensuring the site functions correctly across different web browsers.
+- **Responsive Design Testing**: Verifying that the application is usable on various devices and screen sizes.
+
+Detailed testing procedures and results are documented in [TESTING.md](TESTING.md).
 
 ## Project Planning
 
-Utilizing the MoSCoW method, project requirements were prioritized into Must-haves, Should-haves, Could-haves, and Won't-haves to deliver key functionalities efficiently within time constraints.
+The planning of the Dive In Blog Project followed the MoSCoW method to prioritize features and deliverables:
+
+- **Must-haves**: Essential features such as user authentication, blog post management, and commenting functionality.
+- **Should-haves**: Important features including author profiles and enhanced UI elements.
+- **Could-haves**: Additional enhancements like advanced search and filtering options.
+- **Won't-haves**: Features not included in the initial release, such as multi-language support.
+
+This structured approach ensured that critical functionalities were developed first, while providing flexibility for future enhancements.
 
 ## Technologies Used
 
-The technology stack includes Django, HTML, CSS, Bootstrap, Tailwind, Crispy Forms, and Allauth aimed at delivering an immersive and user-friendly blogging experience.
+Dive In is built with a modern technology stack to ensure a robust and user-friendly experience:
+
+- **[Django](https://www.djangoproject.com/)**: A high-level Python web framework for building the backend.
+- **[HTML](https://html.spec.whatwg.org/) / [CSS](https://www.w3.org/Style/CSS/)**: For structuring and styling web pages.
+- **[Bootstrap](https://getbootstrap.com/)** & **[Tailwind CSS](https://tailwindcss.com/)**: Frontend frameworks for responsive design and modern UI elements.
+- **[Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/)**: Enhances Django forms for improved rendering and user experience.
+- **[Django Allauth](https://django-allauth.readthedocs.io/en/latest/)**: Provides comprehensive authentication features including social login options.
+- **[CodePen](https://codepen.io/)**: For experimenting with and showcasing front-end code snippets and styles.
+- **[Universe](https://universe.com/)**: For inspiration and ideas related to web design and user experience.
 
 ## Deployment
 
-Detailed deployment procedures from GitHub to platforms like Heroku are documented to facilitate a seamless deployment process, ensuring a secure and efficient live version of the blog.
+Dive In is deployed on Heroku, a cloud platform that enables easy deployment and scaling of web applications. The deployment process involves:
+
+1. **Connecting to Heroku**: Link the GitHub repository to Heroku for continuous integration and deployment.
+2. **Configuring Environment Variables**: Set up environment variables such as database credentials and secret keys in the Heroku dashboard.
+3. **Setting Up the Database**: Configure PostgreSQL or another supported database for production use.
+4. **Running Migrations**: Apply database migrations to ensure the schema is up-to-date on Heroku.
+5. **Deploying Updates**: Push changes from GitHub to Heroku to keep the live site updated with the latest features and fixes.
+
+For more detailed deployment instructions, refer to the [Heroku Deployment Documentation](https://devcenter.heroku.com/articles/deploying-python).
 
 ## Credits
 
+Special thanks to the following resources and individuals for their contributions and inspiration:
 
-Utilized code institutes "I think Therefore I Blog" tutorial in setting up my Django model as I learn a lot better with doing than reading. From the base of the blog walkthrough I morphed and changed the models and details to create my own Dive Blog.
+- **[Code Institute](https://codeinstitute.net/)**: The "I Think Therefore I Blog" tutorial was essential for understanding Django's ORM and setting up initial models.
+- **[Django Documentation](https://docs.djangoproject.com/)**: Official documentation provided guidance on implementing Django features and best practices.
+- **[CodePen](https://codepen.io/)**: Provided valuable front-end code snippets and design ideas.
+- **[Uiverse](https://uiverse.io/)**: Offered inspiration for web design and user experience improvements.
+- **[Bootstrap](https://getbootstrap.com/)**: Used for creating a responsive and modern layout.
+- **[Tailwind CSS](https://tailwindcss.com/)**: Helped in styling components with utility-first CSS.
+- **[**[Tailwind CSS](https://tailwindcss.com/)**Viola](https://github.com/violaberg)**: A fellow coder who provided support and motivation throughout the development process, helping to overcome challenging phases and stay focused.
 
+### Social Media
 
-Thanks to Viola my fellow coder for keeping me motivated through difficult slumps throughout a long few months and a fury of overwhelming information.
+Stay connected and follow updates on our Facebook page: [Dive In Blog Facebook Page](https://www.facebook.com/blogdivein)
 
-
+![Facebook](static/images/facebook-logo.png)
 
 ### Site Information
 
-The Dive In Blog Project seeks to captivate a diverse audience of scuba diving and travel enthusiasts, providing a platform for them to share their experiences, connect with like-minded individuals, and immerse themselves in compelling narratives and conversations.
-```bash
+Dive In aims to create an engaging and interactive platform for scuba diving and travel enthusiasts. By offering a space for users to share experiences, connect with others, and explore captivating content, Dive In fosters a sense of community and adventure among its users.
 
-## Project Planning
