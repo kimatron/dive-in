@@ -42,11 +42,12 @@
   <div class="mt-10">
     <h2 class="text-2xl font-bold text-dark-blue">Request a Collaboration</h2>
     <form method="post" class="mt-4">
-      {% csrf_token %}
-      {{ collaborate_form|crispy }}
-      <button type="submit" class="btn btn-primary mt-4">Send Request</button>
+        {% csrf_token %}
+        {{ collaborate_form|crispy }}
+        <button type="submit" class="btn btn-primary mt-4">Send Request</button>
     </form>
-  </div>
+</div>
+
 
   <!-- Footer Section -->
   <div class="row mt-4">

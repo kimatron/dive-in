@@ -1,13 +1,21 @@
 from django.test import TestCase
-from .forms import CommentForm
+from .forms import CollaborateForm
 
 
-class TestCommentForm(TestCase):
+class CollaborateFormTest(TestCase):
+    def test_valid_form(self):
+        form = CollaborateForm(data={
+            'name': 'John Doe',
+            'email': 'john.doe@example.com',
+            'message': 'I would like to collaborate.'
+        })
+        self.assertTrue(form.is_valid())
 
-    def test_form_is_valid(self):
-        comment_form = CommentForm({'body': 'This is a great post'})
-        self.assertTrue(comment_form.is_valid(), msg="Form is invalid")
-
-    def test_form_is_invalid(self):
-        comment_form = CommentForm({'body': ''})
-        self.assertFalse(comment_form.is_valid(), msg="Form is valid")
+    def test_invalid_form(self):
+        form = CollaborateForm(data={
+            'name': '',
+            'email': 'not-an-email',
+            'message': ''
+        })
+        self.assertFalse(form.is_valid())
+        self.assertEqual(len(form.errors), 3)  # Check number of errors
