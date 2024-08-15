@@ -320,7 +320,6 @@ Special thanks to the following resources and individuals for their contribution
 
 Stay connected and follow updates on our Facebook page: [Dive In Blog Facebook Page](https://www.facebook.com/blogdivein)
 
-![Facebook](static/images/facebook-logo.png)
 
 ### Site Information
 

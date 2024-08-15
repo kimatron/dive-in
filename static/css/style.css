@@ -86,21 +86,16 @@ a:hover {
 .btn-common {
   display: inline-block;
   padding: 15px 30px;
-  /* Larger padding for a more substantial button */
   color: #fff;
   border: none;
   border-radius: 50px;
-  /* Fully rounded corners */
   font-size: 1.3em;
-  /* Larger font size for better readability */
   font-weight: 700;
-  /* Bolder text for emphasis */
   text-transform: uppercase;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  /* Softer shadow for depth */
 }
 
 /* Primary Button Style */
@@ -108,30 +103,24 @@ a:hover {
 .signup-button,
 .login-button {
   background: linear-gradient(135deg, #ff6f61, #d83f68);
-  /* Gradient background */
 }
 
 .btn-primary:hover,
 .signup-button:hover,
 .login-button:hover {
   background: linear-gradient(135deg, #d83f68, #ff6f61);
-  /* Inverted gradient on hover */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  /* Deeper shadow on hover */
   transform: translateY(-4px);
-  /* Slight lift effect */
 }
 
 .btn-primary:active,
 .signup-button:active,
 .login-button:active {
   background: linear-gradient(135deg, #ff6f61, #d83f68);
-  /* Original gradient on click */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  /* Shadow on click */
   transform: translateY(2px);
-  /* Slight depression effect */
 }
+
 
 /* Pagination Button Styles */
 .page-link {
@@ -525,9 +514,11 @@ input[type="submit"]:hover {
 
 /* Container */
 .container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 90% !important;
+  /* Adjust as needed */
+  width: 100% !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
 }
 
 /* Login and Signup Containers */

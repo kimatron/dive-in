@@ -3,97 +3,100 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-<div class="bg-light-blue py-8 px-4">
-  <div class="max-w-3xl mx-auto">
-    <!-- Post Header -->
-    <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-dark-blue mb-4">{{ post.title }}</h1>
-      <p class="text-lg text-dark-gray">{{ post.author.username }} | {{ post.created_on|date:"F j, Y" }}</p>
-      {% if post.image %}
-      <div class="mt-6">
-        <img src="{{ post.image.url }}" class="w-full h-auto rounded-lg shadow-md" alt="{{ post.title }}">
-      </div>
-      {% endif %}
-    </div>
-
-    <!-- Hidden element for JavaScript -->
-    <div id="postSlug" data-slug="{{ post.slug }}" style="display:none;"></div>
-
-    <!-- Post Content -->
-    <div class="bg-white rounded-lg shadow-lg p-8 leading-relaxed text-dark-gray">
-      {{ post.content | safe }}
-    </div>
-
-    <!-- Social Sharing -->
-    <div class="mt-8 text-center">
-      <h3 class="text-2xl font-bold text-dark-blue mb-4">Share This Post</h3>
-      <div class="flex justify-center space-x-6">
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-facebook-blue" aria-label="Share on Facebook">
-          <i class="fab fa-facebook-square text-2xl"></i>
-        </a>
-        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" class="text-twitter-blue" aria-label="Share on Twitter">
-          <i class="fab fa-twitter-square text-2xl"></i>
-        </a>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" class="text-linkedin-blue" aria-label="Share on LinkedIn">
-          <i class="fab fa-linkedin text-2xl"></i>
-        </a>
-      </div>
-    </div>
-
-    <!-- Author Bio Section -->
-    <div class="author-bio mt-10 p-6 bg-gray-100 rounded-lg shadow-lg flex items-center">
-      <img src="{{ post.author.userprofile.profile_picture.url }}" alt="{{ post.author.username }}" class="rounded-full w-16 h-16 mr-4">
-      <div>
-        <h4 class="text-lg font-semibold text-gray-900">{{ post.author.username }}</h4>
-        <p class="text-sm text-gray-600">{{ post.author.userprofile.bio }}</p>
-      </div>
-    </div>
-
-    <!-- Comments Section -->
-    <div class="mt-12">
-      <h3 class="text-2xl font-bold text-dark-blue mb-4">
-        Comments ({{ comment_count }})
-      </h3>
-
-<!-- Displaying Comments -->
-<div class="space-y-6">
-  {% for comment in comments %}
-  <div class="p-4 bg-light-white rounded-lg shadow-md">
-      <p class="font-semibold text-dark-gray">
-          {{ comment.author.username }}
-          <span class="font-normal text-sm text-gray-500">
-              {{ comment.created_on|date:"F j, Y" }}
-          </span>
-      </p>
-      <div id="comment{{ comment.id }}" class="mt-2">
-          {{ comment.body | linebreaks }}
-      </div>
-      {% if not comment.approved and comment.author == user %}
-          <p class="text-sm text-yellow-600">Your comment is awaiting approval and will be visible once it's approved.</p>
-      {% endif %}
-      {% if user.is_authenticated and comment.author == user %}
-          <button class="btn btn-edit btn-outline-primary btn-sm mt-2" comment_id="{{ comment.id }}">Edit</button>
-          <button class="btn btn-delete btn-outline-danger btn-sm mt-2" comment_id="{{ comment.id }}">Delete</button>
-      {% endif %}
-  </div>
-  {% endfor %}
-</div>
-
-
-    
-
-      <!-- New Comment Section -->
-      <div class="mt-8">
-        {% if user.is_authenticated %}
-        <h3 class="text-xl font-bold text-dark-blue mb-4">Add a Comment</h3>
-        <form id="commentForm" method="post" class="mt-4">
-          {% csrf_token %}
-          {{ comment_form | crispy }}
-          <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        {% else %}
-        <p class="text-gray-600">Log in to leave a comment.</p>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+      <!-- Post Header -->
+      <div class="text-center mb-5">
+        <h1 class="display-3 font-weight-bold mb-3">{{ post.title }}</h1>
+        <p class="lead mb-4">{{ post.author.username }} | {{ post.created_on|date:"F j, Y" }}</p>
+        {% if post.image %}
+        <div class="mt-4">
+          <img src="{{ post.image.url }}" class="img-fluid rounded shadow" alt="{{ post.title }}">
+        </div>
         {% endif %}
+      </div>
+
+      <!-- Hidden element for JavaScript -->
+      <div id="postSlug" data-slug="{{ post.slug }}" style="display:none;"></div>
+
+      <!-- Post Content -->
+      <div class="bg-white rounded shadow p-4 mb-5">
+        {{ post.content | safe }}
+      </div>
+
+      <!-- Social Sharing -->
+      <div class="text-center mb-5">
+        <h3 class="h4 font-weight-bold mb-3">Share This Post</h3>
+        <div class="d-flex justify-content-center gap-3">
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-primary" aria-label="Share on Facebook">
+            <i class="fab fa-facebook-square fa-2x"></i>
+          </a>
+          <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" class="text-info" aria-label="Share on Twitter">
+            <i class="fab fa-twitter-square fa-2x"></i>
+          </a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" class="text-primary" aria-label="Share on LinkedIn">
+            <i class="fab fa-linkedin fa-2x"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Author Bio Section -->
+      <div class="bg-light rounded shadow mb-5 d-flex align-items-center p-4">
+        <img src="{{ post.author.userprofile.profile_picture.url }}" alt="{{ post.author.username }}" class="rounded-circle mr-3" style="width: 64px; height: 64px;">
+        <div>
+          <h4 class="h5 font-weight-bold">{{ post.author.username }}</h4>
+          <p class="text-muted">{{ post.author.userprofile.bio }}</p>
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="mb-5">
+        <h3 class="h4 font-weight-bold mb-3">
+          Comments ({{ comment_count }})
+        </h3>
+
+        <!-- Displaying Comments -->
+        <div class="mb-4">
+          {% if comments %}
+          {% for comment in comments %}
+          <div class="p-3 mb-3 bg-light rounded shadow">
+            <p class="font-weight-bold">
+              {{ comment.author.username }}
+              <span class="text-muted">
+                {{ comment.created_on|date:"F j, Y" }}
+              </span>
+            </p>
+            <div id="comment{{ comment.id }}" class="mt-2">
+              {{ comment.body | linebreaks }}
+            </div>
+            {% if not comment.approved and comment.author == user %}
+            <p class="text-warning">Your comment is awaiting approval and will be visible once it's approved.</p>
+            {% endif %}
+            {% if user.is_authenticated and comment.author == user %}
+            <button class="btn btn-outline-primary btn-sm mt-2" data-comment-id="{{ comment.id }}">Edit</button>
+            <button class="btn btn-outline-danger btn-sm mt-2" data-comment-id="{{ comment.id }}">Delete</button>
+            {% endif %}
+          </div>
+          {% endfor %}
+          {% else %}
+          <p class="text-muted">No comments yet.</p>
+          {% endif %}
+        </div>
+
+        <!-- New Comment Section -->
+        <div class="mt-4">
+          {% if user.is_authenticated %}
+          <h3 class="h5 font-weight-bold mb-3">Add a Comment</h3>
+          <form id="commentForm" method="post">
+            {% csrf_token %}
+            {{ comment_form | crispy }}
+            <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          {% else %}
+          <p class="text-muted">Log in to leave a comment.</p>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
