@@ -84,17 +84,62 @@
         </div>
     </main>
 
-    <footer class="footer mt-auto py-3">
-        <div class="container text-center">
-            <p class="mb-0">Site Created By Kim @ Dive In 2024</p>
-            <p class="mb-0">Follow us:</p>
-            <div class="social-icons mt-3">
-                <a href="https://www.facebook.com/blogdivein" class="icon facebook"><span class="tooltip">Facebook</span><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="icon twitter"><span class="tooltip">Twitter</span><i class="fab fa-twitter"></i></a>
-                <a href="#" class="icon instagram"><span class="tooltip">Instagram</span><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/kimatron/dive-in" class="icon github"><span class="tooltip">Github</span><i class="fab fa-github"></i></a>
-                <a href="#" class="icon youtube"><span class="tooltip">Youtube</span><i class="fab fa-youtube"></i></a>
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-section">
+                <h2 class="footer-brand">dive |n</h2>
+                <p class="footer-description">
+                    Explore the depths of knowledge and inspiration through our curated collection of insights and stories.
+                </p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/kimatron/dive-in" class="social-icon" aria-label="Github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
             </div>
+    
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'account_login' %}">Login</a></li>
+                        <li><a href="{% url 'account_signup' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+    
+            <!-- Newsletter Section -->
+            <div class="footer-section">
+                <h3 class="text-xl font-semibold mb-4">Stay Updated</h3>
+                <p class="footer-description">Subscribe to our newsletter for the latest updates and insights.</p>
+                <form class="newsletter-form">
+                    {% csrf_token %}
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <p class="copyright-text">
+                © {% now "Y" %} Dive In. Created with ❤️ by Kim | All rights reserved.
+            </p>
         </div>
     </footer>
     
