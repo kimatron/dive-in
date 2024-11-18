@@ -303,65 +303,48 @@ a:hover {
 
 /* Navbar Styles */
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding: 15px 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
 }
 
-.navbar .navbar-brand .brand {
-  font-family: 'Lato', sans-serif;
-  font-size: 1.8rem;
+.navbar.scrolled {
+  padding: 0.5rem 0;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .brand {
+  font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #FFDD00, #FF6F61);
+  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: transform 0.3s ease;
+  background-clip: text;
+  color: transparent;
+  animation: gradientFlow 5s ease infinite;
 }
 
-.navbar .navbar-brand .brand:hover {
-  transform: scale(1.1);
-}
-
-.navbar .navbar-nav .nav-link {
-  color: #343a40;
-  text-decoration: none;
-  font-size: 1rem;
-  margin: 0 15px;
+.navbar .nav-link {
   position: relative;
-  padding-bottom: 5px;
-  transition: color 0.3s ease, transform 0.3s ease;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
 }
 
-.navbar .navbar-nav .nav-link::after {
+.navbar .nav-link::after {
   content: '';
-  display: block;
   position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
   width: 0;
-  background: #FFDD00;
-  transition: width 0.3s ease;
-}
-
-.navbar .navbar-nav .nav-link:hover::after {
-  width: 100%;
-}
-
-.navbar .navbar-nav .nav-link:hover {
-  color: #FFDD00;
-  transform: translateY(-2px);
-}
-
-.navbar .navbar-nav .nav-link.active {
-  color: #FFDD00;
-  font-weight: 600;
-  border-bottom: 2px solid #FFDD00;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
 /* Responsive Navbar */
