@@ -28,10 +28,15 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
-
+ALLOWED_HOSTS = [
+    '.herokuapp.com',
+    '127.0.0.1',
+    'localhost',
+    '.codeinstitute-ide.net',  # This will match all CodeInstitute workspace URLs
+    '8000-kimatron-divein-s6fk5u1m3yn.ws.codeinstitute-ide.net'  # Your specific workspace URL
+]
 
 # Application definition
 
@@ -111,8 +116,9 @@ DATABASES = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.codeanyapp.com",
-    "https://*.herokuapp.com",
+    'https://*.codeinstitute-ide.net',
+    'https://*.gitpod.io',
+    'https://*.herokuapp.com'
 ]
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
