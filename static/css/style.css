@@ -55,6 +55,101 @@ a:hover {
   color: #00796b;
 }
 
+/* Hero Section */
+.hero-section {
+  min-height: 80vh;
+  background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+  background-size: 200% 200%;
+  animation: gradientFlow 15s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #FF6B6B;
+  background: white;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  background: #f8f9fa;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .hero-title {
+      font-size: 4rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-title {
+      font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+      font-size: 2.8rem;
+  }
+  .hero-subtitle {
+      font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+      font-size: 2.2rem;
+  }
+  .hero-subtitle {
+      font-size: 1.1rem;
+  }
+  .hero-button {
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+  }
+}
+
 /* Card Styles */
 .card {
   background-color: rgba(255, 255, 255, 0.9);
