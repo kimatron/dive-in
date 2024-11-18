@@ -3,91 +3,118 @@
 
 {% block content %}
 
-<!-- Main Container -->
-<!-- <div class="container-fluid py-5"> -->
-    <!-- Page Title -->
-    <!-- <div class="text-center mb-4">
-        <h1 class="display-4">Dive In Blog</h1>
-        <p class="lead">Explore the latest insights and updates from the depths of our community.</p>
-    </div> -->
-
-    <!-- Hero Section -->
+<!-- Hero Section -->
 <section class="hero-section">
-  <div class="hero-content">
-      <h1 class="hero-title">Welcome to Dive In</h1>
-      <p class="hero-subtitle">Explore the depths of knowledge and inspiration through our curated collection of insights and stories.</p>
-      <a href="#featured-posts" class="hero-button">Start Reading</a>
-  </div>
+    <div class="hero-content">
+        <h1 class="hero-title">Welcome to Dive In</h1>
+        <p class="hero-subtitle">Explore the depths of knowledge and inspiration through our curated collection of insights and stories.</p>
+        <a href="#featured-posts" class="hero-button">Start Reading</a>
+    </div>
 </section>
 
-    <!-- Featured Blog Posts Section -->
-    <div class="row mb-4">
-        {% for post in featured_posts %}
-        <div class="col-md-6 mb-3">
-            <a href="{% url 'post_detail' post.slug %}" class="card featured-card h-100 text-decoration-none text-dark">
-                {% if post.featured_image %}
-                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="card-img-top">
-                {% else %}
-                <img src="{% static 'images/divinlogolight.png' %}" alt="{{ post.title }}" class="card-img-top">
-                {% endif %}
-                <div class="card-body">
-                    <h3 class="card-title">{{ post.title }}</h3>
-                    <p class="card-text">{{ post.excerpt }}</p>
-                </div>
-            </a>
+<!-- Featured Posts Section -->
+<section id="featured-posts" class="featured-posts-section">
+    <div class="container">
+        <h2 class="section-title">Featured Posts</h2>
+        <div class="featured-posts-grid">
+            {% for post in featured_posts %}
+            <article class="post-card featured">
+                <a href="{% url 'post_detail' post.slug %}" class="post-card-link">
+                    <div class="post-card__image-wrapper">
+                        {% if post.featured_image %}
+                        <img src="{{ post.featured_image.url }}" 
+                             alt="{{ post.title }}" 
+                             class="post-card__image">
+                        {% else %}
+                        <img src="{% static 'images/divinlogolight.png' %}" 
+                             alt="{{ post.title }}" 
+                             class="post-card__image">
+                        {% endif %}
+                    </div>
+                    <div class="post-card__content">
+                        <span class="post-card__category">Featured</span>
+                        <h2 class="post-card__title">{{ post.title }}</h2>
+                        <p class="post-card__excerpt">{{ post.excerpt }}</p>
+                        <div class="post-card__meta">
+                            <div class="post-card__author">
+                                <span>{{ post.author }}</span>
+                            </div>
+                            <time class="post-card__date">{{ post.created_on|date:"F j, Y" }}</time>
+                        </div>
+                    </div>
+                </a>
+            </article>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
+</section>
 
-    <!-- Blog Entries Section -->
-    <div class="row">
-        {% for post in post_list %}
-        <div class="col-md-4 mb-4">
-            <a href="{% url 'post_detail' post.slug %}" class="card h-100 text-decoration-none text-dark">
-                {% if post.featured_image %}
-                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="card-img-top">
-                {% else %}
-                <img src="{% static 'images/divinlogolight.png' %}" alt="{{ post.title }}" class="card-img-top">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ post.title }}</h5>
-                    <p class="card-text">{{ post.excerpt|truncatewords:20 }}</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Posted on {{ post.created_on|date:"F j, Y" }} by {{ post.author }}</small>
-                </div>
-            </a>
+<!-- Recent Posts Section -->
+<section class="recent-posts-section">
+    <div class="container">
+        <h2 class="section-title">Recent Posts</h2>
+        <div class="posts-grid">
+            {% for post in post_list %}
+            <article class="post-card">
+                <a href="{% url 'post_detail' post.slug %}" class="post-card-link">
+                    <div class="post-card__image-wrapper">
+                        {% if post.featured_image %}
+                        <img src="{{ post.featured_image.url }}" 
+                             alt="{{ post.title }}" 
+                             class="post-card__image"
+                             loading="lazy">
+                        {% else %}
+                        <img src="{% static 'images/divinlogolight.png' %}" 
+                             alt="{{ post.title }}" 
+                             class="post-card__image"
+                             loading="lazy">
+                        {% endif %}
+                    </div>
+                    <div class="post-card__content">
+                        <span class="post-card__category">Blog</span>
+                        <h2 class="post-card__title">{{ post.title }}</h2>
+                        <p class="post-card__excerpt">{{ post.excerpt|truncatewords:20 }}</p>
+                        <div class="post-card__meta">
+                            <div class="post-card__author">
+                                <span>{{ post.author }}</span>
+                            </div>
+                            <time class="post-card__date">{{ post.created_on|date:"F j, Y" }}</time>
+                        </div>
+                    </div>
+                </a>
+            </article>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 
     <!-- Pagination -->
     {% if is_paginated %}
-    <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center">
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-              <span aria-hidden="true">&laquo; Prev</span>
-            </a>
-          </li>
-          {% endif %}
-          {% for num in page_obj.paginator.page_range %}
-          <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-          </li>
-          {% endfor %}
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-              <span aria-hidden="true">Next &raquo;</span>
-            </a>
-          </li>
-          {% endif %}
+    <nav aria-label="Page navigation" class="pagination-container">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    <span>&laquo; Prev</span>
+                </a>
+            </li>
+            {% endif %}
+            
+            {% for num in page_obj.paginator.page_range %}
+            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    <span>Next &raquo;</span>
+                </a>
+            </li>
+            {% endif %}
         </ul>
-      </nav>
-      
+    </nav>
     {% endif %}
-</div>
+</section>
 
 {% endblock %}
