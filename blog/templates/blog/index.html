@@ -93,22 +93,30 @@
         <ul class="pagination">
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-                    <span>&laquo; Prev</span>
+                <a class="page-link prev-link" href="?page={{ page_obj.previous_page_number }}">
+                    <span>←</span>
+                    <span class="nav-text">Previous</span>
                 </a>
             </li>
             {% endif %}
             
             {% for num in page_obj.paginator.page_range %}
-            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-            </li>
+                {% if page_obj.number == num %}
+                    <li class="page-item active">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
             {% endfor %}
             
             {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-                    <span>Next &raquo;</span>
+                <a class="page-link next-link" href="?page={{ page_obj.next_page_number }}">
+                    <span class="nav-text">Next</span>
+                    <span>→</span>
                 </a>
             </li>
             {% endif %}

@@ -422,69 +422,130 @@ a:hover {
 
 
 /* Pagination Button Styles */
-.page-link {
-  display: inline-block;
-  padding: 10px 20px;
-  /* Adjust padding for a larger button */
-  color: #fff;
-  /* Set text color to white */
-  background: linear-gradient(135deg, #00796b, #004d40);
-  /* Teal gradient background */
-  border: none;
+/* Modern Pagination Styling */
+.pagination-container {
+  margin: 4rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
   border-radius: 50px;
-  /* Fully rounded corners */
-  font-size: 1em;
-  /* Font size consistent with the buttons */
-  font-weight: 700;
-  /* Bolder text for emphasis */
-  text-transform: uppercase;
-  text-align: center;
-  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.page-item {
+  list-style: none;
+}
+
+.page-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  color: #4a5568;
+  font-weight: 500;
   transition: all 0.3s ease;
-  text-decoration: none;
-  /* Remove underline from links */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  /* Softer shadow for depth */
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Hover effect with gradient */
+.page-link:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.page-link:hover:before {
+  opacity: 1;
 }
 
 .page-link:hover {
-  background: linear-gradient(135deg, #004d40, #00796b);
-  /* Inverted gradient on hover */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  /* Deeper shadow on hover */
-  transform: translateY(-4px);
-  /* Slight lift effect */
-  color: #07c6b0;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.page-link:active {
-  background: linear-gradient(135deg, #00796b, #004d40);
-  /* Original gradient on click */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  /* Shadow on click */
-  transform: translateY(2px);
-  /* Slight depression effect */
+/* Active state */
+.page-item.active .page-link {
+  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Pagination Item Styles */
-.page-item {
-  margin: 0 5px;
-  /* Space between pagination items */
+/* Previous/Next buttons */
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+  width: auto;
+  padding: 0 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.875rem;
 }
 
-/* Remove default link styles if any */
-.page-item a {
-  text-decoration: none;
-  /* Remove underline */
+/* Disabled state */
+.page-item.disabled .page-link {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Add pulse animation for active page */
+@keyframes pulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.05);
+  }
+  100% {
+      transform: scale(1);
+  }
 }
 
 .page-item.active .page-link {
-  background: #004d40;
-  /* Darker background for active page */
-  color: #fff;
-  /* White text color for active page */
+  animation: pulse 2s infinite;
 }
 
+/* Hover animations */
+.pagination {
+  --angle: 0deg;
+  border: 2px solid;
+  border-image: linear-gradient(var(--angle), #FF6B6B, #4ECDC4) 1;
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+      --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
 
 
 
