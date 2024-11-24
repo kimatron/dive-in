@@ -7,6 +7,9 @@ from django.contrib import messages
 from .models import Post, FeaturedPost, Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse
 
 
 class PostList(generic.ListView):
@@ -179,3 +182,36 @@ def comment_approval(request):
         return redirect('comment_approval')
 
     return render(request, 'admin/comment_approval.html', {'comments': comments})
+
+
+def test_email(request):
+    """
+    Simple view to test email functionality.
+    Access this via /test-email/ URL.
+    """
+    if request.user.is_superuser:  # Only allow superusers to test
+        try:
+            send_mail(
+                subject='Test Email from Dive In Blog',
+                message='If you see this, your email configuration is working!',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[request.user.email],  # Sends to the logged-in superuser's email
+                fail_silently=False,
+            )
+            return HttpResponse(
+                """
+                <h2>Email test initiated!</h2>
+                <p>Check your email inbox at: {}</p>
+                <p style="color: green;">If no errors appeared, the email was sent successfully.</p>
+                """.format(request.user.email)
+            )
+        except Exception as e:
+            return HttpResponse(
+                f"""
+                <h2>Email test failed!</h2>
+                <p style="color: red;">Error: {str(e)}</p>
+                <p>Check your email settings and try again.</p>
+                """
+            )
+    else:
+        return HttpResponse("Unauthorized", status=401)

@@ -14,8 +14,11 @@
 from pathlib import Path
 import os
 import dj_database_url
+
 if os.path.isfile('env.py'):
-    import env
+    import env  # noqa: F401
+
+# Now use os.environ.get() for all environment variables
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -138,7 +141,63 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+# Email Settings
+# if 'DEVELOPMENT' in os.environ:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# else:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'  # This is literally the string 'apikey'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+
+# Django allauth settings
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+# ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+# ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
+ACCOUNT_ADAPTER = 'blog.adapters.CustomAccountAdapter'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Dive In Blog - '  # Customize email subject
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')  # Make sure it's set again here
+SERVER_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+
+
+# Add these for debugging email issues
+EMAIL_DEBUG = True
+EMAIL_FAIL_SILENTLY = False
+
+# Email logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.security': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
