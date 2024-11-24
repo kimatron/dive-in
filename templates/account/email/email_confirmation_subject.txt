@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}Please Confirm Your Email Address{% endblocktrans %}
+{% blocktrans %}🌊 Welcome to {{ site_name }} - Verify Your Email to Start Your Journey!{% endblocktrans %}
 {% endautoescape %}
