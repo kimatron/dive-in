@@ -54,6 +54,24 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title} | scribed by {self.author}"
 
+    def get_related_posts(self):
+        """
+        Returns related posts based on category and tags.
+        Prioritizes posts that share both category and tags.
+        """
+        related_posts = Post.objects.filter(status=1).exclude(id=self.id)
+
+        # Get posts from same category
+        category_posts = related_posts.filter(category=self.category) if self.category else related_posts.none()
+
+        # Get posts with similar tags
+        tag_posts = related_posts.filter(tags__in=self.tags.all()).distinct() if self.tags.exists() else related_posts.none()
+
+        # Combine and order the results
+        combined_posts = (category_posts | tag_posts).distinct().order_by('-created_on')
+
+        return combined_posts[:3]  # Return top 3 related posts
+
 
 class Comment(models.Model):
     """

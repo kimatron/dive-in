@@ -14,6 +14,27 @@
     }
 }
 
+/* Post Layout */
+.post-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    width: 100%;
+}
+
+.post-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+@media (min-width: 992px) {
+    .post-layout {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    }
+}
+
 /* Hero Section */
 .post-hero {
     position: relative;
