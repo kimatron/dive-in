@@ -1,130 +1,66 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
 {% load crispy_forms_tags %}
 
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8 col-xl-7">
-      <!-- Post Header -->
-      <div class="text-center mb-5">
-        <h1 class="display-3 font-weight-bold mb-3">{{ post.title }}</h1>
-        <p class="lead mb-4">{{ post.author.username }} | {{ post.created_on|date:"F j, Y" }}</p>
-        {% if post.image %}
-        <div class="mt-4">
-          <img src="{{ post.image.url }}" class="img-fluid rounded shadow" alt="{{ post.title }}">
-        </div>
-        {% endif %}
-      </div>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+{% endblock %}
 
-      <!-- Hidden element for JavaScript -->
-      <div id="postSlug" data-slug="{{ post.slug }}" style="display:none;"></div>
-
-      <!-- Post Content -->
-      <div class="bg-white rounded shadow p-4 mb-5">
-        {{ post.content | safe }}
-      </div>
-
-      <!-- Social Sharing -->
-      <div class="text-center mb-5">
-        <h3 class="h4 font-weight-bold mb-3">Share This Post</h3>
-        <div class="d-flex justify-content-center gap-3">
-          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-primary" aria-label="Share on Facebook">
-            <i class="fab fa-facebook-square fa-2x"></i>
-          </a>
-          <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" class="text-info" aria-label="Share on Twitter">
-            <i class="fab fa-twitter-square fa-2x"></i>
-          </a>
-          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" class="text-primary" aria-label="Share on LinkedIn">
-            <i class="fab fa-linkedin fa-2x"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Author Bio Section -->
-      <div class="bg-light rounded shadow mb-5 d-flex align-items-center p-4">
-        <img src="{{ post.author.userprofile.profile_picture.url }}" alt="{{ post.author.username }}" class="rounded-circle mr-3" style="width: 64px; height: 64px;">
-        <div>
-          <h4 class="h5 font-weight-bold">{{ post.author.username }}</h4>
-          <p class="text-muted">{{ post.author.userprofile.bio }}</p>
-        </div>
-      </div>
-
-      <!-- Comments Section -->
-      <div class="mb-5">
-        <h3 class="h4 font-weight-bold mb-3">
-          Comments ({{ comment_count }})
-        </h3>
-
-        <!-- Displaying Comments -->
-        <div class="mb-4">
-          {% if comments %}
-          {% for comment in comments %}
-          <div class="p-3 mb-3 bg-light rounded shadow">
-            <p class="font-weight-bold">
-              {{ comment.author.username }}
-              <span class="text-muted">
-                {{ comment.created_on|date:"F j, Y" }}
-              </span>
-            </p>
-            <div id="comment{{ comment.id }}" class="mt-2">
-              {{ comment.body | linebreaks }}
+{% block content %}
+<!-- Hero Section -->
+<div class="post-hero">
+    {% if post.featured_image %}
+    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="post-hero__image">
+    {% else %}
+    <img src="{% static 'images/default-hero.jpg' %}" alt="{{ post.title }}" class="post-hero__image">
+    {% endif %}
+    <div class="post-hero__overlay"></div>
+    
+    <div class="post-container">
+        <div class="post-hero__content">
+            {% if post.category %}
+            <span class="post-hero__category">{{ post.category.name }}</span>
+            {% endif %}
+            
+            <h1 class="post-hero__title">{{ post.title }}</h1>
+            
+            <div class="post-hero__meta">
+                <div class="post-hero__meta-item">
+                    <img src="{{ post.author.userprofile.profile_picture.url }}" 
+                         alt="{{ post.author.username }}" 
+                         class="rounded-circle"
+                         style="width: 40px; height: 40px; object-fit: cover;">
+                    <span>By {{ post.author.username }}</span>
+                </div>
+                <div class="post-hero__meta-item">
+                    <i class="far fa-calendar"></i>
+                    <span>{{ post.created_on|date:"F j, Y" }}</span>
+                </div>
+                <div class="post-hero__meta-item">
+                    <i class="far fa-comment"></i>
+                    <span>{{ comment_count }} Comments</span>
+                </div>
             </div>
-            {% if not comment.approved and comment.author == user %}
-            <p class="text-warning">Your comment is awaiting approval and will be visible once it's approved.</p>
-            {% endif %}
-            {% if user.is_authenticated and comment.author == user %}
-            <button class="btn btn-outline-primary btn-sm mt-2" data-comment-id="{{ comment.id }}">Edit</button>
-            <button class="btn btn-outline-danger btn-sm mt-2" data-comment-id="{{ comment.id }}">Delete</button>
-            {% endif %}
-          </div>
-          {% endfor %}
-          {% else %}
-          <p class="text-muted">No comments yet.</p>
-          {% endif %}
         </div>
-
-        <!-- New Comment Section -->
-        <div class="mt-4">
-          {% if user.is_authenticated %}
-          <h3 class="h5 font-weight-bold mb-3">Add a Comment</h3>
-          <form id="commentForm" method="post">
-            {% csrf_token %}
-            {{ comment_form | crispy }}
-            <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
-          </form>
-          {% else %}
-          <p class="text-muted">Log in to leave a comment.</p>
-          {% endif %}
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 
-{% endblock content %}
-
-{% block extras %}
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/comments.js' %}"></script>
-
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete this comment?
-      </div>
-      <div class="modal-footer">
-        <a id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-      </div>
+<!-- Main Content -->
+<div class="post-container">
+    <div class="post-grid">
+        <!-- Main Content Area -->
+        <div class="post-main">
+            <article class="post-card">
+                <div class="post-content">
+                    {{ post.content | safe }}
+                </div>
+            </article>
+            
+         
+        </div>
+        
+        <div class="post-sidebar">
+        </div>
     </div>
-  </div>
 </div>
-
 {% endblock %}
