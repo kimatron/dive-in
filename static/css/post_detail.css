@@ -1,0 +1,131 @@
+/* Post Detail Page Styles */
+
+/* Hero Section */
+.post-hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.post-hero__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.post-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7));
+    z-index: 2;
+}
+
+.post-hero__content {
+    position: relative;
+    z-index: 3;
+    padding: 3rem 0;
+    width: 100%;
+}
+
+.post-hero__category {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background-color: #4ECDC4;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.post-hero__title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.post-hero__meta {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-size: 0.95rem;
+}
+
+.post-hero__meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Main Content */
+.post-content {
+    font-family: 'Georgia', serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #2d3748;
+}
+
+.post-content p {
+    margin-bottom: 1.5rem;
+}
+
+.post-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 2rem 0 1rem;
+}
+
+.post-content img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+}
+
+/* Layout */
+.post-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 992px) {
+    .post-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* Card Styles */
+.post-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .post-hero__title {
+        font-size: 2.5rem;
+    }
+
+    .post-hero__meta {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
