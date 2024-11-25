@@ -187,3 +187,45 @@ def approve_comment(request, comment_id):
         return JsonResponse({'success': True})
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)})
+
+
+@require_POST
+def subscribe_newsletter(request):
+    """
+    Handle newsletter subscription requests.
+    """
+    try:
+        email = request.POST.get('email')
+        name = request.POST.get('name', '')  # Optional name field
+        
+        if email:
+            # Check if already subscribed
+            if not Subscriber.objects.filter(email=email).exists():
+                subscriber = Subscriber.objects.create(
+                    email=email,
+                    name=name,
+                    active=True
+                )
+                messages.success(
+                    request, 
+                    'Thank you for subscribing to our newsletter!'
+                )
+            else:
+                messages.info(
+                    request, 
+                    'You are already subscribed to our newsletter.'
+                )
+        else:
+            messages.error(
+                request, 
+                'Please provide a valid email address.'
+            )
+            
+    except Exception as e:
+        messages.error(
+            request, 
+            'Sorry, there was an error processing your subscription.'
+        )
+    
+    # Redirect back to the referring page
+    return redirect(request.META.get('HTTP_REFERER', 'home'))

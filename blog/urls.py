@@ -13,4 +13,5 @@ urlpatterns = [
     path('approve-comment/<int:comment_id>/',
          views.approve_comment, name='approve_comment'),
     path('test-email/', views.test_email, name='test_email'),
+    path('subscribe/', views.subscribe_newsletter, name='subscribe'),
 ]

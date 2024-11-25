@@ -230,19 +230,40 @@
       </div>
   </div>
 
-  <!-- Newsletter Signup -->
-  <div class="sidebar-card newsletter-card">
-      <h4 class="sidebar-title">Subscribe to Our Newsletter</h4>
-      <p>Stay updated with our latest posts!</p>
-      <form class="newsletter-form" method="post" action="{% url 'subscribe' %}">
-          {% csrf_token %}
-          <div class="form-group">
-              <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
-          </div>
-          <button type="submit" class="btn-subscribe">Subscribe</button>
-      </form>
-  </div>
-</aside>
+
+<!-- Newsletter Signup -->
+<!-- <div class="sidebar-card" id="newsletter-section">
+    <div class="newsletter-content">
+        <div class="newsletter-icon">
+            <i class="far fa-envelope"></i>
+        </div>
+        <h4 class="newsletter-title">Stay in the Loop</h4>
+        <p class="newsletter-description">Get the latest diving stories and ocean updates straight to your inbox.</p>
+        
+        <form class="newsletter-form" method="post" action="{% url 'subscribe' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="far fa-envelope input-icon"></i>
+                    <input type="email" 
+                           name="email" 
+                           class="newsletter-input" 
+                           placeholder="Your email address"
+                           required>
+                </div>
+                <button type="submit" class="newsletter-button">
+                    Subscribe
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </form>
+        
+        <div class="newsletter-footer">
+            <i class="fas fa-shield-alt"></i>
+            <small>We respect your privacy. Unsubscribe at any time.</small>
+        </div>
+    </div>
+</div> -->
 
 <!-- Delete Comment Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
