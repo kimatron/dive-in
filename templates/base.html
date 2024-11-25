@@ -1,65 +1,63 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html class="h-100" lang="en">
-
 <head>
-    <title>Dive In Blog</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Dive In Blog{% endblock %}</title>
 
-    <!-- Google Fonts CSS -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome CSS -->
+    <!-- Third Party CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Personalized CSS -->
+    <!-- Core Site CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Page Specific CSS -->
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body class="d-flex flex-column h-100 bg-light">
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">
                 <span class="brand">dive |n</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" 
+                           href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == about_url %}active{% endif %}" href="{% url 'about' %}">About</a>
+                        <a class="nav-link {% if request.path == about_url %}active{% endif %}" 
+                           href="{% url 'about' %}">About</a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
-
 
     <!-- Notification Management -->
     <div class="container mt-3">
@@ -76,15 +74,12 @@
     </div>
 
     <!-- Main Content -->
-    <main class="flex-shrink-0">
-        <div class="container my-4">
-            {% block content %}
-            <!-- Content Goes here -->
-            {% endblock content %}
-        </div>
+    <main class="flex-shrink-0 main-content">
+        {% block content %}{% endblock content %}
     </main>
 
-    <footer class="footer">
+    <!-- Footer -->
+    <footer class="footer mt-auto">
         <div class="footer-content">
             <!-- Brand Section -->
             <div class="footer-section">
@@ -93,24 +88,18 @@
                     Explore the depths of knowledge and inspiration through our curated collection of insights and stories.
                 </p>
                 <div class="social-icons">
-                    <a href="#" class="social-icon" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-icon" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-icon" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://github.com/kimatron/dive-in" class="social-icon" aria-label="Github">
                         <i class="fab fa-github"></i>
                     </a>
                 </div>
             </div>
-    
+
             <!-- Quick Links -->
             <div class="footer-section">
-                <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                <h3>Quick Links</h3>
                 <ul class="footer-links">
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About</a></li>
@@ -122,10 +111,10 @@
                     {% endif %}
                 </ul>
             </div>
-    
+
             <!-- Newsletter Section -->
             <div class="footer-section">
-                <h3 class="text-xl font-semibold mb-4">Stay Updated</h3>
+                <h3>Stay Updated</h3>
                 <p class="footer-description">Subscribe to our newsletter for the latest updates and insights.</p>
                 <form class="newsletter-form">
                     {% csrf_token %}
@@ -134,28 +123,21 @@
                 </form>
             </div>
         </div>
-    
+
         <!-- Copyright -->
         <div class="footer-bottom">
-            <p class="copyright-text">
-                © {% now "Y" %} Dive In. Created with ❤️ by Kim | All rights reserved.
-            </p>
+            <p class="copyright-text">© {% now "Y" %} Dive In. Created with ❤️ by Kim | All rights reserved.</p>
         </div>
     </footer>
-    
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <!-- Personalized JS -->
+    <!-- Core JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Site Scripts -->
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/comments.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-    {% block extras %}
-    {% endblock extras %}
-
+    <!-- Page Specific JavaScript -->
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

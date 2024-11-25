@@ -5,6 +5,21 @@ from cloudinary.models import CloudinaryField
 STATUS = ((0, "Draft"), (1, "Published"))
 
 
+class Category(models.Model):
+    """
+    Represents a category for organizing blog posts.
+
+    Attributes:
+        name (str): The name of the category.
+        description (str): A description of the category.
+    """
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     """
     Represents a blog post.
@@ -24,6 +39,8 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts")
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="posts")
     featured_image = CloudinaryField('image', default='placeholder')
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -87,21 +104,6 @@ class About(models.Model):
 
     def __str__(self):
         return self.company_name
-
-
-class Category(models.Model):
-    """
-    Represents a category for organizing blog posts.
-
-    Attributes:
-        name (str): The name of the category.
-        description (str): A description of the category.
-    """
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-
-    def __str__(self):
-        return self.name
 
 
 class Tag(models.Model):

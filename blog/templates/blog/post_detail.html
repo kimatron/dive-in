@@ -58,7 +58,34 @@
             
          
         </div>
-        
+        <!-- After the post content, before comments -->
+<div class="author-section">
+  <div class="author-card">
+      <div class="author-card__header">
+          <div class="author-card__avatar">
+              {% if post.author.userprofile.profile_picture %}
+                  <img src="{{ post.author.userprofile.profile_picture.url }}" 
+                       alt="{{ post.author.username }}" 
+                       class="author-card__image">
+              {% else %}
+                  <img src="{% static 'images/default-avatar.png' %}" 
+                       alt="{{ post.author.username }}" 
+                       class="author-card__image">
+              {% endif %}
+          </div>
+          <div class="author-card__info">
+              <h3 class="author-card__name">About {{ post.author.username }}</h3>
+              {% if post.author.userprofile.bio %}
+                  <p class="author-card__bio">{{ post.author.userprofile.bio }}</p>
+              {% endif %}
+          </div>
+      </div>
+      <div class="author-card__footer">
+          <a href="#" class="author-card__link">View Profile</a>
+          <a href="#" class="author-card__link">More Posts</a>
+      </div>
+  </div>
+</div>
         <div class="post-sidebar">
         </div>
     </div>
