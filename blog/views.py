@@ -1,10 +1,9 @@
 from .forms import CommentForm
-from .models import Post, Comment
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic
 from django.contrib import messages
-from .models import Post, FeaturedPost, Comment
+from .models import Post, FeaturedPost, Comment, Category
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import send_mail
@@ -28,52 +27,35 @@ class PostList(generic.ListView):
 
 def post_detail(request, slug):
     """
-    Displays the details of a specific blog post, along with its comments.
-
-    If the user is authenticated, their unapproved comments are shown alongside
-    approved comments. If the user submits a valid comment, it is saved and marked
-    as unapproved until reviewed by an admin.
-
-    Args:
-        request (HttpRequest): The HTTP request object.
-        slug (str): The slug of the post to display.
-
-    Returns:
-        HttpResponse: Rendered template displaying the post details and comments.
+    Display a single blog post with its comments and handle new comment submission.
     """
     post = get_object_or_404(Post, slug=slug)
-    approved_comments = post.comments.filter(approved=True)
+    comments = post.comments.filter(approved=True).order_by('-created_on')
+    categories = Category.objects.annotate(post_count=Count('posts'))
 
-    if request.user.is_authenticated:
-        user_comments = post.comments.filter(author=request.user)
-        comments = list(approved_comments) + list(user_comments)
-    else:
-        comments = approved_comments
-
-    comment_count = len(comments)
-
-    if request.method == 'POST' and request.user.is_authenticated:
-        comment_form = CommentForm(request.POST)
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.author = request.user
-            comment.approved = False  # Mark as unapproved by default
             comment.save()
             messages.success(
-                request, 'Your comment has been submitted and is awaiting approval.')
-            return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+                request,
+                'Your comment has been submitted and is awaiting approval.'
+            )
+            return redirect('post_detail', slug=slug)
     else:
         comment_form = CommentForm()
 
     context = {
-        'post': post,
-        'comments': comments,
-        'comment_count': comment_count,
-        'comment_form': comment_form,
-        'user': request.user,
+        "post": post,
+        "comments": comments,
+        "comment_form": comment_form,
+        "categories": categories,
     }
-    return render(request, 'blog/post_detail.html', context)
+
+    return render(request, "blog/post_detail.html", context)
 
 
 def blog_home(request):
