@@ -165,29 +165,84 @@
             </div>
         </div>
 
-        <!-- Sidebar -->
-        <aside class="post-sidebar">
-            <!-- Share Section -->
-            <div class="sidebar-card">
-                <h4 class="sidebar-title">Share This Post</h4>
-                <div class="share-buttons">
-                    <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" 
-                       class="share-button twitter" target="_blank" rel="noopener">
-                        <i class="fab fa-twitter"></i> Twitter
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" 
-                       class="share-button facebook" target="_blank" rel="noopener">
-                        <i class="fab fa-facebook-f"></i> Facebook
-                    </a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" 
-                       class="share-button linkedin" target="_blank" rel="noopener">
-                        <i class="fab fa-linkedin-in"></i> LinkedIn
-                    </a>
-                </div>
-            </div>
-        </aside>
-    </div>
-</div>
+<!-- Replace your current sidebar with this -->
+<aside class="post-sidebar">
+  <!-- Related Posts -->
+  <div class="sidebar-card">
+      <h4 class="sidebar-title">Related Posts</h4>
+      <div class="related-posts">
+          {% with related_posts=post.get_related_posts %}
+              {% if related_posts %}
+                  {% for related_post in related_posts %}
+                  <a href="{% url 'post_detail' related_post.slug %}" class="related-post-card">
+                      <div class="related-post-image">
+                          {% if related_post.featured_image %}
+                              <img src="{{ related_post.featured_image.url }}" alt="{{ related_post.title }}">
+                          {% else %}
+                              <img src="{% static 'images/default-post.jpg' %}" alt="{{ related_post.title }}">
+                          {% endif %}
+                      </div>
+                      <div class="related-post-content">
+                          <h5>{{ related_post.title|truncatechars:60 }}</h5>
+                          <span class="related-post-date">
+                              <i class="far fa-calendar-alt"></i>
+                              {{ related_post.created_on|date:"M d, Y" }}
+                          </span>
+                      </div>
+                  </a>
+                  {% endfor %}
+              {% else %}
+                  <p class="text-muted">No related posts found</p>
+              {% endif %}
+          {% endwith %}
+      </div>
+  </div>
+
+  <!-- Popular Categories -->
+  <div class="sidebar-card">
+      <h4 class="sidebar-title">Categories</h4>
+      <div class="category-list">
+          {% for category in categories %}
+          <a href="#" class="category-tag">
+              {{ category.name }}
+              <span class="category-count">{{ category.posts.count }}</span>
+          </a>
+          {% endfor %}
+      </div>
+  </div>
+
+  <!-- Share Buttons -->
+  <div class="sidebar-card">
+      <h4 class="sidebar-title">Share This Post</h4>
+      <div class="share-buttons">
+          <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" 
+             class="share-button twitter" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i> Twitter
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" 
+             class="share-button facebook" target="_blank" rel="noopener">
+              <i class="fab fa-facebook-f"></i> Facebook
+          </a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" 
+             class="share-button linkedin" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin-in"></i> LinkedIn
+          </a>
+      </div>
+  </div>
+
+  <!-- Newsletter Signup -->
+  <div class="sidebar-card newsletter-card">
+      <h4 class="sidebar-title">Subscribe to Our Newsletter</h4>
+      <p>Stay updated with our latest posts!</p>
+      <form class="newsletter-form" method="post" action="{% url 'subscribe' %}">
+          {% csrf_token %}
+          <div class="form-group">
+              <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          <button type="submit" class="btn-subscribe">Subscribe</button>
+      </form>
+  </div>
+</aside>
 
 <!-- Delete Comment Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1">

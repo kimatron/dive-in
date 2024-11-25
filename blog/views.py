@@ -9,6 +9,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
+from django.db.models import Count
 
 
 class PostList(generic.ListView):
