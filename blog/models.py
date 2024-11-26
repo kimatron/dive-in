@@ -171,17 +171,56 @@ class FeaturedPost(models.Model):
 
 class UserProfile(models.Model):
     """
-    Represents a user's profile.
-
-    Attributes:
-        user (User): The user associated with the profile.
-        profile_picture (ImageField): The user's profile picture, optional.
-        bio (str): A short biography of the user, optional.
+    Enhanced user profile with diving-specific information.
     """
+    EXPERIENCE_LEVELS = [
+        ('beginner', 'Beginner (0-20 dives)'),
+        ('intermediate', 'Intermediate (21-50 dives)'),
+        ('advanced', 'Advanced (51-100 dives)'),
+        ('expert', 'Expert (100+ dives)')
+        ('pro', 'Professional (500+ dives)')
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(
-        upload_to='profile_pics/', blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
+    
+    # Diving specific fields
+    certification_level = models.ForeignKey(
+        CertificationLevel, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True
+    )
+    total_dives = models.PositiveIntegerField(default=0)
+    experience_level = models.CharField(
+        max_length=20,
+        choices=EXPERIENCE_LEVELS,
+        default='beginner'
+    )
+    favorite_dive_site = models.CharField(max_length=200, blank=True)
+    favorite_marine_life = models.CharField(max_length=200, blank=True)
+    preferred_diving_type = models.CharField(max_length=100, blank=True)
+    location = models.CharField(max_length=200, blank=True)
+    
+    # Social media links
+    instagram = models.URLField(blank=True)
+    facebook = models.URLField(blank=True)
+    twitter = models.URLField(blank=True)
+    
+    # Additional fields
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.username
+        return f"{self.user.username}'s Profile"
+
+    def get_experience_badge(self):
+        """Returns the appropriate badge based on experience level"""
+        badges = {
+            'beginner': '🌊',
+            'intermediate': '🌊 🌊',
+            'advanced': '🌊 🌊 🌊',
+            'expert': '🌊 🌊 🌊 🌊'
+        }
+        return badges.get(self.experience_level, '🌊')
