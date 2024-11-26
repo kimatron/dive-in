@@ -174,7 +174,7 @@ class CertificationLevel(models.Model):
     """Represents different diving certification levels"""
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    
+
     def __str__(self):
         return self.name
 
@@ -190,12 +190,12 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-    
+
     # Diving specific fields
     certification_level = models.ForeignKey(
-        CertificationLevel, 
-        on_delete=models.SET_NULL, 
-        null=True, 
+        CertificationLevel,
+        on_delete=models.SET_NULL,
+        null=True,
         blank=True
     )
     total_dives = models.PositiveIntegerField(default=0)
@@ -208,12 +208,12 @@ class UserProfile(models.Model):
     favorite_marine_life = models.CharField(max_length=200, blank=True)
     preferred_diving_type = models.CharField(max_length=100, blank=True)
     location = models.CharField(max_length=200, blank=True)
-    
+
     # Social media links
     instagram = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
-    
+
     # Additional fields with defaults
     created_on = models.DateTimeField(default=timezone.now)
     updated_on = models.DateTimeField(auto_now=True)
