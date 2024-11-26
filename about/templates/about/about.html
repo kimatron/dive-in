@@ -56,17 +56,30 @@
   </div>
 </section>
 
-<!-- Mission Section -->
-<section id="mission" class="mission-section">
+<!-- Mission & Vision Section -->
+<section class="mission-section">
     <div class="container">
-        <div class="mission-content">
-            <div class="mission-text">
+        <div class="mission-grid">
+            <!-- Mission Card -->
+            <div class="mission-card">
+                <div class="card-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
                 <h2>Our Mission</h2>
-                <p>{{ about.mission }}</p>
+                <div class="card-content">
+                    {{ about.mission|linebreaks }}
+                </div>
             </div>
-            <div class="mission-vision">
+
+            <!-- Vision Card -->
+            <div class="mission-card">
+                <div class="card-icon">
+                    <i class="fas fa-binoculars"></i>
+                </div>
                 <h2>Our Vision</h2>
-                <p>{{ about.vision }}</p>
+                <div class="card-content">
+                    {{ about.vision|linebreaks }}
+                </div>
             </div>
         </div>
     </div>
