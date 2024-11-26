@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-cover">
+            <div class="profile-avatar">
+                {% if profile.profile_picture %}
+                    <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}">
+                {% else %}
+                    <img src="{% static 'images/default-avatar.png' %}" alt="{{ profile.user.username }}">
+                {% endif %}
+            </div>
+        </div>
+        <div class="profile-info">
+            <h1>{{ profile.user.username }}</h1>
+            <div class="profile-stats">
+                <div class="stat">
+                    <span class="stat-value">{{ profile.total_dives }}</span>
+                    <span class="stat-label">Total Dives</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">{{ user_posts.count }}</span>
+                    <span class="stat-label">Posts</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">{{ user_comments.count }}</span>
+                    <span class="stat-label">Comments</span>
+                </div>
+            </div>
+            {% if user == profile.user %}
+                <a href="{% url 'edit_profile' %}" class="edit-profile-btn">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="profile-content">
+        <div class="profile-section">
+            <h2>About Me</h2>
+            <p>{{ profile.bio|default:"No bio added yet." }}</p>
+        </div>
+
+        <div class="profile-section">
+            <h2>Diving Information</h2>
+            <div class="diving-info">
+                <div class="info-item">
+                    <i class="fas fa-certificate"></i>
+                    <span class="label">Certification Level:</span>
+                    <span class="value">{{ profile.certification_level|default:"Not specified" }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-water"></i>
+                    <span class="label">Experience Level:</span>
+                    <span class="value">{{ profile.get_experience_level_display }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="label">Favorite Dive Site:</span>
+                    <span class="value">{{ profile.favorite_dive_site|default:"Not specified" }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-fish"></i>
+                    <span class="label">Favorite Marine Life:</span>
+                    <span class="value">{{ profile.favorite_marine_life|default:"Not specified" }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-compass"></i>
+                    <span class="label">Preferred Diving Type:</span>
+                    <span class="value">{{ profile.preferred_diving_type|default:"Not specified" }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-location-dot"></i>
+                    <span class="label">Location:</span>
+                    <span class="value">{{ profile.location|default:"Not specified" }}</span>
+                </div>
+            </div>
+        </div>
+
+        {% if profile.instagram or profile.facebook or profile.twitter %}
+        <div class="profile-section">
+            <h2>Connect</h2>
+            <div class="social-links">
+                {% if profile.instagram %}
+                <a href="{{ profile.instagram }}" target="_blank" class="social-link instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                {% endif %}
+                {% if profile.facebook %}
+                <a href="{{ profile.facebook }}" target="_blank" class="social-link facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                {% endif %}
+                {% if profile.twitter %}
+                <a href="{{ profile.twitter }}" target="_blank" class="social-link twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- User's Posts -->
+        <div class="profile-section">
+            <h2>Recent Posts</h2>
+            <div class="posts-grid">
+                {% for post in user_posts|slice:":3" %}
+                <div class="post-card">
+                    {% if post.featured_image %}
+                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                    {% endif %}
+                    <div class="post-content">
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.excerpt|truncatewords:15 }}</p>
+                        <a href="{% url 'post_detail' post.slug %}" class="read-more">Read More</a>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="no-posts">No posts yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
