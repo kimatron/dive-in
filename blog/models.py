@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.utils import timezone
 
+
 STATUS = ((0, "Draft"), (1, "Published"))
 
 
@@ -187,34 +188,62 @@ class UserProfile(models.Model):
         ('expert', 'Expert (100+ dives)')
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
-    bio = models.TextField(blank=True, null=True)
+    DIVING_TYPES = [
+        ('recreational', 'Recreational Diving'),
+        ('technical', 'Technical Diving'),
+        ('cave', 'Cave Diving'),
+        ('wreck', 'Wreck Diving'),
+        ('night', 'Night Diving'),
+        ('photography', 'Photography Diving'),
+        ('conservation', 'Conservation Diving')
+    ]
 
-    # Diving specific fields
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = CloudinaryField('image', default='placeholder')  # Changed to CloudinaryField
+    bio = models.TextField(blank=True, null=True)
+    
+    # Diving Certifications
     certification_level = models.ForeignKey(
-        CertificationLevel,
-        on_delete=models.SET_NULL,
-        null=True,
+        CertificationLevel, 
+        on_delete=models.SET_NULL, 
+        null=True, 
         blank=True
     )
+    certification_date = models.DateField(null=True, blank=True)
+    certification_number = models.CharField(max_length=100, blank=True)
+    
+    # Diving Statistics
     total_dives = models.PositiveIntegerField(default=0)
     experience_level = models.CharField(
         max_length=20,
         choices=EXPERIENCE_LEVELS,
         default='beginner'
     )
+    
+    # Diving Preferences
     favorite_dive_site = models.CharField(max_length=200, blank=True)
     favorite_marine_life = models.CharField(max_length=200, blank=True)
-    preferred_diving_type = models.CharField(max_length=100, blank=True)
+    preferred_diving_type = models.CharField(
+        max_length=100,
+        choices=DIVING_TYPES,
+        default='recreational'
+    )
+    max_depth_reached = models.PositiveIntegerField(default=0, help_text="Maximum depth reached in meters")
+    diving_since = models.DateField(null=True, blank=True)
+    
+    # Equipment
+    own_equipment = models.BooleanField(default=False)
+    equipment_details = models.TextField(blank=True, help_text="List your diving equipment")
+    
+    # Location and Availability
     location = models.CharField(max_length=200, blank=True)
-
-    # Social media links
+    available_for_buddy = models.BooleanField(default=False, help_text="Available for buddy diving")
+    
+    # Social media
     instagram = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
-
-    # Additional fields with defaults
+    
     created_on = models.DateTimeField(default=timezone.now)
     updated_on = models.DateTimeField(auto_now=True)
 
