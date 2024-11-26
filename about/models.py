@@ -2,24 +2,39 @@ from django.db import models
 
 
 class About(models.Model):
-    """
-    Model representing the 'About' section of the website, containing details
-    about the company.
-
-    Attributes:
-        company_name (str): The name of the company.
-        founding_date (date): The date when the company was founded.
-        mission (str): The mission statement of the company.
-        offerings (str): The products or services the company offers.
-        updated_on (datetime): The date and time when the record was last updated.
-        content (str): Additional content or information about the company.
-    """
     company_name = models.CharField(max_length=100)
     founding_date = models.DateField()
+    
+    # Hero Section
+    hero_title = models.CharField(max_length=200, default="Explore the Depths with Us")
+    hero_subtitle = models.TextField(help_text="A brief tagline or introduction")
+    hero_image = CloudinaryField('image', null=True, blank=True)
+    
+    # Main Content
     mission = models.TextField()
+    vision = models.TextField(help_text="Our vision for the diving community")
+    
+    # Statistics
+    total_divers = models.PositiveIntegerField(default=0, help_text="Number of divers in our community")
+    dive_locations = models.PositiveIntegerField(default=0, help_text="Number of dive locations covered")
+    articles_written = models.PositiveIntegerField(default=0, help_text="Number of diving articles published")
+    
+    # Features
     offerings = models.TextField()
-    updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
+    
+    # Team Section
+    team_description = models.TextField(help_text="Description of our team", blank=True)
+    
+    # Contact
+    contact_email = models.EmailField(blank=True)
+    contact_phone = models.CharField(max_length=20, blank=True)
+    location = models.CharField(max_length=200, blank=True)
+    
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "About"
 
     def __str__(self):
         return self.company_name
