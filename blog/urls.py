@@ -14,4 +14,7 @@ urlpatterns = [
          views.approve_comment, name='approve_comment'),
     path('test-email/', views.test_email, name='test_email'),
     path('subscribe/', views.subscribe_newsletter, name='subscribe'),
+    path('profile/', views.profile_view, name='profile'),
+    path('profile/<str:username>/', views.profile_view, name='user_profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
 ]

@@ -5,11 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.core.mail import send_mail
 from django.conf import settings
-from django.http import HttpResponse
-from .models import Post, Comment, Category
+from django.http import HttpResponse, JsonResponse
+from .models import Post, Comment, Category, UserProfile, CertificationLevel
 from .forms import CommentForm
 from django.views.decorators.http import require_POST
 from django.contrib.admin.views.decorators import staff_member_required
+from .forms import UserProfileForm
 
 
 class PostList(generic.ListView):
@@ -197,7 +198,7 @@ def subscribe_newsletter(request):
     try:
         email = request.POST.get('email')
         name = request.POST.get('name', '')  # Optional name field
-        
+
         if email:
             # Check if already subscribed
             if not Subscriber.objects.filter(email=email).exists():
@@ -207,25 +208,67 @@ def subscribe_newsletter(request):
                     active=True
                 )
                 messages.success(
-                    request, 
+                    request,
                     'Thank you for subscribing to our newsletter!'
                 )
             else:
                 messages.info(
-                    request, 
+                    request,
                     'You are already subscribed to our newsletter.'
                 )
         else:
             messages.error(
-                request, 
+                request,
                 'Please provide a valid email address.'
             )
-            
+
     except Exception as e:
         messages.error(
-            request, 
+            request,
             'Sorry, there was an error processing your subscription.'
         )
-    
+
     # Redirect back to the referring page
     return redirect(request.META.get('HTTP_REFERER', 'home'))
+
+
+@login_required
+def profile_view(request, username=None):
+    """
+    Display user profile page.
+    If username is provided, show that user's profile.
+    If not, show the logged-in user's profile.
+    """
+    if username:
+        profile_user = get_object_or_404(User, username=username)
+    else:
+        profile_user = request.user
+
+    profile = get_object_or_404(UserProfile, user=profile_user)
+    user_posts = Post.objects.filter(author=profile_user).order_by('-created_on')
+    user_comments = Comment.objects.filter(author=profile_user).order_by('-created_on')
+
+    context = {
+        'profile': profile,
+        'user_posts': user_posts,
+        'user_comments': user_comments,
+    }
+
+    return render(request, 'blog/profile.html', context)
+
+
+@login_required
+def edit_profile(request):
+    """Handle profile editing"""
+    profile = get_object_or_404(UserProfile, user=request.user)
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=profile)
+
+    return render(request, 'blog/edit_profile.html', {'form': form})
