@@ -1,0 +1,349 @@
+/* Profile Page Styles */
+.profile-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Profile Header */
+.profile-header {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.profile-cover {
+    height: 200px;
+    background: linear-gradient(135deg, #4ECDC4, #45B7D1);
+    position: relative;
+}
+
+.profile-avatar {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.profile-avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+.profile-info {
+    padding: 4rem 2rem 2rem;
+    text-align: center;
+}
+
+.profile-info h1 {
+    margin-bottom: 1rem;
+    color: #2d3748;
+    font-size: 2rem;
+}
+
+/* Stats */
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4ECDC4;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #718096;
+}
+
+/* Edit Profile Button */
+.edit-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background: #4ECDC4;
+    color: white;
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.edit-profile-btn:hover {
+    background: #45B7D1;
+    transform: translateY(-2px);
+}
+
+/* Profile Content */
+.profile-section {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h2 {
+    color: #2d3748;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* Diving Info */
+.diving-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.info-item i {
+    font-size: 1.25rem;
+    color: #4ECDC4;
+}
+
+.info-item .label {
+    color: #718096;
+    font-weight: 500;
+}
+
+.info-item .value {
+    color: #2d3748;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.social-link.instagram { background: #E1306C; }
+.social-link.facebook { background: #4267B2; }
+.social-link.twitter { background: #1DA1F2; }
+
+.social-link:hover {
+    transform: translateY(-2px);
+}
+
+/* Posts Grid */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.post-card {
+    background: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+}
+
+.post-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-content {
+    padding: 1.5rem;
+}
+
+.post-content h3 {
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #4ECDC4;
+    text-decoration: none;
+}
+
+.read-more:hover {
+    color: #45B7D1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-stats {
+        gap: 1.5rem;
+    }
+    
+    .diving-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Edit Profile Styles */
+.edit-profile-section {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile-section h1 {
+    color: #2d3748;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.profile-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.form-section h3 {
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.profile-picture-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.current-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.current-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-section {
+    flex: 1;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+.btn-save {
+    background: #4ECDC4;
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-save:hover {
+    background: #45B7D1;
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background: #718096;
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background: #4a5568;
+    transform: translateY(-2px);
+}
+
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Form Field Styling */
+.form-control {
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4ECDC4;
+    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+}
+
+/* File Input Styling */
+input[type="file"] {
+    border: 2px dashed #e2e8f0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    cursor: pointer;
+}
+
+input[type="file"]:hover {
+    border-color: #4ECDC4;
+}

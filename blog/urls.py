@@ -6,8 +6,8 @@ from django.urls import path
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
     path('profile/', views.profile_view, name='profile'),
-    path('profile/<str:username>/', views.profile_view, name='user_profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('profile/<str:username>/', views.profile_view, name='user_profile'),
     path('<slug:slug>/', views.post_detail, name='post_detail'),
     path('post/<slug:slug>/comment_edit/<int:comment_id>/',
          views.comment_edit, name='comment_edit'),

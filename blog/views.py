@@ -245,9 +245,17 @@ def profile_view(request, username=None):
     else:
         profile_user = request.user
 
-    profile = get_object_or_404(UserProfile, user=profile_user)
-    user_posts = Post.objects.filter(author=profile_user).order_by('-created_on')
-    user_comments = Comment.objects.filter(author=profile_user).order_by('-created_on')
+    profile = get_object_or_404(
+        UserProfile,
+        user=profile_user
+    )
+    user_posts = Post.objects.filter(
+        author=profile_user
+    ).order_by('-created_on')
+
+    user_comments = Comment.objects.filter(
+        author=profile_user
+    ).order_by('-created_on')
 
     context = {
         'profile': profile,

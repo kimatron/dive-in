@@ -21,8 +21,12 @@ class UserProfileForm(forms.ModelForm):
             'twitter'
         ]
         widgets = {
-            'bio': forms.Textarea(attrs={'rows': 4}),
-            'profile_picture': forms.FileInput(attrs={'class': 'form-control-file'}),
+            'bio': forms.Textarea(
+                attrs={'rows': 4}
+                                ),
+            'profile_picture': forms.FileInput(
+                attrs={'class': 'form-control-file'}
+                                ),
         }
 
 
