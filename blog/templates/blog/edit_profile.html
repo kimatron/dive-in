@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="edit-profile-section">
+        <h1>Edit Profile</h1>
+        
+        <form method="post" enctype="multipart/form-data" class="profile-form">
+            {% csrf_token %}
+            
+            <!-- Profile Picture Section -->
+            <div class="profile-picture-section">
+                <div class="current-picture">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="Current profile picture">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.png' %}" alt="Default profile picture">
+                    {% endif %}
+                </div>
+                <div class="upload-section">
+                    {{ form.profile_picture|as_crispy_field }}
+                </div>
+            </div>
+
+            <!-- Bio Section -->
+            <div class="form-section">
+                <h3>About You</h3>
+                {{ form.bio|as_crispy_field }}
+            </div>
+
+            <!-- Diving Information -->
+            <div class="form-section">
+                <h3>Diving Information</h3>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        {{ form.certification_level|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.total_dives|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        {{ form.experience_level|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.location|as_crispy_field }}
+                    </div>
+                </div>
+                {{ form.favorite_dive_site|as_crispy_field }}
+                {{ form.favorite_marine_life|as_crispy_field }}
+                {{ form.preferred_diving_type|as_crispy_field }}
+            </div>
+
+            <!-- Social Links -->
+            <div class="form-section">
+                <h3>Social Media Links</h3>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        {{ form.instagram|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.facebook|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.twitter|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="form-actions">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <a href="{% url 'profile' %}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
