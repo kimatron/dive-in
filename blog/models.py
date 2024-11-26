@@ -172,13 +172,39 @@ class FeaturedPost(models.Model):
 
 
 class CertificationLevel(models.Model):
-    """Represents different diving certification levels"""
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+    level_number = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        ordering = ['level_number']
 
     def __str__(self):
         return self.name
 
+    @classmethod
+    def create_default_levels(cls):
+        levels = [
+            (1, 'PADI Open Water Diver', 'Entry-level certification for recreational scuba diving'),
+            (2, 'PADI Advanced Open Water Diver', 'Advanced recreational diving certification'),
+            (3, 'PADI Rescue Diver', 'Emergency response and rescue techniques certification'),
+            (4, 'PADI Divemaster', 'Professional-level diving leadership certification'),
+            (5, 'PADI Instructor', 'Professional teaching certification'),
+            (6, 'SSI Open Water Diver', 'SSI entry-level certification'),
+            (7, 'SSI Advanced Open Water Diver', 'SSI advanced certification'),
+            (8, 'BSAC Ocean Diver', 'BSAC entry-level certification'),
+            (9, 'BSAC Sports Diver', 'BSAC advanced recreational certification'),
+            (10, 'Technical Diving Certification', 'Specialized technical diving certification')
+        ]
+
+        for level_number, name, description in levels:
+            cls.objects.get_or_create(
+                name=name,
+                defaults={
+                    'description': description,
+                    'level_number': level_number
+                }
+            )
 
 class UserProfile(models.Model):
     EXPERIENCE_LEVELS = [
@@ -201,17 +227,17 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = CloudinaryField('image', default='placeholder')  # Changed to CloudinaryField
     bio = models.TextField(blank=True, null=True)
-    
+
     # Diving Certifications
     certification_level = models.ForeignKey(
-        CertificationLevel, 
-        on_delete=models.SET_NULL, 
-        null=True, 
+        CertificationLevel,
+        on_delete=models.SET_NULL,
+        null=True,
         blank=True
     )
     certification_date = models.DateField(null=True, blank=True)
     certification_number = models.CharField(max_length=100, blank=True)
-    
+
     # Diving Statistics
     total_dives = models.PositiveIntegerField(default=0)
     experience_level = models.CharField(
@@ -219,7 +245,7 @@ class UserProfile(models.Model):
         choices=EXPERIENCE_LEVELS,
         default='beginner'
     )
-    
+
     # Diving Preferences
     favorite_dive_site = models.CharField(max_length=200, blank=True)
     favorite_marine_life = models.CharField(max_length=200, blank=True)
@@ -230,20 +256,20 @@ class UserProfile(models.Model):
     )
     max_depth_reached = models.PositiveIntegerField(default=0, help_text="Maximum depth reached in meters")
     diving_since = models.DateField(null=True, blank=True)
-    
+
     # Equipment
     own_equipment = models.BooleanField(default=False)
     equipment_details = models.TextField(blank=True, help_text="List your diving equipment")
-    
+
     # Location and Availability
     location = models.CharField(max_length=200, blank=True)
     available_for_buddy = models.BooleanField(default=False, help_text="Available for buddy diving")
-    
+
     # Social media
     instagram = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
-    
+
     created_on = models.DateTimeField(default=timezone.now)
     updated_on = models.DateTimeField(auto_now=True)
 

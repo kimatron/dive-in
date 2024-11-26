@@ -27,6 +27,9 @@ class UserProfileForm(forms.ModelForm):
             'profile_picture': forms.FileInput(
                 attrs={'class': 'form-control-file'}
                                 ),
+            'certification_date': forms.DateInput(attrs={'type': 'date'}),
+            'diving_since': forms.DateInput(attrs={'type': 'date'}),
+            'equipment_details': forms.Textarea(attrs={'rows': 4}),
         }
 
 
