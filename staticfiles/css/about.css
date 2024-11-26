@@ -465,3 +465,146 @@
         height: 250px;
     }
 }
+
+/* Offerings Section */
+.offerings-section {
+    padding: 5rem 0;
+    background-color: #f8fafc;
+}
+
+.offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.offering-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.offering-content {
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #4ECDC4, #45B7D1);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+.icon-wrapper i {
+    font-size: 1.8rem;
+    color: white;
+    transform: rotate(-45deg);
+}
+
+.offering-card h3 {
+    color: #2d3748;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.offering-card p {
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.offering-hover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        to top,
+        rgba(78, 205, 196, 0.1),
+        transparent
+    );
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.learn-more {
+    background: #4ECDC4;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+/* Hover Effects */
+.offering-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.offering-card:hover .icon-wrapper {
+    transform: rotate(90deg);
+}
+
+.offering-card:hover .offering-hover {
+    opacity: 1;
+}
+
+.offering-card:hover .learn-more {
+    transform: translateY(0);
+}
+
+/* Hover glow effect */
+.offering-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        rgba(78, 205, 196, 0.1) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.offering-card:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .offerings-section {
+        padding: 3rem 0;
+    }
+    
+    .offering-card {
+        margin: 0 1rem;
+    }
+}
