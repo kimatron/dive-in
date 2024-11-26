@@ -1,24 +1,24 @@
 from django import forms
 from .models import CollaborateRequest
 
+
 class CollaborateForm(forms.ModelForm):
-    """
-    A form for submitting collaboration requests.
+    COLLABORATION_TYPES = [
+        ('article', 'Article Contribution'),
+        ('photography', 'Underwater Photography'),
+        ('review', 'Diving Location Review'),
+        ('guide', 'Diving Guide Feature'),
+        ('other', 'Other')
+    ]
 
-    This form is based on the `CollaborateRequest` model and includes fields
-    for the user's name, email, and message. The 'read' field is excluded as per
-    requirements.
+    collaboration_type = forms.ChoiceField(choices=COLLABORATION_TYPES)
+    diving_experience = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}),
+                                        help_text="Brief description of your diving experience")
 
-    Attributes:
-        Meta (class): Contains metadata for the form, including the model to base it on,
-            the fields to include, and any widget customizations.
-            - model (CollaborateRequest): The model that the form is based on.
-            - fields (list): List of fields to be included in the form.
-            - widgets (dict): Custom widget configuration, such as setting the size of the textarea for the message field.
-    """
     class Meta:
         model = CollaborateRequest
-        fields = ['name', 'email', 'message']
+        fields = ['name', 'email', 'collaboration_type', 'diving_experience', 'message']
         widgets = {
-            'message': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'message': forms.Textarea(attrs={'rows': 4,
+                                    'placeholder': 'Tell us more about your collaboration idea...'}),
         }

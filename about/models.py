@@ -4,33 +4,33 @@ from django.db import models
 class About(models.Model):
     company_name = models.CharField(max_length=100)
     founding_date = models.DateField()
-    
+
     # Hero Section
     hero_title = models.CharField(max_length=200, default="Explore the Depths with Us")
     hero_subtitle = models.TextField(help_text="A brief tagline or introduction")
     hero_image = CloudinaryField('image', null=True, blank=True)
-    
+
     # Main Content
     mission = models.TextField()
     vision = models.TextField(help_text="Our vision for the diving community")
-    
+
     # Statistics
     total_divers = models.PositiveIntegerField(default=0, help_text="Number of divers in our community")
     dive_locations = models.PositiveIntegerField(default=0, help_text="Number of dive locations covered")
     articles_written = models.PositiveIntegerField(default=0, help_text="Number of diving articles published")
-    
+
     # Features
     offerings = models.TextField()
     content = models.TextField()
-    
+
     # Team Section
     team_description = models.TextField(help_text="Description of our team", blank=True)
-    
+
     # Contact
     contact_email = models.EmailField(blank=True)
     contact_phone = models.CharField(max_length=20, blank=True)
     location = models.CharField(max_length=200, blank=True)
-    
+
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
