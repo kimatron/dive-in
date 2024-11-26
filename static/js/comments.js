@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const postSlug = postSlugElement.getAttribute("data-slug");
 
       // Add click event listeners to edit buttons
-      // Add click event listeners to edit buttons
 Array.from(editButtons).forEach(button => {
     button.addEventListener("click", function(e) {
         const commentId = this.getAttribute("comment_id");
@@ -55,10 +54,34 @@ Array.from(editButtons).forEach(button => {
             bodyInput.value = document.getElementById('editCommentText').value;
             editForm.appendChild(bodyInput);
 
-            // Add to document and submit
+            // Update UI before submitting
+            const commentCard = document.getElementById(`comment${commentId}`).closest('.comment-card');
+            commentCard.classList.add('comment-pending');
+            
+            // Add pending notice if it doesn't exist
+            if (!commentCard.querySelector('.pending-notice')) {
+                const pendingNotice = document.createElement('div');
+                pendingNotice.className = 'pending-notice';
+                pendingNotice.innerHTML = `
+                    <i class="fas fa-clock"></i>
+                    Your edited comment is awaiting approval
+                `;
+                commentCard.appendChild(pendingNotice);
+            }
+
+            // Update comment text
+            document.getElementById(`comment${commentId}`).innerText = document.getElementById('editCommentText').value;
+
+            // Show notification
+            showNotification('Comment updated successfully and awaiting approval', 'info');
+            
+            // Hide modal
+            editModal.hide();
+
+            // Submit form
             document.body.appendChild(editForm);
             editForm.submit();
-        }, { once: true }); // This ensures the event listener is only added once
+        }, { once: true });
     });
 });
 
