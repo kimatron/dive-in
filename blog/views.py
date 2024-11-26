@@ -287,7 +287,7 @@ def about_view(request):
     # Get the about instance and calculate statistics
     about = About.objects.first()
     if about:
-        # Update statistics (you can customize these calculations)
+        # Update statistics
         about.articles_written = Post.objects.filter(status=1).count()  # Published posts count
         about.total_divers = about.total_divers or 150  # Example default
         about.dive_locations = about.dive_locations or 45  # Example default

@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.db.models import Count
 from .models import About
 from .forms import CollaborateForm
+from blog.models import Post, Comment
+from django.contrib.auth.models import User
 
 
 def about_page(request):
@@ -19,15 +22,30 @@ def about_page(request):
     """
     about = About.objects.all().order_by('-updated_on').first()
 
+    # Calculate statistics if about instance exists
+    if about:
+        total_posts = Post.objects.filter(status=1).count()
+        total_authors = User.objects.filter(blog_posts__isnull=False).distinct().count()
+        total_comments = Comment.objects.filter(approved=True).count()
+        categories_count = Post.objects.filter(status=1).values('category').distinct().count()
+
+        # Update the About object with new statistics
+        about.articles_written = total_posts
+        about.total_divers = total_authors
+        about.dive_locations = categories_count
+        about.save()
+
     return render(
         request,
         "about/about.html",
-        {"about": about},
+        {
+            "about": about,
+            "total_comments": Comment.objects.filter(approved=True).count(),
+        },
     )
 
 
 def about_view(request):
-    print("About view is being called")
     """
     Handles the 'About' page view, including form submissions for collaboration requests.
 
@@ -43,6 +61,8 @@ def about_view(request):
         HttpResponse: The rendered 'about.html' template with the context containing
                       the 'About' instance and the collaboration form.
     """
+    print("About view is being called")
+    
     if request.method == 'POST':
         form = CollaborateForm(request.POST)
         if form.is_valid():
@@ -55,11 +75,25 @@ def about_view(request):
 
     about = About.objects.all().order_by('-updated_on').first()
 
+    # Calculate statistics if about instance exists
+    if about:
+        total_posts = Post.objects.filter(status=1).count()
+        total_authors = User.objects.filter(blog_posts__isnull=False).distinct().count()
+        total_comments = Comment.objects.filter(approved=True).count()
+        categories_count = Post.objects.filter(status=1).values('category').distinct().count()
+
+        # Update the About object with new statistics
+        about.articles_written = total_posts
+        about.total_divers = total_authors
+        about.dive_locations = categories_count
+        about.save()
+
     return render(
         request,
         'about/about.html',
         {
             'about': about,
             'collaborate_form': form,
+            'total_comments': Comment.objects.filter(approved=True).count(),
         }
     )
