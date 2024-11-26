@@ -1,59 +1,156 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
 {% load crispy_forms_tags %}
 
-<div class="container mt-5">
-  <!-- Hero Section -->
-  <div class="jumbotron text-center bg-light-blue py-5 mb-4">
-    <h1 class="display-4 text-dark-blue">{{ about.company_name }}</h1>
-    <p class="lead text-dark-gray">Dedicated to excellence since {{ about.founding_date|date:"Y" }}</p>
-  </div>
-A
-  <div class="row">
-    <!-- Image Section -->
-    <div class="col-md-4 text-center mb-4">
-      <img src="{% static 'images/splash.jpg' %}" class="img-fluid rounded shadow-lg" alt="{{ about.company_name }}">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="about-hero">
+    {% if about.hero_image %}
+        <img src="{{ about.hero_image.url }}" alt="Hero background" class="hero-background">
+    {% else %}
+        <img src="{% static 'images/default-hero.jpg' %}" alt="Default hero" class="hero-background">
+    {% endif %}
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+        <h1 class="hero-title">{{ about.hero_title }}</h1>
+        <p class="hero-subtitle">{{ about.hero_subtitle }}</p>
+        <a href="#mission" class="hero-scroll-btn">
+            <span>Discover More</span>
+            <i class="fas fa-chevron-down"></i>
+        </a>
     </div>
+</section>
 
-    <!-- Content Section -->
-    <div class="col-md-8">
-      <!-- Mission Section -->
-      <div class="bg-white p-4 rounded shadow-sm mb-4">
-        <h4 class="text-dark-blue"><i class="fas fa-bullseye"></i> Our Mission</h4>
-        <p class="text-dark-gray">{{ about.mission | linebreaks }}</p>
-      </div>
-
-      <!-- Offerings Section -->
-      <div class="bg-white p-4 rounded shadow-sm mb-4">
-        <h4 class="text-dark-blue"><i class="fas fa-gift"></i> What We Offer</h4>
-        <p class="text-dark-gray">{{ about.offerings | linebreaks }}</p>
-      </div>
-
-      <!-- Additional Content Section -->
-      <div class="bg-white p-4 rounded shadow-sm">
-        <h4 class="text-dark-blue"><i class="fas fa-info-circle"></i> More About Us</h4>
-        <p class="text-dark-gray">{{ about.content | linebreaks | safe }}</p>
-      </div>
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-number" data-target="{{ about.total_divers }}">0</div>
+                <div class="stat-label">Community Members</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="stat-number" data-target="{{ about.dive_locations }}">0</div>
+                <div class="stat-label">Dive Locations</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-newspaper"></i>
+                <div class="stat-number" data-target="{{ about.articles_written }}">0</div>
+                <div class="stat-label">Articles Published</div>
+            </div>
+        </div>
     </div>
-  </div>
+</section>
 
-  <!-- Collaboration Request Form -->
-  <div class="mt-10">
-    <h2 class="text-2xl font-bold text-dark-blue">Request a Collaboration</h2>
-    <form method="post" class="mt-4">
-        {% csrf_token %}
-        {{ collaborate_form|crispy }}
-        <button type="submit" class="btn btn-primary mt-4">Send Request</button>
-    </form>
-</div>
-
-
-  <!-- Footer Section -->
-  <div class="row mt-4">
-    <div class="col text-right">
-      <p class="text-muted"><em>Last updated on: {{ about.updated_on|date:"F j, Y" }}</em></p>
+<!-- Mission Section -->
+<section id="mission" class="mission-section">
+    <div class="container">
+        <div class="mission-content">
+            <div class="mission-text">
+                <h2>Our Mission</h2>
+                <p>{{ about.mission }}</p>
+            </div>
+            <div class="mission-vision">
+                <h2>Our Vision</h2>
+                <p>{{ about.vision }}</p>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-{% endblock content %}
+</section>
+
+<!-- What We Offer -->
+<section class="offerings-section">
+    <div class="container">
+        <h2>What We Offer</h2>
+        <div class="offerings-grid">
+            <div class="offering-card">
+                <i class="fas fa-book-reader"></i>
+                <h3>Diving Stories</h3>
+                <p>Immersive tales from the depths</p>
+            </div>
+            <div class="offering-card">
+                <i class="fas fa-camera-retro"></i>
+                <h3>Photography</h3>
+                <p>Stunning underwater captures</p>
+            </div>
+            <div class="offering-card">
+                <i class="fas fa-map"></i>
+                <h3>Location Guides</h3>
+                <p>Detailed diving spot reviews</p>
+            </div>
+            <div class="offering-card">
+                <i class="fas fa-users"></i>
+                <h3>Community</h3>
+                <p>Connect with fellow divers</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Collaboration Section -->
+<section class="collab-section">
+    <div class="container">
+        <div class="collab-grid">
+            <div class="collab-info">
+                <h2>Collaborate With Us</h2>
+                <p>Share your diving experiences and expertise with our community.</p>
+                <ul class="collab-features">
+                    <li><i class="fas fa-check"></i> Write Articles</li>
+                    <li><i class="fas fa-check"></i> Share Photos</li>
+                    <li><i class="fas fa-check"></i> Review Locations</li>
+                    <li><i class="fas fa-check"></i> Guide Others</li>
+                </ul>
+            </div>
+            <div class="collab-form">
+                <form method="post" class="collaborate-form">
+                    {% csrf_token %}
+                    {{ collaborate_form|crispy }}
+                    <button type="submit" class="btn-submit">Send Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                {% if about.contact_email %}
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:{{ about.contact_email }}">{{ about.contact_email }}</a>
+                </div>
+                {% endif %}
+                {% if about.contact_phone %}
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:{{ about.contact_phone }}">{{ about.contact_phone }}</a>
+                </div>
+                {% endif %}
+                {% if about.location %}
+                <div class="contact-item">
+                    <i class="fas fa-location-dot"></i>
+                    <span>{{ about.location }}</span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="contact-image">
+                <img src="{% static 'images/contact-image.jpg' %}" alt="Contact us">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/about.js' %}"></script>
+{% endblock %}
