@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitButton = document.getElementById("submitButton");
   const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
   const deleteConfirm = document.getElementById("deleteConfirm");
+  const editModal = new bootstrap.Modal(document.getElementById("editModal"));
 
   // Initialize Toasts if they exist
   const toastElList = document.querySelectorAll('.toast');
@@ -41,15 +42,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Add click event listeners to delete buttons
       Array.from(deleteButtons).forEach(button => {
-          button.addEventListener("click", function(e) {
-              // Get the comment ID from the button's attribute
-              const commentId = this.getAttribute("comment_id");
-              // Set the delete confirmation link
-              deleteConfirm.href = `/post/${postSlug}/comment_delete/${commentId}/`;
-              // Show the modal
-              deleteModal.show();
-          });
-      });
+        button.addEventListener("click", function(e) {
+            const commentId = this.getAttribute("comment_id");
+            const deleteForm = document.createElement('form');
+            deleteForm.method = 'POST';
+            deleteForm.action = `/post/${postSlug}/comment_delete/${commentId}/`;
+            
+            // Add CSRF token
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = getCookie('csrftoken');
+            deleteForm.appendChild(csrfInput);
+    
+            // Add to document
+            document.body.appendChild(deleteForm);
+            
+            // Set up delete confirmation
+            deleteConfirm.onclick = function(e) {
+                e.preventDefault();
+                deleteForm.submit();
+            };
+            
+            // Show modal
+            deleteModal.show();
+        });
+    });
   }
 });
 
