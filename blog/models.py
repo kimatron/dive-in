@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.utils import timezone
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
@@ -173,32 +174,28 @@ class CertificationLevel(models.Model):
     """Represents different diving certification levels"""
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-
+    
     def __str__(self):
         return self.name
 
 
 class UserProfile(models.Model):
-    """
-    Enhanced user profile with diving-specific information.
-    """
     EXPERIENCE_LEVELS = [
         ('beginner', 'Beginner (0-20 dives)'),
         ('intermediate', 'Intermediate (21-50 dives)'),
         ('advanced', 'Advanced (51-100 dives)'),
-        ('expert', 'Expert (100+ dives)'),
-        ('pro', 'Professional (500+ dives)')
+        ('expert', 'Expert (100+ dives)')
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-
+    
     # Diving specific fields
     certification_level = models.ForeignKey(
-        CertificationLevel,
-        on_delete=models.SET_NULL,
-        null=True,
+        CertificationLevel, 
+        on_delete=models.SET_NULL, 
+        null=True, 
         blank=True
     )
     total_dives = models.PositiveIntegerField(default=0)
@@ -211,25 +208,15 @@ class UserProfile(models.Model):
     favorite_marine_life = models.CharField(max_length=200, blank=True)
     preferred_diving_type = models.CharField(max_length=100, blank=True)
     location = models.CharField(max_length=200, blank=True)
-
+    
     # Social media links
     instagram = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
-
-    # Additional fields
-    created_on = models.DateTimeField(auto_now_add=True)
+    
+    # Additional fields with defaults
+    created_on = models.DateTimeField(default=timezone.now)
     updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
-
-    def get_experience_badge(self):
-        """Returns the appropriate badge based on experience level"""
-        badges = {
-            'beginner': '🌊',
-            'intermediate': '🌊 🌊',
-            'advanced': '🌊 🌊 🌊',
-            'expert': '🌊 🌊 🌊 🌊'
-        }
-        return badges.get(self.experience_level, '🌊')
