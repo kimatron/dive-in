@@ -11,6 +11,7 @@ from .forms import CommentForm
 from django.views.decorators.http import require_POST
 from django.contrib.admin.views.decorators import staff_member_required
 from .forms import UserProfileForm
+from django.contrib.auth.models import User
 
 
 class PostList(generic.ListView):

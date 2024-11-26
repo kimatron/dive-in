@@ -25,14 +25,15 @@
             
             <h1 class="post-hero__title">{{ post.title }}</h1>
             
-            <div class="post-hero__meta">
-                <div class="post-hero__meta-item">
-                    <img src="{{ post.author.userprofile.profile_picture.url }}" 
-                         alt="{{ post.author.username }}" 
-                         class="rounded-circle"
-                         style="width: 40px; height: 40px; object-fit: cover;">
-                    <span>By {{ post.author.username }}</span>
-                </div>
+            <div class="post-hero__meta-item">
+                <img src="{{ post.author.userprofile.profile_picture.url }}" 
+                     alt="{{ post.author.username }}" 
+                     class="rounded-circle"
+                     style="width: 40px; height: 40px; object-fit: cover;">
+                <a href="{% url 'user_profile' post.author.username %}" class="author-link">
+                    By {{ post.author.username }}
+                </a>
+            </div>
                 <div class="post-hero__meta-item">
                     <i class="far fa-calendar"></i>
                     <span>{{ post.created_on|date:"F j, Y" }}</span>

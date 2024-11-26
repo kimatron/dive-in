@@ -630,3 +630,23 @@
         transform: translateY(0);
     }
 }
+
+
+.author-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.author-link:hover {
+    color: #4ECDC4;
+}
+
+/* Profile Link in Navbar */
+.nav-item .rounded-circle {
+    transition: transform 0.3s ease;
+}
+
+.nav-item:hover .rounded-circle {
+    transform: scale(1.1);
+}
