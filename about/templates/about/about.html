@@ -283,20 +283,38 @@
     <div class="container">
         <div class="collab-wrapper">
             <div class="collab-info">
-                <h2>Collaborate With Us</h2>
-                <p>Share your diving experiences and expertise with our community</p>
-                <div class="collab-features">
-                    <div class="feature">
-                        <i class="fas fa-pen"></i>
-                        <span>Write Articles</span>
+                <h2>Join Our Diving Community</h2>
+                <p class="lead-text">Share your underwater adventures and expertise</p>
+                
+                <div class="collab-types">
+                    <div class="collab-type">
+                        <div class="type-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <div class="type-content">
+                            <h3>Content Creation</h3>
+                            <p>Write diving guides, share experiences, or create educational content</p>
+                        </div>
                     </div>
-                    <div class="feature">
-                        <i class="fas fa-camera"></i>
-                        <span>Share Photos</span>
+
+                    <div class="collab-type">
+                        <div class="type-icon">
+                            <i class="fas fa-camera-retro"></i>
+                        </div>
+                        <div class="type-content">
+                            <h3>Photography</h3>
+                            <p>Showcase your underwater photography and tell visual stories</p>
+                        </div>
                     </div>
-                    <div class="feature">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <span>Review Locations</span>
+
+                    <div class="collab-type">
+                        <div class="type-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="type-content">
+                            <h3>Location Reviews</h3>
+                            <p>Share detailed insights about diving spots and hidden gems</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -304,21 +322,56 @@
             <div class="collab-form-container">
                 <form method="post" class="collab-form">
                     {% csrf_token %}
-                    <div class="form-grid">
-                        <div class="form-group">
-                            {{ collaborate_form.name|as_crispy_field }}
-                        </div>
-                        <div class="form-group">
-                            {{ collaborate_form.email|as_crispy_field }}
-                        </div>
-                        <div class="form-group full-width">
-                            {{ collaborate_form.message|as_crispy_field }}
-                        </div>
+                    <div class="form-header">
+                        <h3>Start Collaborating</h3>
+                        <p>Fill out the form below and we'll get back to you within 48 hours</p>
                     </div>
-                    <button type="submit" class="submit-btn">
-                        <span>Send Request</span>
-                        <i class="fas fa-paper-plane"></i>
+
+                    <div class="form-group floating">
+                        <input type="text" name="name" id="id_name" class="form-control" required>
+                        <label for="id_name">Your Name</label>
+                        <div class="line"></div>
+                    </div>
+
+                    <div class="form-group floating">
+                        <input type="email" name="email" id="id_email" class="form-control" required>
+                        <label for="id_email">Email Address</label>
+                        <div class="line"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <select name="collaboration_type" id="id_collaboration_type" class="form-control" required>
+                            <option value="">Select Collaboration Type</option>
+                            <option value="content">Content Creation</option>
+                            <option value="photography">Photography</option>
+                            <option value="reviews">Location Reviews</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_experience">Your Diving Experience</label>
+                        <textarea name="experience" id="id_experience" rows="3" class="form-control" 
+                                placeholder="Tell us about your diving experience and certifications"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_message">Collaboration Details</label>
+                        <textarea name="message" id="id_message" rows="4" class="form-control" 
+                                placeholder="Share your ideas and what you'd like to contribute"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <span class="button-text">Send Request</span>
+                        <span class="button-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </span>
                     </button>
+
+                    <div class="form-footer">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Our team reviews all requests and will contact you to discuss collaboration opportunities</span>
+                    </div>
                 </form>
             </div>
         </div>
