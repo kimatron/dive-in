@@ -43,9 +43,20 @@
                            href="{% url 'about' %}">About</a>
                     </li>
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                        </li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'profile' %}">
+        {% if user.userprofile.profile_picture %}
+            <img src="{{ user.userprofile.profile_picture.url }}" 
+                 alt="Profile" 
+                 class="rounded-circle"
+                 style="width: 25px; height: 25px; object-fit: cover; margin-right: 5px;">
+        {% endif %}
+        My Profile
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+</li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
