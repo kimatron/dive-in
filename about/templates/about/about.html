@@ -281,22 +281,44 @@
 <!-- Collaboration Section -->
 <section class="collab-section">
     <div class="container">
-        <div class="collab-grid">
+        <div class="collab-wrapper">
             <div class="collab-info">
                 <h2>Collaborate With Us</h2>
-                <p>Share your diving experiences and expertise with our community.</p>
-                <ul class="collab-features">
-                    <li><i class="fas fa-check"></i> Write Articles</li>
-                    <li><i class="fas fa-check"></i> Share Photos</li>
-                    <li><i class="fas fa-check"></i> Review Locations</li>
-                    <li><i class="fas fa-check"></i> Guide Others</li>
-                </ul>
+                <p>Share your diving experiences and expertise with our community</p>
+                <div class="collab-features">
+                    <div class="feature">
+                        <i class="fas fa-pen"></i>
+                        <span>Write Articles</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-camera"></i>
+                        <span>Share Photos</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Review Locations</span>
+                    </div>
+                </div>
             </div>
-            <div class="collab-form">
-                <form method="post" class="collaborate-form">
+            
+            <div class="collab-form-container">
+                <form method="post" class="collab-form">
                     {% csrf_token %}
-                    {{ collaborate_form|crispy }}
-                    <button type="submit" class="btn-submit">Send Request</button>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            {{ collaborate_form.name|as_crispy_field }}
+                        </div>
+                        <div class="form-group">
+                            {{ collaborate_form.email|as_crispy_field }}
+                        </div>
+                        <div class="form-group full-width">
+                            {{ collaborate_form.message|as_crispy_field }}
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span>Send Request</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
                 </form>
             </div>
         </div>
