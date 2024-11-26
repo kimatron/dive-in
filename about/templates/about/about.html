@@ -27,25 +27,33 @@
 
 <!-- Stats Section -->
 <section class="stats-section">
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <i class="fas fa-users"></i>
-                <div class="stat-number" data-target="{{ about.total_divers }}">0</div>
-                <div class="stat-label">Community Members</div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-map-marker-alt"></i>
-                <div class="stat-number" data-target="{{ about.dive_locations }}">0</div>
-                <div class="stat-label">Dive Locations</div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-newspaper"></i>
-                <div class="stat-number" data-target="{{ about.articles_written }}">0</div>
-                <div class="stat-label">Articles Published</div>
-            </div>
-        </div>
-    </div>
+  <div class="container">
+      <div class="stats-grid">
+          <div class="stat-card">
+              <div class="stat-icon">
+                  <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-number" data-target="{{ about.total_divers }}">0</div>
+              <div class="stat-label">Community Members</div>
+          </div>
+          
+          <div class="stat-card">
+              <div class="stat-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="stat-number" data-target="{{ about.dive_locations }}">0</div>
+              <div class="stat-label">Dive Locations</div>
+          </div>
+          
+          <div class="stat-card">
+              <div class="stat-icon">
+                  <i class="fas fa-newspaper"></i>
+              </div>
+              <div class="stat-number" data-target="{{ about.articles_written }}">0</div>
+              <div class="stat-label">Articles Published</div>
+          </div>
+      </div>
+  </div>
 </section>
 
 <!-- Mission Section -->
