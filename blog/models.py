@@ -206,6 +206,7 @@ class CertificationLevel(models.Model):
                 }
             )
 
+
 class UserProfile(models.Model):
     EXPERIENCE_LEVELS = [
         ('beginner', 'Beginner (0-20 dives)'),
