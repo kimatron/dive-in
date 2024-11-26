@@ -27,18 +27,40 @@ document.addEventListener('DOMContentLoaded', () => {
       const postSlug = postSlugElement.getAttribute("data-slug");
 
       // Add click event listeners to edit buttons
-      Array.from(editButtons).forEach(button => {
-          button.addEventListener("click", function(e) {
-              // Get the comment ID from the button's attribute
-              const commentId = this.getAttribute("comment_id");
-              // Get the comment content
-              const commentContent = document.getElementById(`comment${commentId}`).innerText;
-              // Update the form
-              commentText.value = commentContent;
-              submitButton.innerText = "Update";
-              commentForm.setAttribute("action", `/post/${postSlug}/comment_edit/${commentId}/`);
-          });
-      });
+      // Add click event listeners to edit buttons
+Array.from(editButtons).forEach(button => {
+    button.addEventListener("click", function(e) {
+        const commentId = this.getAttribute("comment_id");
+        const commentContent = document.getElementById(`comment${commentId}`).innerText;
+        document.getElementById('editCommentText').value = commentContent.trim();
+        editModal.show();
+
+        // Set up save edit button
+        document.getElementById('saveEdit').addEventListener('click', function() {
+            const editForm = document.createElement('form');
+            editForm.method = 'POST';
+            editForm.action = `/post/${postSlug}/comment_edit/${commentId}/`;
+
+            // Add CSRF token
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = getCookie('csrftoken');
+            editForm.appendChild(csrfInput);
+
+            // Add comment body
+            const bodyInput = document.createElement('input');
+            bodyInput.type = 'hidden';
+            bodyInput.name = 'body';
+            bodyInput.value = document.getElementById('editCommentText').value;
+            editForm.appendChild(bodyInput);
+
+            // Add to document and submit
+            document.body.appendChild(editForm);
+            editForm.submit();
+        }, { once: true }); // This ensures the event listener is only added once
+    });
+});
 
       // Add click event listeners to delete buttons
       Array.from(deleteButtons).forEach(button => {
