@@ -608,3 +608,83 @@
         margin: 0 1rem;
     }
 }
+
+/* Contact Section */
+.contact-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.contact-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-info h2 {
+    font-size: 2.5rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.contact-info > p {
+    color: #718096;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.contact-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+}
+
+.contact-item i {
+    font-size: 1.5rem;
+    color: #4ECDC4;
+}
+
+.item-content h3 {
+    color: #2d3748;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.item-content p {
+    color: #718096;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .collab-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+
+    .contact-details {
+        grid-template-columns: 1fr;
+    }
+}

@@ -328,30 +328,36 @@
 <!-- Contact Section -->
 <section class="contact-section">
     <div class="container">
-        <div class="contact-grid">
+        <div class="contact-wrapper">
             <div class="contact-info">
                 <h2>Get in Touch</h2>
-                {% if about.contact_email %}
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:{{ about.contact_email }}">{{ about.contact_email }}</a>
+                <p>Have questions? We'd love to hear from you.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="item-content">
+                            <h3>Email Us</h3>
+                            <p>{{ about.contact_email|default:"info@divein.com" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="item-content">
+                            <h3>Location</h3>
+                            <p>{{ about.location|default:"Dublin, Ireland" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="item-content">
+                            <h3>Response Time</h3>
+                            <p>Within 24 hours</p>
+                        </div>
+                    </div>
                 </div>
-                {% endif %}
-                {% if about.contact_phone %}
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <a href="tel:{{ about.contact_phone }}">{{ about.contact_phone }}</a>
-                </div>
-                {% endif %}
-                {% if about.location %}
-                <div class="contact-item">
-                    <i class="fas fa-location-dot"></i>
-                    <span>{{ about.location }}</span>
-                </div>
-                {% endif %}
-            </div>
-            <div class="contact-image">
-                <img src="{% static 'images/contact-image.jpg' %}" alt="Contact us">
             </div>
         </div>
     </div>
