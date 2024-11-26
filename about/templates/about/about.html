@@ -9,20 +9,20 @@
 {% block content %}
 <!-- Hero Section -->
 <section class="about-hero">
-    {% if about.hero_image %}
-        <img src="{{ about.hero_image.url }}" alt="Hero background" class="hero-background">
-    {% else %}
-        <img src="{% static 'images/default-hero.jpg' %}" alt="Default hero" class="hero-background">
-    {% endif %}
-    <div class="hero-overlay"></div>
-    <div class="hero-content container">
-        <h1 class="hero-title">{{ about.hero_title }}</h1>
-        <p class="hero-subtitle">{{ about.hero_subtitle }}</p>
-        <a href="#mission" class="hero-scroll-btn">
-            <span>Discover More</span>
-            <i class="fas fa-chevron-down"></i>
-        </a>
-    </div>
+  {% if about.hero_image %}
+      <img src="{{ about.hero_image.url }}" alt="Hero background" class="hero-background">
+  {% else %}
+      <img src="{% static 'images/default-hero.jpg' %}" alt="Default hero" class="hero-background">
+  {% endif %}
+  <div class="hero-overlay"></div>
+  <div class="hero-content container">
+      <h1 class="hero-title">{{ about.hero_title }}</h1>
+      <p class="hero-subtitle">{{ about.hero_subtitle }}</p>
+      <a href="#mission" class="hero-scroll-btn">
+          <span>Discover More</span>
+          <i class="fas fa-chevron-down"></i>
+      </a>
+  </div>
 </section>
 
 <!-- Stats Section -->

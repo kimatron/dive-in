@@ -4,10 +4,25 @@ from django_summernote.admin import SummernoteModelAdmin
 
 
 @admin.register(About)
-class AboutAdmin(SummernoteModelAdmin):
-
-    summernote_fields = ('content',)
-# Register your models here.
+class AboutAdmin(admin.ModelAdmin):
+    list_display = ('company_name', 'updated_on')
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('company_name', 'founding_date')
+        }),
+        ('Hero Section', {
+            'fields': ('hero_title', 'hero_subtitle', 'hero_image')
+        }),
+        ('Content', {
+            'fields': ('mission', 'vision', 'offerings', 'content')
+        }),
+        ('Statistics', {
+            'fields': ('total_divers', 'dive_locations', 'articles_written')
+        }),
+        ('Contact Information', {
+            'fields': ('contact_email', 'contact_phone', 'location')
+        }),
+    )
 
 
 class CollaborateRequestAdmin(admin.ModelAdmin):
