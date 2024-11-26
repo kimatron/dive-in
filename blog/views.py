@@ -281,3 +281,30 @@ def edit_profile(request):
         form = UserProfileForm(instance=profile)
 
     return render(request, 'blog/edit_profile.html', {'form': form})
+
+
+def about_view(request):
+    # Get the about instance and calculate statistics
+    about = About.objects.first()
+    if about:
+        # Update statistics (you can customize these calculations)
+        about.articles_written = Post.objects.filter(status=1).count()  # Published posts count
+        about.total_divers = about.total_divers or 150  # Example default
+        about.dive_locations = about.dive_locations or 45  # Example default
+        about.save()
+
+    if request.method == 'POST':
+        form = CollaborateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your collaboration request has been submitted!')
+            return redirect('about')
+    else:
+        form = CollaborateForm()
+
+    context = {
+        'about': about,
+        'collaborate_form': form,
+    }
+    
+    return render(request, 'about/about.html', context)
