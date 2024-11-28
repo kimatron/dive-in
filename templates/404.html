@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="error-page">
+    <div class="error-content">
+        <h1 class="error-title">404</h1>
+        <div class="error-divider">
+            <i class="fas fa-water"></i>
+        </div>
+        <h2>Oops! Looks like you're in deep water</h2>
+        <p>The page you're looking for seems to have drifted away...</p>
+        <div class="error-actions">
+            <a href="{% url 'home' %}" class="btn-home">
+                <i class="fas fa-home"></i> Back to Surface
+            </a>
+            <a href="{% url 'about' %}" class="btn-contact">
+                <i class="fas fa-envelope"></i> Contact Us
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
