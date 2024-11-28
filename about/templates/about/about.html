@@ -391,15 +391,19 @@
                         <i class="fas fa-envelope"></i>
                         <div class="item-content">
                             <h3>Email Us</h3>
-                            <p>{{ about.contact_email|default:"info@divein.com" }}</p>
+                            <a href="mailto:{{ about.contact_email|default:'info@divein.com' }}" class="contact-link">
+                                {{ about.contact_email|default:"info@divein.com" }}
+                            </a>
                         </div>
                     </div>
                     
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-phone"></i>
                         <div class="item-content">
-                            <h3>Location</h3>
-                            <p>{{ about.location|default:"Dublin, Ireland" }}</p>
+                            <h3>Call Us</h3>
+                            <a href="tel:{{ about.contact_phone|default:'+353 123 456 789' }}" class="contact-link">
+                                {{ about.contact_phone|default:"+353 123 456 789" }}
+                            </a>
                         </div>
                     </div>
                     
