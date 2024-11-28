@@ -1,4 +1,4 @@
-// General site functionality
+// Site-wide functionality
 document.addEventListener('DOMContentLoaded', function() {
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
@@ -25,13 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Initialize animations
-    initializeCardAnimations();
-    initializePaginationEffects();
-});
-
-// Card animations with Intersection Observer
-function initializeCardAnimations() {
+    // Initialize card animations
     const cards = document.querySelectorAll('.post-card');
     
     const observer = new IntersectionObserver((entries) => {
@@ -52,11 +46,6 @@ function initializeCardAnimations() {
     });
 
     // Lazy loading for images
-    initializeLazyLoading();
-}
-
-// Image lazy loading
-function initializeLazyLoading() {
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -71,27 +60,35 @@ function initializeLazyLoading() {
     document.querySelectorAll('.post-card__image[data-src]').forEach(img => {
         imageObserver.observe(img);
     });
-}
 
-// Pagination effects
-function initializePaginationEffects() {
+    // Pagination effects
     const paginationLinks = document.querySelectorAll('.page-link');
     
     paginationLinks.forEach(link => {
-        // Add ripple effect
-        link.addEventListener('click', handleRippleEffect);
-        // Add hover animation
-        link.addEventListener('mouseenter', () => link.style.transform = 'translateY(-2px)');
-        link.addEventListener('mouseleave', () => link.style.transform = 'translateY(0)');
+        // Ripple effect
+        link.addEventListener('click', function(e) {
+            let x = e.clientX - e.target.offsetLeft;
+            let y = e.clientY - e.target.offsetTop;
+            
+            let ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+        
+        // Hover animation
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
     });
-}
-
-function handleRippleEffect(e) {
-    let ripple = document.createElement('span');
-    ripple.className = 'ripple';
-    ripple.style.left = `${e.clientX - e.target.offsetLeft}px`;
-    ripple.style.top = `${e.clientY - e.target.offsetTop}px`;
-    
-    this.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-}
+});
