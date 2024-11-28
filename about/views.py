@@ -62,7 +62,7 @@ def about_view(request):
                       the 'About' instance and the collaboration form.
     """
     print("About view is being called")
-    
+
     if request.method == 'POST':
         form = CollaborateForm(request.POST)
         if form.is_valid():
