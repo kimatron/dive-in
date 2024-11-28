@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="error-page">
+    <div class="error-content">
+        <h1 class="error-title">500</h1>
+        <div class="error-divider">
+            <i class="fas fa-tools"></i>
+        </div>
+        <h2>Something went wrong underwater</h2>
+        <p>We're experiencing some technical difficulties. Our team is working on it!</p>
+        <div class="error-actions">
+            <a href="{% url 'home' %}" class="btn-home">
+                <i class="fas fa-home"></i> Return Home
+            </a>
+            <a href="{% url 'about' %}" class="btn-contact">
+                <i class="fas fa-envelope"></i> Report Issue
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
