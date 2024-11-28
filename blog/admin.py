@@ -1,15 +1,103 @@
 from django.contrib import admin
-from .models import Post, Comment, Category, Tag, Subscriber, UserProfile, FeaturedPost
+from .models import Post, Comment, Category, Tag, Subscriber, UserProfile, FeaturedPost, CertificationLevel
 from django_summernote.admin import SummernoteModelAdmin
 
 
+@admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'profile_picture', 'bio')
-    search_fields = ('user__username', 'bio')
+    list_display = (
+        'user',
+        'experience_level',
+        'total_dives',
+        'certification_level',
+        'location',
+        'available_for_buddy'
+    )
+    
+    list_filter = (
+        'experience_level',
+        'certification_level',
+        'preferred_diving_type',
+        'own_equipment',
+        'available_for_buddy'
+    )
+    
+    search_fields = (
+        'user__username',
+        'location',
+        'favorite_dive_site',
+        'certification_number'
+    )
+    
+    readonly_fields = ('created_on', 'updated_on')
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': (
+                'user',
+                'profile_picture',
+                'bio',
+                'location'
+            )
+        }),
+        ('Certification Details', {
+            'fields': (
+                'certification_level',
+                'certification_date',
+                'certification_number'
+            )
+        }),
+        ('Diving Experience', {
+            'fields': (
+                'experience_level',
+                'total_dives',
+                'diving_since',
+                'max_depth_reached'
+            )
+        }),
+        ('Diving Preferences', {
+            'fields': (
+                'preferred_diving_type',
+                'favorite_dive_site',
+                'favorite_marine_life',
+            )
+        }),
+        ('Equipment', {
+            'fields': (
+                'own_equipment',
+                'equipment_details',
+            ),
+            'classes': ('collapse',)
+        }),
+        ('Availability', {
+            'fields': (
+                'available_for_buddy',
+            )
+        }),
+        ('Social Media', {
+            'fields': (
+                'instagram',
+                'facebook',
+                'twitter'
+            ),
+            'classes': ('collapse',)
+        }),
+        ('Timestamps', {
+            'fields': (
+                'created_on',
+                'updated_on'
+            ),
+            'classes': ('collapse',)
+        })
+    )
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # Editing an existing object
+            return self.readonly_fields + ('user',)
+        return self.readonly_fields
 
 
-admin.site.register(UserProfile, UserProfileAdmin)
-
+admin.site.register(CertificationLevel)
 
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):

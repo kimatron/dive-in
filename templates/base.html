@@ -145,8 +145,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Site Scripts -->
+    <script src="{% static 'js/utils.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/comments.js' %}"></script>
+    {% if 'about' in request.path %}
+        <script src="{% static 'js/about.js' %}"></script>
+    {% endif %}
     
 
     <!-- Page Specific JavaScript -->
