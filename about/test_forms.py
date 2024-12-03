@@ -1,14 +1,17 @@
 from django.test import TestCase
 from .forms import CollaborateForm
 
+
 class CollaborateFormTest(TestCase):
     def test_valid_form(self):
         form_data = {
             'name': 'Test User',
             'email': 'test@example.com',
-            'collaboration_type': 'article',  # Using a valid choice from COLLABORATION_TYPES
+            'collaboration_type': 'article',
+            # Using a valid choice from COLLABORATION_TYPES
             'diving_experience': 'PADI Advanced Open Water with 50+ dives',
-            'message': 'I would like to contribute a detailed article about diving in the Great Barrier Reef.'
+            'message': 'I would like to contribute a\
+            detailed article about diving in the Great Barrier Reef.'
         }
         form = CollaborateForm(data=form_data)
         if not form.is_valid():

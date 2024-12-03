@@ -5,10 +5,10 @@ from cloudinary.models import CloudinaryField
 class About(models.Model):
     company_name = models.CharField(max_length=100)
     founding_date = models.DateField()
-    
+
     # Hero Section
     hero_title = models.CharField(
-        max_length=200, 
+        max_length=200,
         default="Explore the Depths with Us",
         blank=True
     )
@@ -18,7 +18,7 @@ class About(models.Model):
         blank=True
     )
     hero_image = CloudinaryField('image', null=True, blank=True)
-    
+
     # Main Content
     mission = models.TextField()
     vision = models.TextField(
@@ -26,7 +26,7 @@ class About(models.Model):
         default="",
         blank=True
     )
-    
+
     # Statistics
     total_divers = models.PositiveIntegerField(
         default=0,
@@ -40,23 +40,23 @@ class About(models.Model):
         default=0,
         help_text="Number of diving articles published"
     )
-    
+
     # Features
     offerings = models.TextField()
     content = models.TextField()
-    
+
     # Team Section
     team_description = models.TextField(
         help_text="Description of our team",
         default="",
         blank=True
     )
-    
+
     # Contact
     contact_email = models.EmailField(blank=True)
     contact_phone = models.CharField(max_length=20, blank=True)
     location = models.CharField(max_length=200, blank=True)
-    
+
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -75,7 +75,8 @@ class CollaborateRequest(models.Model):
         email (str): The email address of the user.
         message (str): The message or request content.
         read (bool): A flag indicating whether the request has been read.
-        created_on (datetime): The date and time when the request was submitted.
+        created_on (datetime):
+        The date and time when the request was submitted.
     """
     name = models.CharField(max_length=100)
     email = models.EmailField()

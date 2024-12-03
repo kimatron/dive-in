@@ -12,13 +12,23 @@ class CollaborateForm(forms.ModelForm):
     ]
 
     collaboration_type = forms.ChoiceField(choices=COLLABORATION_TYPES)
-    diving_experience = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}),
-                                        help_text="Brief description of your diving experience")
+    diving_experience = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 3}),
+        help_text="Brief description of your diving experience"
+    )
 
     class Meta:
         model = CollaborateRequest
-        fields = ['name', 'email', 'collaboration_type', 'diving_experience', 'message']
+        fields = [
+            'name', 'email', 'collaboration_type',
+            'diving_experience', 'message'
+        ]
         widgets = {
-            'message': forms.Textarea(attrs={'rows': 4,
-                                    'placeholder': 'Tell us more about your collaboration idea...'}),
+            'message': forms.Textarea(
+                attrs={
+                    'rows': 4,
+                    'placeholder': 'Tell us \
+                    more about your collaboration idea...'
+                }
+            ),
         }
