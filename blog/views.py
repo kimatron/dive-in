@@ -19,7 +19,8 @@ class PostList(generic.ListView):
     Displays a paginated list of published blog posts.
 
     Attributes:
-        queryset (QuerySet): The queryset of published posts ordered by creation date.
+        queryset (QuerySet):
+        The queryset of published posts ordered by creation date.
         template_name (str): The template used to render the list of posts.
         paginate_by (int): The number of posts to display per page.
     """
@@ -33,7 +34,8 @@ def post_detail(request, slug):
     Displays the details of a specific blog post, along with its comments.
 
     If the user is authenticated, their unapproved comments are shown alongside
-    approved comments. If the user submits a valid comment, it is saved and marked
+    approved comments.
+    If the user submits a valid comment, it is saved and marked
     as unapproved until reviewed by an admin.
 
     Args:
@@ -41,7 +43,8 @@ def post_detail(request, slug):
         slug (str): The slug of the post to display.
 
     Returns:
-        HttpResponse: Rendered template displaying the post details and comments.
+        HttpResponse:
+        Rendered template displaying the post details and comments.
     """
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.filter(approved=True).order_by('-created_on')
@@ -288,7 +291,8 @@ def about_view(request):
     about = About.objects.first()
     if about:
         # Update statistics
-        about.articles_written = Post.objects.filter(status=1).count()  # Published posts count
+        about.articles_written = Post.objects.filter(status=1).count()
+        # Published posts count
         about.total_divers = about.total_divers or 150  # Example default
         about.dive_locations = about.dive_locations or 45  # Example default
         about.save()
@@ -297,7 +301,9 @@ def about_view(request):
         form = CollaborateForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your collaboration request has been submitted!')
+            messages.success(
+                request, 'Your collaboration request has been submitted!'
+                )
             return redirect('about')
     else:
         form = CollaborateForm()
@@ -306,5 +312,5 @@ def about_view(request):
         'about': about,
         'collaborate_form': form,
     }
-    
+
     return render(request, 'about/about.html', context)

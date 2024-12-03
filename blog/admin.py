@@ -1,5 +1,15 @@
 from django.contrib import admin
-from .models import Post, Comment, Category, Tag, Subscriber, UserProfile, FeaturedPost, CertificationLevel
+from .models import (
+    Post,
+    Comment,
+    Category,
+    Tag,
+    Subscriber,
+    UserProfile,
+    FeaturedPost,
+    CertificationLevel,
+)
+
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -13,7 +23,7 @@ class UserProfileAdmin(admin.ModelAdmin):
         'location',
         'available_for_buddy'
     )
-    
+
     list_filter = (
         'experience_level',
         'certification_level',
@@ -21,16 +31,16 @@ class UserProfileAdmin(admin.ModelAdmin):
         'own_equipment',
         'available_for_buddy'
     )
-    
+
     search_fields = (
         'user__username',
         'location',
         'favorite_dive_site',
         'certification_number'
     )
-    
+
     readonly_fields = ('created_on', 'updated_on')
-    
+
     fieldsets = (
         ('Basic Information', {
             'fields': (
@@ -98,6 +108,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(CertificationLevel)
+
 
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
