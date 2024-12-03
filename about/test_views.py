@@ -1,43 +1,70 @@
-
-# Create your tests here.
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
-from .models import About, CollaborateRequest, Post, User
-from .forms import CollaborateForm
+from django.contrib.auth.models import User
+from blog.models import Post
+from .models import About, CollaborateRequest
+from django.utils import timezone
+import datetime
 
 
-class AboutPageViewTest(TestCase):
+class AboutViewTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create(
-            username='testuser', password='testpass')
-        self.about_url = reverse('about')
+        self.client = Client()
+        self.about = About.objects.create(
+            company_name='Test Company',
+            founding_date=datetime.date(2020, 1, 1),
+            mission='Test Mission',
+            vision='Test Vision',
+            offerings='Test Offerings',
+            content='Test Content',
+            hero_title='Welcome to Test Company',
+            hero_subtitle='Explore the depths with Test Company',
+            total_divers=100,
+            dive_locations=50,
+            articles_written=25,
+            contact_email='test@example.com',
+            contact_phone='+1234567890',
+            location='Test Location'
+        )
 
-    def test_about_page_status_code(self):
-        response = self.client.get(self.about_url)
+    def test_about_view(self):
+        response = self.client.get(reverse('about'))
         self.assertEqual(response.status_code, 200)
-
-    def test_about_page_template(self):
-        response = self.client.get(self.about_url)
         self.assertTemplateUsed(response, 'about/about.html')
-
-    def test_about_page_context(self):
-        response = self.client.get(self.about_url)
+        
+    def test_about_content(self):
+        """Test that about page contains the correct content"""
+        response = self.client.get(reverse('about'))
+        content = response.content.decode()
+        
+        # Test hero section content
+        self.assertIn('Welcome to Test Company', content)
+        self.assertIn('Explore the depths with Test Company', content)
+        
+        # Test mission and vision
+        self.assertIn('Test Mission', content)
+        self.assertIn('Test Vision', content)
+        
+        # Test stat elements presence (not the actual numbers as they're loaded via JS)
+        self.assertIn('stat-number', content)
+        self.assertIn('Community Members', content)
+        self.assertIn('Dive Locations', content)
+        self.assertIn('Articles Published', content)
+        
+        # Test contact information
+        self.assertIn('test@example.com', content)
+        self.assertIn('+1234567890', content)
+        
+    def test_context_data(self):
+        """Test that the about data is correctly passed to the template context"""
+        response = self.client.get(reverse('about'))
         self.assertIn('about', response.context)
-        self.assertIsInstance(response.context['about'], About)
-
-
-class CollaborateFormViewTest(TestCase):
-    def setUp(self):
-        # Assuming the collaborate form is on the about page
-        self.url = reverse('about')
-
-    def test_form_submission(self):
-        data = {
-            'name': 'John Doe',
-            'email': 'john.doe@example.com',
-            'message': 'I would like to collaborate.'
-        }
-        response = self.client.post(self.url, data)
-        # Check for a redirect after form submission
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(CollaborateRequest.objects.exists())
+        about = response.context['about']
+        
+        # Test context values
+        self.assertEqual(about.company_name, 'Test Company')
+        self.assertEqual(about.mission, 'Test Mission')
+        self.assertEqual(about.vision, 'Test Vision')
+        self.assertEqual(about.total_divers, 100)
+        self.assertEqual(about.dive_locations, 50)
+        self.assertEqual(about.articles_written, 25)

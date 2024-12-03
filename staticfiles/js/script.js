@@ -1,7 +1,6 @@
-console.log("Water is wet! ");
-
-// Navbar scroll effect
+// Site-wide functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     
     window.addEventListener('scroll', function() {
@@ -25,10 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-});
 
-// Intersection Observer for card animations
-document.addEventListener('DOMContentLoaded', function() {
+    // Initialize card animations
     const cards = document.querySelectorAll('.post-card');
     
     const observer = new IntersectionObserver((entries) => {
@@ -63,14 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.post-card__image[data-src]').forEach(img => {
         imageObserver.observe(img);
     });
-});
 
-// Pagination hover effects
-document.addEventListener('DOMContentLoaded', function() {
+    // Pagination effects
     const paginationLinks = document.querySelectorAll('.page-link');
     
     paginationLinks.forEach(link => {
-        // Add ripple effect
+        // Ripple effect
         link.addEventListener('click', function(e) {
             let x = e.clientX - e.target.offsetLeft;
             let y = e.clientY - e.target.offsetTop;
@@ -87,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 600);
         });
         
-        // Add hover animation
+        // Hover animation
         link.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-2px)';
         });

@@ -1,43 +1,43 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
+from django.contrib.auth.models import User
+from .models import Post, Category, Comment
 
-from about.models import CollaborateRequest
-from .models import About, Post, User
-from .forms import CollaborateForm
-
-
-class AboutPageViewTest(TestCase):
+class BlogViewsTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create(
-            username='testuser', password='testpass')
-        self.about_url = reverse('about')
+        self.client = Client()
+        self.user = User.objects.create_user(
+            username='testuser',
+            password='testpass123'
+        )
+        self.category = Category.objects.create(
+            name='Test Category',
+            description='Test Description'
+        )
+        self.post = Post.objects.create(
+            title='Test Post',
+            slug='test-post',
+            author=self.user,
+            content='Test Content',
+            status=1,
+            category=self.category
+        )
 
-    def test_about_page_status_code(self):
-        response = self.client.get(self.about_url)
+    def test_post_list_view(self):
+        response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'blog/index.html')
 
-    def test_about_page_template(self):
-        response = self.client.get(self.about_url)
-        self.assertTemplateUsed(response, 'about/about.html')
+    def test_post_detail_view(self):
+        response = self.client.get(reverse('post_detail', args=['test-post']))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'blog/post_detail.html')
 
-    def test_about_page_context(self):
-        response = self.client.get(self.about_url)
-        self.assertIn('about', response.context)
-        self.assertIsInstance(response.context['about'], About)
-
-
-class CollaborateFormViewTest(TestCase):
-    def setUp(self):
-        # Assuming the collaborate form is on the about page
-        self.url = reverse('about')
-
-    def test_form_submission(self):
-        data = {
-            'name': 'John Doe',
-            'email': 'john.doe@example.com',
-            'message': 'I would like to collaborate.'
-        }
-        response = self.client.post(self.url, data)
-        # Check for a redirect after form submission
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(CollaborateRequest.objects.exists())
+    def test_comment_post(self):
+        self.client.login(username='testuser', password='testpass123')
+        response = self.client.post(
+            reverse('post_detail', args=['test-post']),
+            {'body': 'Test Comment'}
+        )
+        self.assertEqual(response.status_code, 302)  # Redirect after comment
+        self.assertTrue(Comment.objects.filter(body='Test Comment').exists())

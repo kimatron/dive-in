@@ -1,0 +1,134 @@
+.error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e6f7ff 100%);
+}
+
+.error-content {
+    text-align: center;
+    max-width: 600px;
+}
+
+.error-title {
+    font-size: 8rem;
+    font-weight: 700;
+    color: #4ECDC4;
+    line-height: 1;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.error-divider {
+    margin: 2rem 0;
+    position: relative;
+}
+
+.error-divider::before,
+.error-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 2px;
+    background: #4ECDC4;
+    opacity: 0.3;
+}
+
+.error-divider::before {
+    left: 0;
+}
+
+.error-divider::after {
+    right: 0;
+}
+
+.error-divider i {
+    font-size: 2rem;
+    color: #4ECDC4;
+    padding: 0 1rem;
+}
+
+.error-content h2 {
+    font-size: 2rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.error-content p {
+    color: #718096;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.error-actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-home {
+    background: #4ECDC4;
+    color: white;
+}
+
+.btn-home:hover {
+    background: #45B7D1;
+    transform: translateY(-2px);
+}
+
+.btn-contact {
+    background: white;
+    color: #4ECDC4;
+    border: 2px solid #4ECDC4;
+}
+
+.btn-contact:hover {
+    background: #4ECDC4;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Animation */
+.error-content {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .error-title {
+        font-size: 6rem;
+    }
+    
+    .error-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .error-actions {
+        flex-direction: column;
+    }
+}

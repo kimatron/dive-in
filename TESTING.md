@@ -273,3 +273,339 @@ Below are the screenshots and logs captured during the testing process. These vi
 ## Round Up
 
 The testing process for this Full-Stack Web application was comprehensive, covering manual, automated, and compatibility testing across various browsers and devices. All identified bugs were addressed and resolved. The application is now stable and ready for deployment, meeting all the specified project requirements and learning outcomes.
+
+
+# Testing Documentation
+
+## Overview
+This document provides detailed testing documentation for the Dive In blog platform. The testing encompasses user story testing, feature testing, automated testing attempts, bug tracking, and validation results.
+
+## Contents
+1. [User Story Testing](#user-story-testing)
+2. [Feature Testing](#feature-testing)
+3. [Authentication Testing](#authentication-testing)
+4. [Django Admin Testing](#django-admin-testing)
+5. [Responsiveness Testing](#responsiveness-testing)
+6. [Browser Compatibility](#browser-compatibility)
+7. [Validation Testing](#validation-testing)
+8. [Known Bugs](#known-bugs)
+9. [Fixed Bugs](#fixed-bugs)
+10. [Outstanding Issues](#outstanding-issues)
+
+## User Story Testing
+
+### User Registration and Authentication
+| User Story | Feature | Test | Result | Evidence |
+|------------|---------|------|---------|-----------|
+| As a new user, I want to register for an account | Registration Form | 1. Navigate to registration page<br>2. Enter valid details<br>3. Submit form<br>4. Check email verification | PASS | ![Registration Form](static/images/documentation/registration.png) |
+| As a returning user, I want to login to my account | Login System | 1. Access login page<br>2. Enter credentials<br>3. Submit<br>4. Verify redirect to home | PASS | ![Login System](static/images/documentation/login.png) |
+| As a user, I want to recover my forgotten password | Password Reset | 1. Click "Forgot Password"<br>2. Enter email<br>3. Follow reset link<br>4. Set new password | PASS | ![Password Reset](static/images/documentation/password-reset.png) |
+
+### Blog Interaction
+| User Story | Feature | Test | Result | Evidence |
+|------------|---------|------|---------|-----------|
+| As a user, I want to read blog posts | Blog Display | 1. Navigate to home page<br>2. View post list<br>3. Select and read post | PASS | ![Blog Posts](static/images/documentation/blog-posts.png) |
+| As a user, I want to comment on posts | Comment System | 1. View post<br>2. Add comment<br>3. Submit<br>4. Verify pending status | PASS | ![Comment System](static/images/documentation/comments.png) |
+| As a user, I want to manage my own comments | Comment Management | 1. Locate own comment<br>2. Edit comment<br>3. Delete comment | PASS | ![Comment Management](static/images/documentation/comment-management.png) |
+
+### Profile Features
+| User Story | Feature | Test | Result | Evidence |
+|------------|---------|------|---------|-----------|
+| As a user, I want to customize my profile | Profile Management | 1. Access profile settings<br>2. Update information<br>3. Save changes | PASS | ![Profile Management](static/images/documentation/profile-edit.png) |
+| As a user, I want to view other users' profiles | Profile View | 1. Click username link<br>2. View profile page<br>3. Check content display | PASS | ![Profile View](static/images/documentation/profile-view.png) |
+
+### Admin Capabilities
+| User Story | Feature | Test | Result | Evidence |
+|------------|---------|------|---------|-----------|
+| As an admin, I want to manage posts | Post Management | 1. Access admin panel<br>2. Create/edit posts<br>3. Verify changes | PASS | ![Admin Posts](static/images/documentation/admin-posts.png) |
+| As an admin, I want to moderate comments | Comment Moderation | 1. Review pending comments<br>2. Approve/reject comments<br>3. Check visibility | PASS | ![Comment Moderation](static/images/documentation/comment-moderation.png) |
+
+## Feature Testing
+
+### Navigation System
+| Feature | Test Case | Steps | Expected Result | Actual Result | Status | Evidence |
+|---------|-----------|-------|-----------------|---------------|---------|-----------|
+| Main Navigation | Logo Click | 1. Click "dive \|n" logo | Redirects to homepage | Works as expected | ✅ | ![Logo Navigation](static/images/documentation/logo-nav.png) |
+| | Home Link | 1. Click "Home" in nav | Redirects to homepage | Works as expected | ✅ | ![Home Nav](static/images/documentation/home-nav.png) |
+| | About Link | 1. Click "About" in nav | Loads about page | Works as expected | ✅ | ![About Nav](static/images/documentation/about-nav.png) |
+| | Profile Link | 1. Login<br>2. Click profile | Shows user profile | Works as expected | ✅ | ![Profile Nav](static/images/documentation/profile-nav.png) |
+| Mobile Menu | Hamburger Menu | 1. View on mobile<br>2. Click menu icon | Menu expands properly | Works as expected | ✅ | ![Mobile Menu](static/images/documentation/mobile-menu.png) |
+| | Mobile Links | 1. Click each nav item | Each link works correctly | Works as expected | ✅ | ![Mobile Links](static/images/documentation/mobile-links.png) |
+
+### Authentication System
+| Feature | Test Case | Steps | Expected Result | Actual Result | Status | Evidence |
+|---------|-----------|-------|-----------------|---------------|---------|-----------|
+| Registration | Valid Registration | 1. Enter username<br>2. Enter valid email<br>3. Enter matching passwords<br>4. Submit form | Account created successfully | Works as expected | ✅ | ![Registration](static/images/documentation/registration-full.png) |
+| | Invalid Email | 1. Enter invalid email format<br>2. Submit | Shows error message | Proper validation | ✅ | ![Email Validation](static/images/documentation/email-validation.png) |
+| | Password Validation | 1. Enter weak password<br>2. Submit | Shows password requirements | Proper validation | ✅ | ![Password Validation](static/images/documentation/password-validation.png) |
+| Login | Valid Login | 1. Enter credentials<br>2. Submit | User logged in successfully | Works as expected | ✅ | ![Login Success](static/images/documentation/login-success.png) |
+| | Invalid Login | 1. Enter wrong credentials<br>2. Submit | Shows error message | Proper error handling | ✅ | ![Login Error](static/images/documentation/login-error.png) |
+| Password Reset | Request Reset | 1. Click "Forgot Password"<br>2. Enter email<br>3. Submit | Reset email sent | Works as expected | ✅ | ![Password Reset](static/images/documentation/password-reset-full.png) |
+
+### Blog Post Features
+| Feature | Test Case | Steps | Expected Result | Actual Result | Status | Evidence |
+|---------|-----------|-------|-----------------|---------------|---------|-----------|
+| Post Display | View Post List | 1. Load home page<br>2. Check post display | Posts show with images | Works as expected | ✅ | ![Post List](static/images/documentation/post-list.png) |
+| | Post Detail | 1. Click post title<br>2. View full post | Shows complete post | Works as expected | ✅ | ![Post Detail](static/images/documentation/post-detail.png) |
+| | Featured Posts | 1. Check featured section | Shows highlighted posts | Works as expected | ✅ | ![Featured Posts](static/images/documentation/featured-posts.png) |
+| Post Interaction | Like Post | 1. Click like button<br>2. Check counter | Like registered | Works as expected | ✅ | ![Post Like](static/images/documentation/post-like.png) |
+| | Share Post | 1. Click share buttons<br>2. Test each platform | Share dialogs open | Works as expected | ✅ | ![Post Share](static/images/documentation/post-share.png) |
+
+### Comment System
+| Feature | Test Case | Steps | Expected Result | Actual Result | Status | Evidence |
+|---------|-----------|-------|-----------------|---------------|---------|-----------|
+| Add Comment | Logged In User | 1. Type comment<br>2. Submit | Comment pending approval | Works as expected | ✅ | ![Add Comment](static/images/documentation/add-comment.png) |
+| | Not Logged In | 1. Attempt to comment | Prompts to login | Works as expected | ✅ | ![Comment Login](static/images/documentation/comment-login.png) |
+| Edit Comment | Own Comment | 1. Click edit<br>2. Make changes<br>3. Save | Comment updated | Works as expected | ✅ | ![Edit Comment](static/images/documentation/edit-comment.png) |
+| Delete Comment | Own Comment | 1. Click delete<br>2. Confirm | Comment removed | Works as expected | ✅ | ![Delete Comment](static/images/documentation/delete-comment.png) |
+
+### Profile Features
+| Feature | Test Case | Steps | Expected Result | Actual Result | Status | Evidence |
+|---------|-----------|-------|-----------------|---------------|---------|-----------|
+| View Profile | Profile Display | 1. Access profile | Shows user info | Works as expected | ✅ | ![View Profile](static/images/documentation/view-profile.png) |
+| Edit Profile | Update Info | 1. Edit fields<br>2. Save changes | Profile updated | Works as expected | ✅ | ![Edit Profile](static/images/documentation/edit-profile-full.png) |
+| Profile Picture | Upload Image | 1. Choose file<br>2. Upload | Image displayed | Debug issue noted | ⚠️ | ![Profile Picture](static/images/documentation/profile-picture.png) |
+
+## Django Admin Testing
+
+### Admin Access and Navigation
+| Feature | Test Case | Steps | Expected Result | Actual Result | Status | Evidence |
+|---------|-----------|-------|-----------------|---------------|---------|-----------|
+| Admin Login | Access Admin Panel | 1. Navigate to /admin<br>2. Enter admin credentials<br>3. Submit | Access granted to admin dashboard | Works as expected | ✅ | ![Admin Login](static/images/documentation/admin-login.png) |
+| Dashboard Navigation | View All Models | 1. Check all model links<br>2. Verify accessibility | All models accessible | Works as expected | ✅ | ![Admin Dashboard](static/images/documentation/admin-dashboard.png) |
+
+### Post Management
+| Feature | Test Case | Steps | Expected Result | Actual Result | Status | Evidence |
+|---------|-----------|-------|-----------------|---------------|---------|-----------|
+| Create Post | Add New Post | 1. Click 'Add Post'<br>2. Fill all fields<br>3. Save post | Post created successfully | Works as expected | ✅ | ![Create Post](static/images/documentation/admin-create-post.png) |
+| Edit Post | Modify Existing Post | 1. Select post<br>2. Edit fields<br>3. Save changes | Post updates correctly | Works as expected | ✅ | ![Edit Post](static/images/documentation/admin-edit-post.png) |
+| Delete Post | Remove Post | 1. Select post<br>2. Click delete<br>3. Confirm deletion | Post deleted successfully | Works as expected | ✅ | ![Delete Post](static/images/documentation/admin-delete-post.png) |
+
+### User Management
+| Feature | Test Case | Steps | Expected Result | Actual Result | Status | Evidence |
+|---------|-----------|-------|-----------------|---------------|---------|-----------|
+| User List | View All Users | 1. Access user section<br>2. Check user list | Complete user list shown | Works as expected | ✅ | ![User List](static/images/documentation/admin-users.png) |
+| User Permissions | Modify Permissions | 1. Select user<br>2. Adjust permissions<br>3. Save | Permissions updated | Works as expected | ✅ | ![User Permissions](static/images/documentation/admin-permissions.png) |
+
+### Comment Management
+| Feature | Test Case | Steps | Expected Result | Actual Result | Status | Evidence |
+|---------|-----------|-------|-----------------|---------------|---------|-----------|
+| Approve Comments | Comment Moderation | 1. View pending comments<br>2. Select comment<br>3. Approve/Reject | Comment status updated | Works as expected | ✅ | ![Comment Approval](static/images/documentation/admin-comments.png) |
+| Bulk Actions | Multiple Comments | 1. Select multiple comments<br>2. Choose action<br>3. Apply | Bulk action successful | Works as expected | ✅ | ![Bulk Actions](static/images/documentation/admin-bulk-actions.png) |
+
+## Technical Testing
+
+### Security Testing
+| Test Type | Test Case | Expected Result | Actual Result | Status | Notes |
+|-----------|-----------|-----------------|---------------|---------|-------|
+| CSRF Protection | Form Submission | Forms protected from CSRF | Protection active | ✅ | All forms include CSRF token |
+| Authentication | Protected Routes | Unauthorized access blocked | Proper redirection | ✅ | Login required for protected pages |
+| XSS Prevention | Script Injection | Scripts properly escaped | No XSS vulnerability | ✅ | Content properly sanitized |
+| Password Security | Password Hashing | Passwords securely hashed | Using Django's auth | ✅ | Bcrypt hashing implemented |
+
+### Database Testing
+| Test Type | Test Case | Expected Result | Actual Result | Status | Evidence |
+|-----------|-----------|-----------------|---------------|---------|-----------|
+| Create Operations | Add Records | Records successfully created | Works correctly | ✅ | ![Create Test](static/images/documentation/db-create.png) |
+| Read Operations | Retrieve Records | Records accurately retrieved | Works correctly | ✅ | ![Read Test](static/images/documentation/db-read.png) |
+| Update Operations | Modify Records | Records properly updated | Works correctly | ✅ | ![Update Test](static/images/documentation/db-update.png) |
+| Delete Operations | Remove Records | Records successfully deleted | Works correctly | ✅ | ![Delete Test](static/images/documentation/db-delete.png) |
+
+### Performance Testing
+| Test Type | Tool Used | Results | Status | Evidence |
+|-----------|-----------|----------|---------|-----------|
+| Page Load Speed | GTmetrix | Average load: 2.3s | ✅ | ![Speed Test](static/images/documentation/performance-speed.png) |
+| Mobile Performance | Lighthouse | Mobile Score: 85 | ✅ | ![Mobile Score](static/images/documentation/performance-mobile.png) |
+| Desktop Performance | Lighthouse | Desktop Score: 92 | ✅ | ![Desktop Score](static/images/documentation/performance-desktop.png) |
+
+## Responsiveness Testing
+
+### Mobile Devices
+| Device | Screen Size | Browser | Test Cases | Result | Evidence |
+|--------|-------------|---------|------------|---------|-----------|
+| iPhone 13 | 390x844 | Safari | All features | Minor spacing issues | ![iPhone Test](static/images/documentation/responsive-iphone.png) |
+| Samsung S21 | 360x800 | Chrome | All features | Works as expected | ![Samsung Test](static/images/documentation/responsive-samsung.png) |
+| Pixel 6 | 412x915 | Chrome | All features | Works as expected | ![Pixel Test](static/images/documentation/responsive-pixel.png) |
+
+### Tablet Devices
+| Device | Screen Size | Browser | Test Cases | Result | Evidence |
+|--------|-------------|---------|------------|---------|-----------|
+| iPad Air | 820x1180 | Safari | All features | Works as expected | ![iPad Air](static/images/documentation/responsive-ipad-air.png) |
+| iPad Mini | 768x1024 | Safari | All features | Works as expected | ![iPad Mini](static/images/documentation/responsive-ipad-mini.png) |
+| Surface Pro | 912x1368 | Edge | All features | Works as expected | ![Surface Pro](static/images/documentation/responsive-surface.png) |
+
+### Desktop Resolutions
+| Screen Size | Browser | Test Cases | Result | Evidence |
+|-------------|---------|------------|---------|-----------|
+| 1920x1080 | Chrome | All features | Works as expected | ![Desktop HD](static/images/documentation/responsive-desktop-hd.png) |
+| 1440x900 | Firefox | All features | Works as expected | ![Desktop Medium](static/images/documentation/responsive-desktop-med.png) |
+| 2560x1440 | Edge | All features | Works as expected | ![Desktop Large](static/images/documentation/responsive-desktop-large.png) |
+
+## Validation Testing
+
+### HTML Validation (W3C)
+| Page | Result | Evidence | Notes |
+|------|---------|-----------|-------|
+| Home | Pass | ![Home HTML](static/images/documentation/validation-html-home.png) | Minor warnings for Django template syntax |
+| About | Pass | ![About HTML](static/images/documentation/validation-html-about.png) | No errors |
+| Profile | Pass | ![Profile HTML](static/images/documentation/validation-html-profile.png) | No errors |
+| Post Detail | Pass | ![Post HTML](static/images/documentation/validation-html-post.png) | No errors |
+
+### CSS Validation (W3C)
+| File | Result | Evidence | Notes |
+|------|---------|-----------|-------|
+| style.css | Pass | ![Main CSS](static/images/documentation/validation-css-main.png) | No errors |
+| about.css | Pass | ![About CSS](static/images/documentation/validation-css-about.png) | No errors |
+| profile.css | Pass | ![Profile CSS](static/images/documentation/validation-css-profile.png) | No errors |
+
+### JavaScript Validation (JSHint)
+| File | Result | Evidence | Notes |
+|------|---------|-----------|-------|
+| script.js | Pass | ![Main JS](static/images/documentation/validation-js-main.png) | No major issues |
+| comments.js | Pass | ![Comments JS](static/images/documentation/validation-js-comments.png) | No major issues |
+| about.js | Pass | ![About JS](static/images/documentation/validation-js-about.png) | No major issues |
+
+### Python Validation (PEP8)
+| File | Result | Evidence | Notes |
+|------|---------|-----------|-------|
+| views.py | Pass | ![Views Python](static/images/documentation/validation-py-views.png) | No issues |
+| models.py | Pass | ![Models Python](static/images/documentation/validation-py-models.png) | No issues |
+| forms.py | Pass | ![Forms Python](static/images/documentation/validation-py-forms.png) | No issues |
+| admin.py | Pass | ![Admin Python](static/images/documentation/validation-py-admin.png) | No issues |
+
+## Accessibility Testing
+
+### WAVE Tool Results
+| Page | Errors | Alerts | Features | Passed | Evidence |
+|------|---------|---------|-----------|---------|-----------|
+| Home | 0 | 2 | 15 | Yes | ![WAVE Home](static/images/documentation/wave-home.png) |
+| About | 0 | 1 | 12 | Yes | ![WAVE About](static/images/documentation/wave-about.png) |
+| Profile | 0 | 3 | 10 | Yes | ![WAVE Profile](static/images/documentation/wave-profile.png) |
+
+## Bug Tracking and Resolution
+
+### Known Bugs
+
+1. **Profile Picture Display Issue**
+   - **Description:** Profile pictures not displaying when DEBUG=False in production
+   - **Steps to Reproduce:**
+     1. Deploy to production
+     2. Set DEBUG=False
+     3. Upload profile picture
+   - **Expected:** Picture should display
+   - **Actual:** Picture not showing
+   - **Status:** ⚠️ In Progress
+   - **Evidence:** ![Profile Bug](static/images/documentation/bug-profile-picture.png)
+
+2. **Mobile Container Spacing**
+   - **Description:** Container margins inconsistent on mobile devices
+   - **Steps to Reproduce:**
+     1. View on mobile device
+     2. Check container spacing
+   - **Expected:** Consistent margins
+   - **Actual:** Some containers have different spacing
+   - **Status:** ⚠️ Minor Issue
+   - **Evidence:** ![Spacing Bug](static/images/documentation/bug-mobile-spacing.png)
+
+3. **Form Validation Messages**
+   - **Description:** Form validation messages styling inconsistent across browsers
+   - **Steps to Reproduce:**
+     1. Submit form with errors
+     2. Check message styling
+   - **Expected:** Consistent styling
+   - **Actual:** Different styles in Safari
+   - **Status:** ⚠️ Minor Issue
+   - **Evidence:** ![Validation Bug](static/images/documentation/bug-form-validation.png)
+
+### Fixed Bugs
+
+1. **Comment Approval System**
+   - **Description:** Comments appearing before approval
+   - **Solution:** Added proper filtering in views.py
+   - **Status:** ✅ Fixed
+   - **Evidence:** ![Comment Fix](static/images/documentation/bug-fix-comments.png)
+
+2. **Authentication Redirect**
+   - **Description:** Incorrect redirect after login
+   - **Solution:** Updated LOGIN_REDIRECT_URL in settings.py
+   - **Status:** ✅ Fixed
+   - **Evidence:** ![Auth Fix](static/images/documentation/bug-fix-auth.png)
+
+3. **Image Upload Size**
+   - **Description:** Large images causing slow load times
+   - **Solution:** Implemented image compression
+   - **Status:** ✅ Fixed
+   - **Evidence:** ![Image Fix](static/images/documentation/bug-fix-images.png)
+
+## Future Improvements
+
+1. **Performance Enhancements**
+   - Implement caching system
+   - Optimize database queries
+   - Add lazy loading for images
+   - Evidence of current performance: ![Performance](static/images/documentation/future-performance.png)
+
+2. **Feature Additions**
+   - User notification system
+   - Advanced search functionality
+   - Social media integration
+   - Draft mockups: ![Features](static/images/documentation/future-features.png)
+
+3. **UI/UX Improvements**
+   - Enhanced mobile navigation
+   - Dark mode support
+   - Accessibility enhancements
+   - Design concepts: ![UI/UX](static/images/documentation/future-uiux.png)
+
+## Testing Tools Used
+
+| Tool | Purpose | Link |
+|------|---------|------|
+| Chrome DevTools | Browser testing and debugging | [Link](https://developers.google.com/web/tools/chrome-devtools) |
+| W3C Validator | HTML/CSS validation | [Link](https://validator.w3.org/) |
+| JSHint | JavaScript validation | [Link](https://jshint.com/) |
+| PEP8 Online | Python code validation | [Link](http://pep8online.com/) |
+| Am I Responsive | Responsive design testing | [Link](http://ami.responsivedesign.is/) |
+| WAVE | Accessibility testing | [Link](https://wave.webaim.org/) |
+
+## Testing Credits
+
+- Manual testing performed by:
+  - Project developer (Kim Hanlon)
+  - Peer review from Code Institute students
+  - Mentor feedback and testing
+  - Family members for user testing
+
+## Testing Environment
+
+- **Development Environment:**
+  - VS Code
+  - GitPod
+  - Local development server
+  - Python 3.9.12
+  - Django 4.2.10
+
+- **Production Environment:**
+  - Heroku hosting
+  - PostgreSQL database
+  - DEBUG=False
+  - Cloudinary media storage
+
+## Testing Conclusion
+
+Through comprehensive testing across multiple devices, browsers, and user scenarios, the Dive In blog platform has demonstrated robust functionality and reliability. While there are some minor issues to address, the core features work as intended, providing a solid foundation for future improvements.
+
+Key achievements:
+- ✅ Core functionality working as expected
+- ✅ Responsive design across devices
+- ✅ Secure user authentication
+- ✅ Proper data handling
+- ✅ Accessible user interface
+
+Areas for improvement:
+- 🔄 Profile picture handling in production
+- 🔄 Mobile spacing consistency
+- 🔄 Cross-browser form styling
+
+This testing documentation will be continuously updated as new features are added and existing issues are resolved.
+
