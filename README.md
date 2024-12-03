@@ -280,6 +280,17 @@ The planning of the Dive In Blog Project followed the MoSCoW method to prioritiz
 
 This structured approach ensured that critical functionalities were developed first while providing flexibility for future enhancements.
 
+
+## WireFrames
+
+![Index Page](static/images/documentation/wireframeindex.png)
+
+![Post Detail](static/images/documentation/wireframepost.png)
+
+![Profile](static/images/documentation/wireframeprofile.png)
+
+![About Page](static/images/documentation/wireframeabout.png)
+
 ## Technologies Used
 
 Dive In is built with a modern technology stack to ensure a robust and user-friendly experience:
