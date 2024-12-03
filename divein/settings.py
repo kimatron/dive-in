@@ -38,8 +38,8 @@ ALLOWED_HOSTS = [
     '.herokuapp.com',
     '127.0.0.1',
     'localhost',
-    '.codeinstitute-ide.net',  # This will match all CodeInstitute workspace URLs
-    '8000-kimatron-divein-s6fk5u1m3yn.ws.codeinstitute-ide.net'  # Your specific workspace URL
+    '.codeinstitute-ide.net',  # CodeInstitute workspace URLs
+    '8000-kimatron-divein-s6fk5u1m3yn.ws.codeinstitute-ide.net'
 ]
 
 # Application definition
@@ -135,18 +135,31 @@ CSRF_TRUSTED_ORIGINS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "UserAttributeSimilarityValidator"
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "MinimumLengthValidator"
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "CommonPasswordValidator"
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "NumericPasswordValidator"
+        ),
     },
 ]
+
 
 # ACCOUNT_EMAIL_VERIFICATION = 'none'
 
@@ -175,7 +188,8 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Dive In Blog - '  # Customize email subject
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')  # Make sure it's set again here
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+# Make sure it's set again here
 SERVER_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 
