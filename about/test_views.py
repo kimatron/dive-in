@@ -31,36 +31,38 @@ class AboutViewTest(TestCase):
         response = self.client.get(reverse('about'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'about/about.html')
-        
+
     def test_about_content(self):
         """Test that about page contains the correct content"""
         response = self.client.get(reverse('about'))
         content = response.content.decode()
-        
+
         # Test hero section content
         self.assertIn('Welcome to Test Company', content)
         self.assertIn('Explore the depths with Test Company', content)
-        
+
         # Test mission and vision
         self.assertIn('Test Mission', content)
         self.assertIn('Test Vision', content)
-        
-        # Test stat elements presence (not the actual numbers as they're loaded via JS)
+
+        # Test stat elements presence (not the actual
+        # numbers as they're loaded via JS)
         self.assertIn('stat-number', content)
         self.assertIn('Community Members', content)
         self.assertIn('Dive Locations', content)
         self.assertIn('Articles Published', content)
-        
+
         # Test contact information
         self.assertIn('test@example.com', content)
         self.assertIn('+1234567890', content)
-        
+
     def test_context_data(self):
-        """Test that the about data is correctly passed to the template context"""
+        """Test that the about data is
+         correctly passed to the template context"""
         response = self.client.get(reverse('about'))
         self.assertIn('about', response.context)
         about = response.context['about']
-        
+
         # Test context values
         self.assertEqual(about.company_name, 'Test Company')
         self.assertEqual(about.mission, 'Test Mission')

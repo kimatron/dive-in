@@ -30,19 +30,26 @@ class Post(models.Model):
         title (str): The title of the post, must be unique.
         slug (str): The URL-friendly version of the title, must be unique.
         author (User): The author of the post, linked to the User model.
-        featured_image (CloudinaryField): The image associated with the post, defaults to a placeholder.
+        featured_image (CloudinaryField): The image associated with the post,
+            defaults to a placeholder.
         content (str): The main content of the post.
-        created_on (datetime): The date and time when the post was created, automatically set on creation.
-        status (int): The publication status of the post (0 for Draft, 1 for Published).
+        created_on (datetime): The date and time when the post was created,
+            automatically set on creation.
+        status (int): The publication status of the post
+            (0 for Draft, 1 for Published).
         excerpt (str): A short summary of the post, can be left blank.
-        updated_on (datetime): The date and time when the post was last updated, automatically set on update.
+        updated_on (datetime): The date and time when the post was last
+            updated, automatically set on update.
     """
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="blog_posts")
+        User, on_delete=models.CASCADE, related_name="blog_posts"
+    )
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="posts")
+        Category, on_delete=models.SET_NULL, null=True,
+        blank=True, related_name="posts"
+    )
     featured_image = CloudinaryField('image', default='placeholder')
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -65,13 +72,23 @@ class Post(models.Model):
         related_posts = Post.objects.filter(status=1).exclude(id=self.id)
 
         # Get posts from same category
-        category_posts = related_posts.filter(category=self.category) if self.category else related_posts.none()
+        category_posts = (
+            related_posts.filter(category=self.category)
+            if self.category else related_posts.none()
+        )
 
         # Get posts with similar tags
-        tag_posts = related_posts.filter(tags__in=self.tags.all()).distinct() if self.tags.exists() else related_posts.none()
+        tag_posts = (
+            related_posts.filter(tags__in=self.tags.all()).distinct()
+            if self.tags.exists() else related_posts.none()
+        )
 
         # Combine and order the results
-        combined_posts = (category_posts | tag_posts).distinct().order_by('-created_on')
+        combined_posts = (
+            (category_posts | tag_posts)
+            .distinct()
+            .order_by('-created_on')
+        )
 
         return combined_posts[:3]  # Return top 3 related posts
 
@@ -85,13 +102,17 @@ class Comment(models.Model):
         author (User): The author of the comment, linked to the User model.
         body (str): The content of the comment.
         approved (bool): Whether the comment is approved for display.
-        created_on (datetime): The date and time when the comment was created, automatically set on creation.
-        updated_on (datetime): The date and time when the comment was last updated, automatically set on update.
+        created_on (datetime): The date and time when the comment was created,
+            automatically set on creation.
+        updated_on (datetime): The date and time when the comment was last
+            updated, automatically set on update.
     """
     post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="comments")
+        Post, on_delete=models.CASCADE, related_name="comments"
+    )
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="commenter")
+        User, on_delete=models.CASCADE, related_name="commenter"
+    )
     body = models.TextField()
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -113,7 +134,8 @@ class About(models.Model):
         founding_date (date): The date when the company was founded.
         mission (str): The mission statement of the company.
         offerings (str): The products or services offered by the company.
-        updated_on (datetime): The date and time when the information was last updated, automatically set on update.
+        updated_on (datetime): The date and time when the information was last
+            updated, automatically set on update.
         content (str): Additional content or description about the company.
     """
     company_name = models.CharField(max_length=100)
@@ -147,7 +169,8 @@ class Subscriber(models.Model):
     Attributes:
         email (str): The email address of the subscriber.
         name (str): The name of the subscriber.
-        subscribed_on (datetime): The date and time when the subscription was made, automatically set on creation.
+        subscribed_on (datetime): The date and time when the subscription was
+            made, automatically set on creation.
         active (bool): Whether the subscription is active.
     """
     email = models.EmailField()
@@ -185,16 +208,22 @@ class CertificationLevel(models.Model):
     @classmethod
     def create_default_levels(cls):
         levels = [
-            (1, 'PADI Open Water Diver', 'Entry-level certification for recreational scuba diving'),
-            (2, 'PADI Advanced Open Water Diver', 'Advanced recreational diving certification'),
-            (3, 'PADI Rescue Diver', 'Emergency response and rescue techniques certification'),
-            (4, 'PADI Divemaster', 'Professional-level diving leadership certification'),
+            (1, 'PADI Open Water Diver',
+             'Entry-level certification for recreational scuba diving'),
+            (2, 'PADI Advanced Open Water Diver',
+             'Advanced recreational diving certification'),
+            (3, 'PADI Rescue Diver',
+             'Emergency response and rescue techniques certification'),
+            (4, 'PADI Divemaster',
+             'Professional-level diving leadership certification'),
             (5, 'PADI Instructor', 'Professional teaching certification'),
             (6, 'SSI Open Water Diver', 'SSI entry-level certification'),
             (7, 'SSI Advanced Open Water Diver', 'SSI advanced certification'),
             (8, 'BSAC Ocean Diver', 'BSAC entry-level certification'),
-            (9, 'BSAC Sports Diver', 'BSAC advanced recreational certification'),
-            (10, 'Technical Diving Certification', 'Specialized technical diving certification')
+            (9, 'BSAC Sports Diver',
+                'BSAC advanced recreational certification'),
+            (10, 'Technical Diving Certification',
+             'Specialized technical diving certification')
         ]
 
         for level_number, name, description in levels:
@@ -226,7 +255,7 @@ class UserProfile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = CloudinaryField('image', default='placeholder')  # Changed to CloudinaryField
+    profile_picture = CloudinaryField('image', default='placeholder')
     bio = models.TextField(blank=True, null=True)
 
     # Diving Certifications
@@ -255,16 +284,22 @@ class UserProfile(models.Model):
         choices=DIVING_TYPES,
         default='recreational'
     )
-    max_depth_reached = models.PositiveIntegerField(default=0, help_text="Maximum depth reached in meters")
+    max_depth_reached = models.PositiveIntegerField(
+        default=0, help_text="Maximum depth reached in meters"
+    )
     diving_since = models.DateField(null=True, blank=True)
 
     # Equipment
     own_equipment = models.BooleanField(default=False)
-    equipment_details = models.TextField(blank=True, help_text="List your diving equipment")
+    equipment_details = models.TextField(
+        blank=True, help_text="List your diving equipment"
+    )
 
     # Location and Availability
     location = models.CharField(max_length=200, blank=True)
-    available_for_buddy = models.BooleanField(default=False, help_text="Available for buddy diving")
+    available_for_buddy = models.BooleanField(
+        default=False, help_text="Available for buddy diving"
+    )
 
     # Social media
     instagram = models.URLField(blank=True)
