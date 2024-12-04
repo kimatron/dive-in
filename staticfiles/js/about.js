@@ -58,3 +58,12 @@ function animateCount(element) {
         }
     }, stepTime);
 }
+
+window.addEventListener('scroll', function() {
+    const scrollToTopBtn = document.querySelector('.scroll-to-top');
+    if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('show');
+    } else {
+        scrollToTopBtn.classList.remove('show');
+    }
+});
