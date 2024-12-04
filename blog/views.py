@@ -24,9 +24,19 @@ class PostList(generic.ListView):
         template_name (str): The template used to render the list of posts.
         paginate_by (int): The number of posts to display per page.
     """
-    queryset = Post.objects.filter(status=1).order_by("-created_on")
     template_name = "blog/index.html"
     paginate_by = 6
+
+    def get_queryset(self):
+        return Post.objects.filter(status=1).order_by("-created_on")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['featured_posts'] = Post.objects.filter(
+            status=1,
+            featuredpost__is_featured=True
+        ).order_by("-created_on")[:3]
+        return context
 
 
 def post_detail(request, slug):

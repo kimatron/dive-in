@@ -3,6 +3,7 @@
 from django.db import migrations, models
 from django.utils.text import slugify
 
+
 def generate_unique_slugs(apps, schema_editor):
     Category = apps.get_model('blog', 'Category')
     for category in Category.objects.all():
@@ -13,6 +14,7 @@ def generate_unique_slugs(apps, schema_editor):
             counter += 1
         category.slug = slug
         category.save()
+
 
 class Migration(migrations.Migration):
 

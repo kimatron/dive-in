@@ -169,47 +169,7 @@
             </section>
         </main>
 
-<!-- Replace your current sidebar with this -->
 <aside class="post-sidebar">
-    <!-- Author Card -->
-    <div class="sidebar-card author-widget">
-        <div class="author-widget__header">
-            {% if post.author.userprofile.profile_picture %}
-                <img src="{{ post.author.userprofile.profile_picture.url }}" 
-                     alt="{{ post.author.username }}" 
-                     class="author-widget__avatar">
-            {% else %}
-                <img src="{% static 'images/default-avatar.png' %}" 
-                     alt="{{ post.author.username }}" 
-                     class="author-widget__avatar">
-            {% endif %}
-            <div class="author-widget__info">
-                <h3 class="author-widget__name">{{ post.author.username }}</h3>
-                <a href="{% url 'user_profile' post.author.username %}" class="author-widget__profile-link">
-                    View Full Profile
-                </a>
-            </div>
-        </div>
-        {% if post.author.userprofile.bio %}
-            <p class="author-widget__bio">{{ post.author.userprofile.bio|truncatewords:30 }}</p>
-        {% endif %}
-        <div class="author-widget__stats">
-            <div class="stat-item">
-                <span class="stat-value">{{ author_posts_count }}</span>
-                <span class="stat-label">Posts</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value">{{ author_comments_count }}</span>
-                <span class="stat-label">Comments</span>
-            </div>
-            {% if post.author.userprofile.total_dives %}
-            <div class="stat-item">
-                <span class="stat-value">{{ post.author.userprofile.total_dives }}</span>
-                <span class="stat-label">Dives</span>
-            </div>
-            {% endif %}
-        </div>
-    </div>
 
     <!-- Table of Contents -->
     <div class="sidebar-card toc-widget">

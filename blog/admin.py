@@ -110,13 +110,24 @@ class UserProfileAdmin(admin.ModelAdmin):
 admin.site.register(CertificationLevel)
 
 
+class FeaturedPostInline(admin.TabularInline):
+    model = FeaturedPost
+    max_num = 1
+
+
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'slug', 'status', 'created_on')
+    list_display = ('title', 'slug', 'status', 'created_on', 'is_featured')
     search_fields = ['title', 'content']
     list_filter = ('status',)
     prepopulated_fields = {'slug': ('title',)}
     summernote_fields = ('content',)
+    inlines = [FeaturedPostInline]
+
+    def is_featured(self, obj):
+        return hasattr(obj, 'featuredpost') and obj.featuredpost.is_featured
+    is_featured.boolean = True
+    is_featured.short_description = 'Featured'
 
 
 @admin.register(Comment)
@@ -149,6 +160,3 @@ class SubscriberAdmin(admin.ModelAdmin):
     list_display = ('email', 'name', 'subscribed_on', 'active')
     list_filter = ('active', 'subscribed_on')
     search_fields = ['email', 'name']
-
-
-admin.site.register(FeaturedPost)
