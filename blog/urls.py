@@ -17,4 +17,5 @@ urlpatterns = [
          views.approve_comment, name='approve_comment'),
     path('test-email/', views.test_email, name='test_email'),
     path('subscribe/', views.subscribe_newsletter, name='subscribe'),
+    path('category/<slug:category_slug>/', views.category_posts, name='category_posts'),
 ]

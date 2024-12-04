@@ -972,7 +972,7 @@ a:hover {
 }
 
 /* Related Posts */
-.related-posts a {
+/* .related-posts a {
   padding: 15px;
   background-color: #ffffff;
   border-radius: 5px;
@@ -985,7 +985,7 @@ a:hover {
 .related-posts a:hover {
   background-color: #e0f7fa;
   transform: translateY(-2px);
-}
+} */
 
 /* Forms */
 form {

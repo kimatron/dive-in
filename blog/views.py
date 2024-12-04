@@ -314,3 +314,20 @@ def about_view(request):
     }
 
     return render(request, 'about/about.html', context)
+
+
+def category_posts(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    posts = Post.objects.filter(
+        category=category,
+        status=1
+    ).order_by('-created_on')
+
+    return render(
+        request,
+        'blog/category_posts.html',
+        {
+            'category': category,
+            'posts': posts
+        }
+    )

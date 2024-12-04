@@ -16,7 +16,11 @@ class Category(models.Model):
         description (str): A description of the category.
     """
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True, null=True)  # Make it nullable initially
     description = models.TextField()
+
+    class Meta:
+        verbose_name_plural = 'categories'
 
     def __str__(self):
         return self.name

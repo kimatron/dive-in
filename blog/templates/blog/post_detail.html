@@ -8,8 +8,9 @@
 
 {% block content %}
 <div id="postSlug" data-slug="{{ post.slug }}" style="display: none;"></div>
+
 <!-- Hero Section -->
-<div class="post-hero">
+<section class="post-hero">
     {% if post.featured_image %}
     <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="post-hero__image">
     {% else %}
@@ -25,15 +26,16 @@
             
             <h1 class="post-hero__title">{{ post.title }}</h1>
             
-            <div class="post-hero__meta-item">
-                <img src="{{ post.author.userprofile.profile_picture.url }}" 
-                     alt="{{ post.author.username }}" 
-                     class="rounded-circle"
-                     style="width: 40px; height: 40px; object-fit: cover;">
-                <a href="{% url 'user_profile' post.author.username %}" class="author-link">
-                    By {{ post.author.username }}
-                </a>
-            </div>
+            <div class="post-hero__meta">
+                <div class="post-hero__meta-item">
+                    <img src="{{ post.author.userprofile.profile_picture.url }}" 
+                         alt="{{ post.author.username }}" 
+                         class="rounded-circle"
+                         style="width: 40px; height: 40px; object-fit: cover;">
+                    <a href="{% url 'user_profile' post.author.username %}" class="author-link">
+                        By {{ post.author.username }}
+                    </a>
+                </div>
                 <div class="post-hero__meta-item">
                     <i class="far fa-calendar"></i>
                     <span>{{ post.created_on|date:"F j, Y" }}</span>
@@ -45,12 +47,12 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <div class="post-container">
     <div class="post-layout">
         <!-- Main Content Column -->
-        <div class="post-main">
+        <main class="post-main">
             <!-- Article Content -->
             <article class="post-card">
                 <div class="post-content">
@@ -68,7 +70,7 @@
             </article>
 
             <!-- Author Section -->
-            <div class="author-section">
+            <section class="author-section">
                 <div class="author-card">
                     <div class="author-card__header">
                         <div class="author-card__avatar">
@@ -94,10 +96,10 @@
                         <a href="#" class="author-card__link">More Posts</a>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Comments Section -->
-            <div class="comments-section">
+            <section class="comments-section">
                 <h3 class="comments-title">Comments ({{ comment_count }})</h3>
 
                 {% if user.is_authenticated %}
@@ -164,108 +166,141 @@
                         <p class="no-comments">No comments yet. Be the first to comment!</p>
                     {% endif %}
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
 
 <!-- Replace your current sidebar with this -->
 <aside class="post-sidebar">
-  <!-- Related Posts -->
-  <div class="sidebar-card">
-      <h4 class="sidebar-title">Related Posts</h4>
-      <div class="related-posts">
-          {% with related_posts=post.get_related_posts %}
-              {% if related_posts %}
-                  {% for related_post in related_posts %}
-                  <a href="{% url 'post_detail' related_post.slug %}" class="related-post-card">
-                      <div class="related-post-image">
-                          {% if related_post.featured_image %}
-                              <img src="{{ related_post.featured_image.url }}" alt="{{ related_post.title }}">
-                          {% else %}
-                              <img src="{% static 'images/default-post.jpg' %}" alt="{{ related_post.title }}">
-                          {% endif %}
-                      </div>
-                      <div class="related-post-content">
-                          <h5>{{ related_post.title|truncatechars:60 }}</h5>
-                          <span class="related-post-date">
-                              <i class="far fa-calendar-alt"></i>
-                              {{ related_post.created_on|date:"M d, Y" }}
-                          </span>
-                      </div>
-                  </a>
-                  {% endfor %}
-              {% else %}
-                  <p class="text-muted">No related posts found</p>
-              {% endif %}
-          {% endwith %}
-      </div>
-  </div>
-
-  <!-- Popular Categories -->
-  <div class="sidebar-card">
-      <h4 class="sidebar-title">Categories</h4>
-      <div class="category-list">
-          {% for category in categories %}
-          <a href="#" class="category-tag">
-              {{ category.name }}
-              <span class="category-count">{{ category.posts.count }}</span>
-          </a>
-          {% endfor %}
-      </div>
-  </div>
-
-  <!-- Share Buttons -->
-  <div class="sidebar-card">
-      <h4 class="sidebar-title">Share This Post</h4>
-      <div class="share-buttons">
-          <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" 
-             class="share-button twitter" target="_blank" rel="noopener">
-              <i class="fab fa-twitter"></i> Twitter
-          </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" 
-             class="share-button facebook" target="_blank" rel="noopener">
-              <i class="fab fa-facebook-f"></i> Facebook
-          </a>
-          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" 
-             class="share-button linkedin" target="_blank" rel="noopener">
-              <i class="fab fa-linkedin-in"></i> LinkedIn
-          </a>
-      </div>
-  </div>
-
-
-<!-- Newsletter Signup -->
-<!-- <div class="sidebar-card" id="newsletter-section">
-    <div class="newsletter-content">
-        <div class="newsletter-icon">
-            <i class="far fa-envelope"></i>
-        </div>
-        <h4 class="newsletter-title">Stay in the Loop</h4>
-        <p class="newsletter-description">Get the latest diving stories and ocean updates straight to your inbox.</p>
-        
-        <form class="newsletter-form" method="post" action="{% url 'subscribe' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <div class="input-wrapper">
-                    <i class="far fa-envelope input-icon"></i>
-                    <input type="email" 
-                           name="email" 
-                           class="newsletter-input" 
-                           placeholder="Your email address"
-                           required>
-                </div>
-                <button type="submit" class="newsletter-button">
-                    Subscribe
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+    <!-- Author Card -->
+    <div class="sidebar-card author-widget">
+        <div class="author-widget__header">
+            {% if post.author.userprofile.profile_picture %}
+                <img src="{{ post.author.userprofile.profile_picture.url }}" 
+                     alt="{{ post.author.username }}" 
+                     class="author-widget__avatar">
+            {% else %}
+                <img src="{% static 'images/default-avatar.png' %}" 
+                     alt="{{ post.author.username }}" 
+                     class="author-widget__avatar">
+            {% endif %}
+            <div class="author-widget__info">
+                <h3 class="author-widget__name">{{ post.author.username }}</h3>
+                <a href="{% url 'user_profile' post.author.username %}" class="author-widget__profile-link">
+                    View Full Profile
+                </a>
             </div>
-        </form>
-        
-        <div class="newsletter-footer">
-            <i class="fas fa-shield-alt"></i>
-            <small>We respect your privacy. Unsubscribe at any time.</small>
+        </div>
+        {% if post.author.userprofile.bio %}
+            <p class="author-widget__bio">{{ post.author.userprofile.bio|truncatewords:30 }}</p>
+        {% endif %}
+        <div class="author-widget__stats">
+            <div class="stat-item">
+                <span class="stat-value">{{ author_posts_count }}</span>
+                <span class="stat-label">Posts</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">{{ author_comments_count }}</span>
+                <span class="stat-label">Comments</span>
+            </div>
+            {% if post.author.userprofile.total_dives %}
+            <div class="stat-item">
+                <span class="stat-value">{{ post.author.userprofile.total_dives }}</span>
+                <span class="stat-label">Dives</span>
+            </div>
+            {% endif %}
         </div>
     </div>
-</div> -->
+
+    <!-- Table of Contents -->
+    <div class="sidebar-card toc-widget">
+        <h4 class="sidebar-card__title">Table of Contents</h4>
+        <nav class="toc-nav">
+            <div id="toc-content">
+                <!-- Dynamically generated by JavaScript -->
+            </div>
+        </nav>
+    </div>
+
+    <!-- Related Posts -->
+    <div class="sidebar-card related-posts-widget">
+        <h4 class="sidebar-card__title">Related Posts</h4>
+        <div class="related-posts">
+            {% for related_post in post.get_related_posts %}
+                <a href="{% url 'post_detail' related_post.slug %}" class="related-post-card">
+                    <div class="related-post-image">
+                        {% if related_post.featured_image %}
+                            <img src="{{ related_post.featured_image.url }}" 
+                                 alt="{{ related_post.title }}"
+                                 loading="lazy">
+                        {% else %}
+                            <img src="{% static 'images/default-post.jpg' %}" 
+                                 alt="{{ related_post.title }}"
+                                 loading="lazy">
+                        {% endif %}
+                    </div>
+                    <div class="related-post-content">
+                        <h5 class="related-post-title">{{ related_post.title }}</h5>
+                        <div class="related-post-meta">
+                            <span class="post-date">
+                                <i class="far fa-calendar-alt"></i>
+                                {{ related_post.created_on|date:"M d, Y" }}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            {% empty %}
+                <p class="no-related">No related posts found</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="sidebar-card categories-widget">
+        <h4 class="sidebar-card__title">Categories</h4>
+        <div class="categories-list">
+            {% for category in categories %}
+                <span class="category-tag">
+                    <span class="category-name">{{ category.name }}</span>
+                    <span class="category-count">{{ category.posts.count }}</span>
+                </span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Share Widget -->
+    <div class="sidebar-card share-widget">
+        <h4 class="sidebar-card__title">Share This Post</h4>
+        <div class="share-buttons">
+            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title|urlencode }}" 
+               class="share-button twitter"
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-twitter"></i>
+                <span>Share on Twitter</span>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" 
+               class="share-button facebook"
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-facebook-f"></i>
+                <span>Share on Facebook</span>
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title|urlencode }}" 
+               class="share-button linkedin"
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-linkedin-in"></i>
+                <span>Share on LinkedIn</span>
+            </a>
+            <button class="share-button copy" id="copyLink">
+                <i class="fas fa-link"></i>
+                <span>Copy Link</span>
+            </button>
+        </div>
+    </div>
+</aside>
+    </div>
+</div>
 
 <!-- Toast Container -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
@@ -307,6 +342,7 @@
         </div>
     </div>
 </div>
+
 <!-- Delete Comment Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
