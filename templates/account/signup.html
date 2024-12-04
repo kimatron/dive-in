@@ -1,27 +1,80 @@
 {% extends "base.html" %}
-
 {% load i18n %}
+{% load static %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock head_title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+{% block head_title %}{% trans "Sign Up" %}{% endblock head_title %}
 
 {% block content %}
-<div class="signup-container">
-  <h1 class="signup-heading">{% trans "Sign Up" %}</h1>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="auth-title">{% trans "Join Our Community" %}</h1>
+            <p class="auth-subtitle">Start your diving journey with us</p>
+        </div>
 
-  <p class="signup-text">
-    {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}" class="signup-link">sign in</a>.{% endblocktrans %}
-  </p>
+        <div class="auth-content">
+            {% get_providers as socialaccount_providers %}
+            {% if socialaccount_providers %}
+            <div class="social-auth">
+                {% for provider in socialaccount_providers %}
+                    {% if provider.id == "google" %}
+                    <a href="{% provider_login_url provider.id process='login' %}" class="social-btn google">
+                        <i class="fab fa-google"></i>
+                        <span>Sign up with Google</span>
+                    </a>
+                    {% endif %}
+                    {% if provider.id == "facebook" %}
+                    <a href="{% provider_login_url provider.id process='login' %}" class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Sign up with Facebook</span>
+                    </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
 
-  <form class="signup-form" id="signup_form" method="post" action="{% url 'account_signup' %}">
-    {% csrf_token %}
-    
-    {{ form.as_p|safe }}
+            <div class="divider">
+                <span>or</span>
+            </div>
+            {% endif %}
 
-    {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
-    {% endif %}
-    
-    <button type="submit" class="signup-button btn-common">{% trans "Sign Up" %} &raquo;</button>
-  </form>
+            {% if form.errors %}
+                <div class="alert alert-error">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form class="auth-form" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+
+                <button type="submit" class="auth-submit">
+                    {% trans "Create Account" %}
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <p class="auth-switch">
+                    {% blocktrans %}Already have an account? <a href="{{ login_url }}">Sign in</a>{% endblocktrans %}
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="auth-decoration">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+    </div>
 </div>
 {% endblock content %}

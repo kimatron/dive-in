@@ -1,28 +1,90 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% load i18n %}
 {% load account socialaccount %}
+{% load crispy_forms_tags %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock head_title %}
 
 {% block content %}
-<div class="login-container">
-    <h1 class="login-heading">{% trans "Sign In" %}</h1>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="auth-title">{% trans "Welcome Back" %}</h1>
+            <p class="auth-subtitle">Dive back into your adventures</p>
+        </div>
 
-    <p class="login-text">
-        {% blocktrans %}Nice to see you again at Dive In! To add to the conversation or validate our humor by liking a post, please log in. If you haven't created an account yet, please <a class="login-link" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
-    </p>
+        <div class="auth-content">
+            {% get_providers as socialaccount_providers %}
+            {% if socialaccount_providers %}
+            <div class="social-auth">
+                {% for provider in socialaccount_providers %}
+                    {% if provider.id == "google" %}
+                    <a href="{% provider_login_url provider.id process='login' %}" class="social-btn google">
+                        <i class="fab fa-google"></i>
+                        <span>Continue with Google</span>
+                    </a>
+                    {% endif %}
+                    {% if provider.id == "facebook" %}
+                    <a href="{% provider_login_url provider.id process='login' %}" class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Continue with Facebook</span>
+                    </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
 
-    <form class="login-form" method="POST" action="{% url 'account_login' %}">
-        {% csrf_token %}
-        
-        {{ form.as_p|safe }}
-        
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        
-        <button class="login-button btn-common" type="submit">{% trans "Sign In" %} &raquo;</button>
-    </form>
+            <div class="divider">
+                <span>or</span>
+            </div>
+            {% endif %}
+
+            {% if form.errors %}
+                <div class="alert alert-error">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form class="auth-form" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="{% url 'account_reset_password' %}" class="forgot-password">
+                        {% trans "Forgot Password?" %}
+                    </a>
+                </div>
+
+                <button class="auth-submit" type="submit">
+                    {% trans "Sign In" %}
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <p class="auth-switch">
+                    {% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>{% endblocktrans %}
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="auth-decoration">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+    </div>
 </div>
 {% endblock content %}
