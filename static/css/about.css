@@ -8,7 +8,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -76px; /* Adjust based on your navbar height */
+    margin-top: -76px;
+    scroll-behavior: smooth;
 }
 
 .hero-background {
@@ -1015,4 +1016,31 @@
 
 .notification-close:hover {
     opacity: 1;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #4ECDC4;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    background-color: #45B6B0;
 }

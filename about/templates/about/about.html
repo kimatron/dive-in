@@ -8,11 +8,11 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="about-hero">
+<section id="about-hero" class="about-hero">
   {% if about.hero_image %}
       <img src="{{ about.hero_image.url }}" alt="Hero background" class="hero-background">
   {% else %}
-      <img src="{% static 'images/default-hero.jpg' %}" alt="Default hero" class="hero-background">
+      <img src="{% static 'images/heroabout.jpg' %}" alt="Default hero" class="hero-background">
   {% endif %}
   <div class="hero-overlay"></div>
   <div class="hero-content container">
@@ -57,7 +57,7 @@
 </section>
 
 <!-- Mission & Vision Section -->
-<section class="mission-section">
+<section id="mission" class="mission-section">
     <div class="container">
         <div class="mission-grid">
             <!-- Mission Card -->
@@ -419,6 +419,9 @@
         </div>
     </div>
 </section>
+<a href="#about-hero" class="scroll-to-top">
+    <i class="fas fa-chevron-up"></i>
+</a>
 {% endblock %}
 
 {% block extra_js %}

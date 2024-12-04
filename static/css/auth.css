@@ -330,3 +330,166 @@
         padding: 0.75rem;
     }
 }
+
+
+/* Reset Confirmation Styles */
+.reset-confirmation {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.confirmation-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 2rem;
+    background: linear-gradient(135deg, #4ECDC4, #45B7D1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmation-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.reset-confirmation p {
+    color: #718096;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.reset-confirmation .auth-submit {
+    display: inline-flex;
+    text-decoration: none;
+}
+
+/* Password Strength Indicator */
+.password-field {
+    position: relative;
+}
+
+.password-strength-meter {
+    height: 4px;
+    background: #e2e8f0;
+    margin-top: 0.5rem;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0;
+    transition: all 0.3s ease;
+}
+
+.strength-weak { 
+    width: 33.33%; 
+    background: #FC8181;
+}
+
+.strength-medium { 
+    width: 66.66%; 
+    background: #F6E05E;
+}
+
+.strength-strong { 
+    width: 100%; 
+    background: #68D391;
+}
+
+/* Password Requirements List */
+.password-requirements {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 0.5rem;
+}
+
+.requirements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.requirements-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #718096;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.requirements-list i {
+    font-size: 0.75rem;
+}
+
+.requirement-met {
+    color: #68D391;
+}
+
+.requirement-unmet {
+    color: #FC8181;
+}
+
+/* Success Icon Styles */
+.auth-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #4ECDC4, #45B7D1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.auth-icon.success {
+    background: linear-gradient(135deg, #48BB78, #38A169);
+}
+
+/* Reset Confirmation Styles */
+.reset-confirmation {
+    text-align: center;
+}
+
+.reset-confirmation p {
+    color: #718096;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.reset-confirmation .auth-submit {
+    display: inline-flex;
+    text-decoration: none;
+}
+
+/* Help Text */
+.help-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #718096;
+    font-size: 0.9rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 0.5rem;
+}
+
+.help-text i {
+    color: #4ECDC4;
+}
+
+/* Remove the Normal text */
+.userStyle {
+    display: none !important;
+}
