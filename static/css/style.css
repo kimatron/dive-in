@@ -54,7 +54,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #00796b;
+  color: #0ec9b3;
   line-height: 1.4;
 }
 
@@ -72,7 +72,7 @@ a {
 
 a:visited,
 a:hover {
-  color: #00796b;
+  color: #0ec9b3;
 }
 
 /* Hero Section */
