@@ -280,6 +280,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # )
 # CSP_CONNECT_SRC = ("'self'",)
 
+# Basic security settings that won't break things
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+
 # SECURE_SSL_REDIRECT = True
 # SECURE_BROWSER_XSS_FILTER = True
 # SECURE_CONTENT_TYPE_NOSNIFF = True
