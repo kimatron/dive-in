@@ -76,7 +76,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'csp.middleware.CSPMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -252,34 +251,34 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CSP_DEFAULT_SRC = ("'self'",)
-CSP_STYLE_SRC = (
-    "'self'",
-    "'unsafe-inline'",
-    "https://fonts.googleapis.com",
-    "https://cdn.jsdelivr.net",
-    "https://cdnjs.cloudflare.com",
-)
-CSP_SCRIPT_SRC = (
-    "'self'",
-    "'unsafe-inline'",
-    "'unsafe-eval'",
-    "https://cdn.jsdelivr.net",
-    "https://cdnjs.cloudflare.com",
-)
-CSP_FONT_SRC = (
-    "'self'",
-    "https://fonts.gstatic.com",
-    "https://cdn.jsdelivr.net",
-    "https://cdnjs.cloudflare.com",
-)
-CSP_IMG_SRC = (
-    "'self'",
-    "https:",
-    "data:",
-    "https://res.cloudinary.com",
-)
-CSP_CONNECT_SRC = ("'self'",)
+# CSP_DEFAULT_SRC = ("'self'",)
+# CSP_STYLE_SRC = (
+#     "'self'",
+#     "'unsafe-inline'",
+#     "https://fonts.googleapis.com",
+#     "https://cdn.jsdelivr.net",
+#     "https://cdnjs.cloudflare.com",
+# )
+# CSP_SCRIPT_SRC = (
+#     "'self'",
+#     "'unsafe-inline'",
+#     "'unsafe-eval'",
+#     "https://cdn.jsdelivr.net",
+#     "https://cdnjs.cloudflare.com",
+# )
+# CSP_FONT_SRC = (
+#     "'self'",
+#     "https://fonts.gstatic.com",
+#     "https://cdn.jsdelivr.net",
+#     "https://cdnjs.cloudflare.com",
+# )
+# CSP_IMG_SRC = (
+#     "'self'",
+#     "https:",
+#     "data:",
+#     "https://res.cloudinary.com",
+# )
+# CSP_CONNECT_SRC = ("'self'",)
 
 # SECURE_SSL_REDIRECT = True
 # SECURE_BROWSER_XSS_FILTER = True
