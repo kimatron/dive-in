@@ -9,16 +9,19 @@ from django.contrib.auth.models import User
 
 def about_page(request):
     """
-    Renders the 'About' page, displaying the most recent information about the company.
+    Renders the 'About' page,
+    displaying the most recent information about the company.
 
-    Retrieves the latest 'About' instance from the database (ordered by the most recently updated)
+    Retrieves the latest 'About' instance from the database
+    (ordered by the most recently updated)
     and passes it to the 'about.html' template for rendering.
 
     Args:
         request (HttpRequest): The HTTP request object.
 
     Returns:
-        HttpResponse: The rendered 'about.html' template with the context containing the 'About' instance.
+        HttpResponse: The rendered 'about.html' template
+        with the context containing the 'About' instance.
     """
     about = About.objects.all().order_by('-updated_on').first()
 

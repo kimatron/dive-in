@@ -2,6 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const postSlugElement = document.getElementById("postSlug");
     if (!postSlugElement) return;
 
+        // Initialize modals with error handling
+        try {
+            const editModal = document.getElementById("editModal");
+            const deleteModal = document.getElementById("deleteModal");
+            
+            if (editModal) {
+                const editModalInstance = new bootstrap.Modal(editModal);
+            }
+            if (deleteModal) {
+                const deleteModalInstance = new bootstrap.Modal(deleteModal);
+            }
+        } catch (error) {
+            console.warn('Modal initialization error:', error);
+        }
+
     const postSlug = postSlugElement.getAttribute("data-slug");
     const editModal = document.getElementById("editModal");
     const deleteModal = document.getElementById("deleteModal");

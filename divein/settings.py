@@ -64,6 +64,9 @@ INSTALLED_APPS = [
     'about',
 ]
 
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
+CLOUDINARY_SECURE = True
+
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -73,6 +76,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'csp.middleware.CSPMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -181,6 +185,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+ACCOUNT_USER_DISPLAY = lambda user: user.get_username()
 # ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 # ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
 ACCOUNT_ADAPTER = 'blog.adapters.CustomAccountAdapter'
@@ -245,3 +250,38 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_STYLE_SRC = (
+    "'self'",
+    "'unsafe-inline'",
+    "https://fonts.googleapis.com",
+    "https://cdn.jsdelivr.net",
+    "https://cdnjs.cloudflare.com",
+)
+CSP_SCRIPT_SRC = (
+    "'self'",
+    "'unsafe-inline'",
+    "'unsafe-eval'",
+    "https://cdn.jsdelivr.net",
+    "https://cdnjs.cloudflare.com",
+)
+CSP_FONT_SRC = (
+    "'self'",
+    "https://fonts.gstatic.com",
+    "https://cdn.jsdelivr.net",
+    "https://cdnjs.cloudflare.com",
+)
+CSP_IMG_SRC = (
+    "'self'",
+    "https:",
+    "data:",
+    "https://res.cloudinary.com",
+)
+CSP_CONNECT_SRC = ("'self'",)
+
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
