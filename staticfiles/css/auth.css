@@ -526,3 +526,76 @@
 .auth-submit {
     margin-top: 1.5rem;
 }
+
+.logout-card {
+    background: white;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.logout-card:hover {
+    transform: translateY(-5px);
+}
+
+.logout-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #4ECDC4, #45B7D1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.card-title {
+    color: #2d3748;
+    font-weight: 700;
+}
+
+.card-text {
+    color: #718096;
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4ECDC4, #45B7D1);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.2);
+    background: linear-gradient(135deg, #45B7D1, #4ECDC4);
+}
+
+.btn-outline-secondary {
+    border: 2px solid #718096;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #718096;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background: #718096;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.logout-form {
+    margin-top: 2rem;
+}

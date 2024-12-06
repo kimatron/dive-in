@@ -776,7 +776,8 @@
 .form-control:focus {
     border-color: #4ECDC4;
     box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
-    outline: none;
+    outline: 2px solid #4ECDC4;
+    outline-offset: 2px;
 }
 
 /* Submit Button */
@@ -1043,4 +1044,10 @@
 
 .scroll-to-top:hover {
     background-color: #45B6B0;
+}
+
+/* Higher contrast for form labels */
+label {
+    color: #2d3748;
+    font-weight: 500;
 }

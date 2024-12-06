@@ -1,119 +1,185 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const postSlugElement = document.getElementById("postSlug");
-    if (!postSlugElement) return;
+    // Check if Bootstrap is available
+    if (typeof bootstrap === 'undefined') {
+        console.error('Bootstrap is not loaded. Please ensure bootstrap.bundle.min.js is properly included.');
+        return;
+    }
 
-        // Initialize modals with error handling
-        try {
-            const editModal = document.getElementById("editModal");
-            const deleteModal = document.getElementById("deleteModal");
-            
-            if (editModal) {
-                const editModalInstance = new bootstrap.Modal(editModal);
+    // Get CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
-            if (deleteModal) {
-                const deleteModalInstance = new bootstrap.Modal(deleteModal);
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    const postSlugElement = document.getElementById('postSlug');
+    if (!postSlugElement) return;
+    const postSlug = postSlugElement.getAttribute('data-slug');
+
+    // Safely initialize modals
+    let editModal, deleteModal;
+    try {
+        const editModalElement = document.getElementById('editModal');
+        const deleteModalElement = document.getElementById('deleteModal');
+        
+        if (editModalElement) {
+            editModal = new bootstrap.Modal(editModalElement);
+        }
+        if (deleteModalElement) {
+            deleteModal = new bootstrap.Modal(deleteModalElement);
+        }
+    } catch (error) {
+        console.error('Error initializing modals:', error);
+        return;
+    }
+
+    let currentCommentId = null;
+
+    // Handle edit and delete buttons
+    const commentsList = document.querySelector('.comments-list');
+    if (commentsList) {
+        commentsList.addEventListener('click', (e) => {
+            if (e.target.closest('.btn-edit') && editModal) {
+                const editButton = e.target.closest('.btn-edit');
+                currentCommentId = editButton.getAttribute('comment_id');
+                const commentElement = document.querySelector(`#comment${currentCommentId}`);
+                const commentText = commentElement.textContent.trim();
+                document.getElementById('editCommentText').value = commentText;
+                editModal.show();
+            }
+            
+            if (e.target.closest('.btn-delete') && deleteModal) {
+                const deleteButton = e.target.closest('.btn-delete');
+                currentCommentId = deleteButton.getAttribute('comment_id');
+                deleteModal.show();
+            }
+        });
+    }
+
+    // Handle edit form submission
+    const saveEditButton = document.getElementById('saveEdit');
+    if (saveEditButton) {
+        saveEditButton.addEventListener('click', async () => {
+            if (!currentCommentId || !editModal) return;
+            
+            const updatedText = document.getElementById('editCommentText').value;
+            try {
+                const response = await fetch(`/post/${postSlug}/comment_edit/${currentCommentId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': csrftoken,
+                    },
+                    body: `body=${encodeURIComponent(updatedText)}`
+                });
+
+                if (response.ok) {
+                    const commentElement = document.querySelector(`#comment${currentCommentId}`);
+                    commentElement.innerHTML = updatedText;
+
+                    const commentCard = commentElement.closest('.comment-card');
+                    if (!commentCard.querySelector('.pending-notice')) {
+                        const pendingNotice = document.createElement('div');
+                        pendingNotice.className = 'pending-notice';
+                        pendingNotice.innerHTML = `
+                            <i class="fas fa-clock"></i>
+                            Your edited comment is awaiting approval
+                        `;
+                        commentCard.appendChild(pendingNotice);
+                    }
+
+                    showToast('Comment updated successfully and awaiting approval', 'success');
+                    editModal.hide();
+                } else {
+                    throw new Error('Failed to update comment');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Error updating comment. Please try again.', 'error');
+            }
+        });
+    }
+
+    // Handle delete confirmation
+    const deleteConfirmButton = document.getElementById('deleteConfirm');
+    if (deleteConfirmButton) {
+        deleteConfirmButton.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (!currentCommentId || !deleteModal) return;
+
+            try {
+                const response = await fetch(`/post/${postSlug}/comment_delete/${currentCommentId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    }
+                });
+
+                if (response.ok) {
+                    const commentCard = document.querySelector(`#comment${currentCommentId}`).closest('.comment-card');
+                    commentCard.remove();
+                    showToast('Comment deleted successfully', 'success');
+                    deleteModal.hide();
+                } else {
+                    throw new Error('Failed to delete comment');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Error deleting comment. Please try again.', 'error');
+            }
+        });
+    }
+
+    function showToast(message, type) {
+        try {
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-white border-0 bg-${type}`;
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+
+            const toastContainer = document.querySelector('.toast-container');
+            if (toastContainer) {
+                toastContainer.appendChild(toast);
+                const bsToast = new bootstrap.Toast(toast, { autohide: true, delay: 3000 });
+                bsToast.show();
+
+                toast.addEventListener('hidden.bs.toast', () => {
+                    toast.remove();
+                });
             }
         } catch (error) {
-            console.warn('Modal initialization error:', error);
+            console.error('Error showing toast:', error);
         }
+    }
 
-    const postSlug = postSlugElement.getAttribute("data-slug");
-    const editModal = document.getElementById("editModal");
-    const deleteModal = document.getElementById("deleteModal");
-    const editForm = document.getElementById("editForm");
-    const deleteForm = document.getElementById("deleteForm");
-    const commentsList = document.querySelector(".comments-list");
-
-    // Initialize Bootstrap modals
-    const editModalInstance = new bootstrap.Modal(editModal);
-    const deleteModalInstance = new bootstrap.Modal(deleteModal);
-
-    // Handle Edit functionality
-    commentsList.addEventListener("click", (event) => {
-        if (event.target.matches(".btn-edit")) {
-            const commentId = event.target.getAttribute("data-comment-id");
-            const commentContent = document.querySelector(`#comment${commentId} .comment-content`).innerText;
-            document.getElementById("editCommentId").value = commentId;
-            document.getElementById("editCommentText").value = commentContent.trim();
-            editModalInstance.show();
-        }
-    });
-
-    editForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const formData = new FormData(editForm);
-        const response = await fetch(editForm.action, {
-            method: "POST",
-            body: formData,
+    // Safely initialize existing toasts
+    try {
+        document.querySelectorAll('.toast').forEach(toastElement => {
+            const toast = new bootstrap.Toast(toastElement, { autohide: true, delay: 3000 });
+            toast.show();
         });
-
-        if (response.ok) {
-            const commentId = document.getElementById("editCommentId").value;
-            const commentCard = document.querySelector(`#comment${commentId}`).closest(".comment-card");
-            commentCard.classList.add("comment-pending");
-            const pendingNotice = commentCard.querySelector(".pending-notice");
-            if (!pendingNotice) {
-                commentCard.insertAdjacentHTML(
-                    "beforeend",
-                    `<div class="pending-notice">
-                        <i class="fas fa-clock"></i>
-                        Your edited comment is awaiting approval
-                    </div>`
-                );
-            }
-            document.querySelector(`#comment${commentId} .comment-content`).innerText = document.getElementById("editCommentText").value;
-            showNotification("Comment updated successfully and awaiting approval", "info");
-            editModalInstance.hide();
-        } else {
-            showNotification("Error updating comment. Please try again.", "error");
-        }
-    });
-
-    // Handle Delete functionality
-    commentsList.addEventListener("click", (event) => {
-        if (event.target.matches(".btn-delete")) {
-            const commentId = event.target.getAttribute("data-comment-id");
-            document.getElementById("deleteCommentId").value = commentId;
-            deleteModalInstance.show();
-        }
-    });
-
-    deleteForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const formData = new FormData(deleteForm);
-        const response = await fetch(deleteForm.action, {
-            method: "POST",
-            body: formData,
-        });
-
-        if (response.ok) {
-            const commentId = document.getElementById("deleteCommentId").value;
-            document.querySelector(`#comment${commentId}`).closest(".comment-card").remove();
-            showNotification("Comment deleted successfully", "success");
-            deleteModalInstance.hide();
-        } else {
-            showNotification("Error deleting comment. Please try again.", "error");
-        }
-    });
-
-    // Notification function
-    function showNotification(message, type) {
-        const notificationContainer = document.createElement("div");
-        notificationContainer.classList.add("toast", "align-items-center", "text-white", "border-0", `bg-${type}`);
-        notificationContainer.setAttribute("role", "alert");
-        notificationContainer.setAttribute("aria-live", "assertive");
-        notificationContainer.setAttribute("aria-atomic", "true");
-        notificationContainer.innerHTML = `
-            <div class="d-flex">
-                <div class="toast-body">
-                    <i class="fas ${type === "success" ? "fa-check-circle" : type === "error" ? "fa-exclamation-circle" : "fa-info-circle"} me-2"></i>
-                    ${message}
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        `;
-        document.querySelector(".toast-container").appendChild(notificationContainer);
-        const toast = new bootstrap.Toast(notificationContainer, { autohide: true, delay: 3000 });
-        toast.show();
+    } catch (error) {
+        console.error('Error initializing existing toasts:', error);
     }
 });
