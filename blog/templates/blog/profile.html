@@ -12,9 +12,9 @@
         <div class="profile-cover">
             <div class="profile-avatar">
                 {% if profile.profile_picture %}
-                    <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}">
+                    <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}" SameSite=Lax>
                 {% else %}
-                    <img src="{% static 'images/default-avatar.png' %}" alt="{{ profile.user.username }}">
+                    <img src="{% static 'images/default-avatar.png' %}" alt="{{ profile.user.username }}" SameSite=Lax>
                 {% endif %}
             </div>
         </div>
@@ -115,7 +115,7 @@
                 {% for post in user_posts|slice:":3" %}
                 <div class="post-card">
                     {% if post.featured_image %}
-                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" SameSite=Lax>
                     {% endif %}
                     <div class="post-content">
                         <h3>{{ post.title }}</h3>

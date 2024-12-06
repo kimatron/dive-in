@@ -26,11 +26,13 @@
                                 {% if post.featured_image %}
                                 <img src="{{ post.featured_image.url }}" 
                                      alt="{{ post.title }}" 
-                                     class="featured-image">
+                                     class="featured-image"
+                                     SameSite=Lax>
                                 {% else %}
                                 <img src="{% static 'images/default-post.jpg' %}" 
                                      alt="{{ post.title }}" 
-                                     class="featured-image">
+                                     class="featured-image"
+                                     SameSite=Lax>
                                 {% endif %}
                             </div>
                             <div class="featured-post-content">
@@ -44,7 +46,8 @@
                                         {% if post.author.userprofile.profile_picture %}
                                         <img src="{{ post.author.userprofile.profile_picture.url }}" 
                                              alt="{{ post.author.username }}" 
-                                             class="author-avatar">
+                                             class="author-avatar"
+                                             SameSite=Lax>
                                         {% endif %}
                                         <span class="author-name">{{ post.author.username }}</span>
                                     </div>
@@ -81,7 +84,8 @@
                         <img src="{% static 'images/divinlogolight.png' %}" 
                              alt="{{ post.title }}" 
                              class="post-card__image"
-                             loading="lazy">
+                             loading="lazy"
+                             SameSite=Lax>
                         {% endif %}
                     </div>
                     <div class="post-card__content">

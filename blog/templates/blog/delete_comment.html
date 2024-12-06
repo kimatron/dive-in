@@ -5,7 +5,7 @@
     <p>{{ comment.body }}</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <button type="submit" class="btn btn-delete btn-danger">Confirm Delete</button>
         <a href="{% url 'post_detail' comment.post.slug %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>

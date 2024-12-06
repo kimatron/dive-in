@@ -12,26 +12,24 @@
 <!-- Hero Section -->
 <section class="post-hero">
     {% if post.featured_image %}
-    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="post-hero__image">
+    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="post-hero__image" SameSite=Lax>
     {% else %}
-    <img src="{% static 'images/default-hero.jpg' %}" alt="{{ post.title }}" class="post-hero__image">
+    <img src="{% static 'images/default-hero.jpg' %}" alt="{{ post.title }}" class="post-hero__image" SameSite=Lax>
     {% endif %}
     <div class="post-hero__overlay"></div>
-    
+
     <div class="post-container">
         <div class="post-hero__content">
             {% if post.category %}
             <span class="post-hero__category">{{ post.category.name }}</span>
             {% endif %}
-            
+
             <h1 class="post-hero__title">{{ post.title }}</h1>
-            
+
             <div class="post-hero__meta">
                 <div class="post-hero__meta-item">
-                    <img src="{{ post.author.userprofile.profile_picture.url }}" 
-                         alt="{{ post.author.username }}" 
-                         class="rounded-circle"
-                         style="width: 40px; height: 40px; object-fit: cover;">
+                    <img src="{{ post.author.userprofile.profile_picture.url }}" alt="{{ post.author.username }}"
+                        class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" SameSite=Lax>
                     <a href="{% url 'user_profile' post.author.username %}" class="author-link">
                         By {{ post.author.username }}
                     </a>
@@ -58,7 +56,7 @@
                 <div class="post-content">
                     {{ post.content | safe }}
                 </div>
-                
+
                 <!-- Tags Section -->
                 {% if post.tags.all %}
                 <div class="post-tags">
@@ -75,24 +73,23 @@
                     <div class="author-card__header">
                         <div class="author-card__avatar">
                             {% if post.author.userprofile.profile_picture %}
-                                <img src="{{ post.author.userprofile.profile_picture.url }}" 
-                                     alt="{{ post.author.username }}" 
-                                     class="author-card__image">
+                            <img src="{{ post.author.userprofile.profile_picture.url }}"
+                                alt="{{ post.author.username }}" class="author-card__image" SameSite=Lax>
                             {% else %}
-                                <img src="{% static 'images/divinlogolight.png' %}" 
-                                     alt="{{ post.author.username }}" 
-                                     class="author-card__image">
+                            <img src="{% static 'images/divinlogolight.png' %}" alt="{{ post.author.username }}"
+                                class="author-card__image" SameSite=Lax>
                             {% endif %}
                         </div>
                         <div class="author-card__info">
                             <h3 class="author-card__name">About {{ post.author.username }}</h3>
                             {% if post.author.userprofile.bio %}
-                                <p class="author-card__bio">{{ post.author.userprofile.bio }}</p>
+                            <p class="author-card__bio">{{ post.author.userprofile.bio }}</p>
                             {% endif %}
                         </div>
                     </div>
                     <div class="author-card__footer">
-                        <a href="{% url 'user_profile' post.author.username %}" class="author-card__link">View Profile</a>
+                        <a href="{% url 'user_profile' post.author.username %}" class="author-card__link">View
+                            Profile</a>
                         <a href="#" class="author-card__link">More Posts</a>
                     </div>
                 </div>
@@ -120,165 +117,155 @@
                 <!-- Comments List -->
                 <div class="comments-list">
                     {% if comments %}
-                        {% for comment in comments %}
-                        <div class="comment-card {% if not comment.approved %}comment-pending{% endif %}">
-                            <div class="comment-header">
-                                <div class="comment-author">
-                                    {% if comment.author.userprofile.profile_picture %}
-                                        <img src="{{ comment.author.userprofile.profile_picture.url }}" 
-                                             alt="{{ comment.author.username }}" 
-                                             class="author-avatar">
-                                    {% else %}
-                                        <img src="{% static 'images/default-avatar.png' %}" 
-                                             alt="{{ comment.author.username }}" 
-                                             class="author-avatar">
-                                    {% endif %}
-                                    <div class="author-info">
-                                        <span class="author-name">{{ comment.author.username }}</span>
-                                        <span class="comment-date">{{ comment.created_on|timesince }} ago</span>
-                                    </div>
-                                </div>
-                                {% if user.is_authenticated and comment.author == user %}
-                                <div class="comment-actions">
-                                    <button class="btn-edit" comment_id="{{ comment.id }}">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-delete" comment_id="{{ comment.id }}">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
+                    {% for comment in comments %}
+                    <div class="comment-card {% if not comment.approved %}comment-pending{% endif %}">
+                        <div class="comment-header">
+                            <div class="comment-author">
+                                {% if comment.author.userprofile.profile_picture %}
+                                <img src="{{ comment.author.userprofile.profile_picture.url }}"
+                                    alt="{{ comment.author.username }}" class="author-avatar" SameSite=Lax>
+                                {% else %}
+                                <img src="{% static 'images/default-avatar.png' %}" alt="{{ comment.author.username }}"
+                                    class="author-avatar" SameSite=Lax>
                                 {% endif %}
+                                <div class="author-info">
+                                    <span class="author-name">{{ comment.author.username }}</span>
+                                    <span class="comment-date">{{ comment.created_on|timesince }} ago</span>
+                                </div>
                             </div>
-
-                            <div class="comment-content" id="comment{{ comment.id }}">
-                                {{ comment.body | linebreaks }}
-                            </div>
-
-                            {% if not comment.approved %}
-                            <div class="pending-notice">
-                                <i class="fas fa-clock"></i>
-                                Your comment is awaiting approval
+                            {% if user.is_authenticated and comment.author == user %}
+                            <div class="comment-actions">
+                                <button class="btn-edit" comment_id="{{ comment.id }}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-delete" comment_id="{{ comment.id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </div>
                             {% endif %}
                         </div>
-                        {% endfor %}
+
+                        <div class="comment-content" id="comment{{ comment.id }}">
+                            {{ comment.body | linebreaks }}
+                        </div>
+
+                        {% if not comment.approved %}
+                        <div class="pending-notice">
+                            <i class="fas fa-clock"></i>
+                            Your comment is awaiting approval
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
                     {% else %}
-                        <p class="no-comments">No comments yet. Be the first to comment!</p>
+                    <p class="no-comments">No comments yet. Be the first to comment!</p>
                     {% endif %}
                 </div>
             </section>
         </main>
 
-<aside class="post-sidebar">
+        <aside class="post-sidebar">
 
-    <!-- Table of Contents -->
-    <div class="sidebar-card toc-widget">
-        <h4 class="sidebar-card__title">Table of Contents</h4>
-        <nav class="toc-nav">
-            <div id="toc-content">
-                <!-- Dynamically generated by JavaScript -->
+            <!-- Table of Contents -->
+            <div class="sidebar-card toc-widget">
+                <h4 class="sidebar-card__title">Table of Contents</h4>
+                <nav class="toc-nav">
+                    <div id="toc-content">
+                        <!-- Dynamically generated by JavaScript -->
+                    </div>
+                </nav>
             </div>
-        </nav>
-    </div>
 
-    <!-- Related Posts -->
-    <div class="sidebar-card related-posts-widget">
-        <h4 class="sidebar-card__title">Related Posts</h4>
-        <div class="related-posts">
-            {% for related_post in post.get_related_posts %}
-                <a href="{% url 'post_detail' related_post.slug %}" class="related-post-card">
-                    <div class="related-post-image">
-                        {% if related_post.featured_image %}
-                            <img src="{{ related_post.featured_image.url }}" 
-                                 alt="{{ related_post.title }}"
-                                 loading="lazy">
-                        {% else %}
-                            <img src="{% static 'images/default-post.jpg' %}" 
-                                 alt="{{ related_post.title }}"
-                                 loading="lazy">
-                        {% endif %}
-                    </div>
-                    <div class="related-post-content">
-                        <h5 class="related-post-title">{{ related_post.title }}</h5>
-                        <div class="related-post-meta">
-                            <span class="post-date">
-                                <i class="far fa-calendar-alt"></i>
-                                {{ related_post.created_on|date:"M d, Y" }}
-                            </span>
+            <!-- Related Posts -->
+            <div class="sidebar-card related-posts-widget">
+                <h4 class="sidebar-card__title">Related Posts</h4>
+                <div class="related-posts">
+                    {% for related_post in post.get_related_posts %}
+                    <a href="{% url 'post_detail' related_post.slug %}" class="related-post-card">
+                        <div class="related-post-image">
+                            {% if related_post.featured_image %}
+                            <img src="{{ related_post.featured_image.url }}" alt="{{ related_post.title }}"
+                                loading="lazy" SameSite=Lax>
+                            {% else %}
+                            <img src="{% static 'images/default-post.jpg' %}" alt="{{ related_post.title }}"
+                                loading="lazy" SameSite=Lax>
+                            {% endif %}
                         </div>
-                    </div>
-                </a>
-            {% empty %}
-                <p class="no-related">No related posts found</p>
-            {% endfor %}
-        </div>
-    </div>
+                        <div class="related-post-content">
+                            <h5 class="related-post-title">{{ related_post.title }}</h5>
+                            <div class="related-post-meta">
+                                <span class="post-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    {{ related_post.created_on|date:"M d, Y" }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    {% empty %}
+                    <p class="no-related">No related posts found</p>
+                    {% endfor %}
+                </div>
+            </div>
 
-    <!-- Categories -->
-    <div class="sidebar-card categories-widget">
-        <h4 class="sidebar-card__title">Categories</h4>
-        <div class="categories-list">
-            {% for category in categories %}
-                <span class="category-tag">
-                    <span class="category-name">{{ category.name }}</span>
-                    <span class="category-count">{{ category.posts.count }}</span>
-                </span>
-            {% endfor %}
-        </div>
-    </div>
+            <!-- Categories -->
+            <div class="sidebar-card categories-widget">
+                <h4 class="sidebar-card__title">Categories</h4>
+                <div class="categories-list">
+                    {% for category in categories %}
+                    <span class="category-tag">
+                        <span class="category-name">{{ category.name }}</span>
+                        <span class="category-count">{{ category.posts.count }}</span>
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
 
-    <!-- Share Widget -->
-    <div class="sidebar-card share-widget">
-        <h4 class="sidebar-card__title">Share This Post</h4>
-        <div class="share-buttons">
-            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title|urlencode }}" 
-               class="share-button twitter"
-               target="_blank"
-               rel="noopener noreferrer">
-                <i class="fab fa-twitter"></i>
-                <span>Share on Twitter</span>
-            </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" 
-               class="share-button facebook"
-               target="_blank"
-               rel="noopener noreferrer">
-                <i class="fab fa-facebook-f"></i>
-                <span>Share on Facebook</span>
-            </a>
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title|urlencode }}" 
-               class="share-button linkedin"
-               target="_blank"
-               rel="noopener noreferrer">
-                <i class="fab fa-linkedin-in"></i>
-                <span>Share on LinkedIn</span>
-            </a>
-            <button class="share-button copy" id="copyLink">
-                <i class="fas fa-link"></i>
-                <span>Copy Link</span>
-            </button>
-        </div>
-    </div>
-</aside>
+            <!-- Share Widget -->
+            <div class="sidebar-card share-widget">
+                <h4 class="sidebar-card__title">Share This Post</h4>
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title|urlencode }}"
+                        class="share-button twitter" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter"></i>
+                        <span>Share on Twitter</span>
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                        class="share-button facebook" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Share on Facebook</span>
+                    </a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title|urlencode }}"
+                        class="share-button linkedin" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>Share on LinkedIn</span>
+                    </a>
+                    <button class="share-button copy" id="copyLink">
+                        <i class="fas fa-link"></i>
+                        <span>Copy Link</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
     </div>
 </div>
 
 <!-- Toast Container -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     {% if messages %}
-        {% for message in messages %}
-        <div class="toast align-items-center {% if message.tags == 'success' %}bg-success{% elif message.tags == 'error' %}bg-danger{% else %}bg-primary{% endif %} text-white border-0" 
-             role="alert" 
-             aria-live="assertive" 
-             aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    <i class="fas {% if message.tags == 'success' %}fa-check-circle{% elif message.tags == 'error' %}fa-exclamation-circle{% else %}fa-info-circle{% endif %} me-2"></i>
-                    {{ message }}
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    {% for message in messages %}
+    <div class="toast align-items-center {% if message.tags == 'success' %}bg-success{% elif message.tags == 'error' %}bg-danger{% else %}bg-primary{% endif %} text-white border-0"
+        role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i
+                    class="fas {% if message.tags == 'success' %}fa-check-circle{% elif message.tags == 'error' %}fa-exclamation-circle{% else %}fa-info-circle{% endif %} me-2"></i>
+                {{ message }}
             </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
         </div>
-        {% endfor %}
+    </div>
+    {% endfor %}
     {% endif %}
 </div>
 
@@ -328,7 +315,7 @@
 {% block extra_js %}
 <script>
     // Reading Time Calculator
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const content = document.querySelector('.post-content').innerText;
         const wordCount = content.trim().split(/\s+/).length;
         const readingTime = Math.ceil(wordCount / 200); // Assuming 200 words per minute

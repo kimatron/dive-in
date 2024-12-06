@@ -18,9 +18,9 @@
             <div class="profile-picture-section">
                 <div class="current-picture">
                     {% if profile.profile_picture %}
-                        <img src="{{ profile.profile_picture.url }}" alt="Current profile picture">
+                        <img src="{{ profile.profile_picture.url }}" alt="Current profile picture" SameSite=Lax>
                     {% else %}
-                        <img src="{% static 'images/default-avatar.png' %}" alt="Default profile picture">
+                        <img src="{% static 'images/default-avatar.png' %}" alt="Default profile picture" SameSite=Lax>
                     {% endif %}
                 </div>
                 <div class="upload-section">

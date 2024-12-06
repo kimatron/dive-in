@@ -19,6 +19,9 @@ import dj_database_url
 if os.path.isfile('env.py'):
     import env  # noqa: F401
 
+import cloudinary
+cloudinary.config(secure=True,)
+
 # Now use os.environ.get() for all environment variables
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

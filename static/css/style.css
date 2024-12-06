@@ -70,7 +70,7 @@ a {
   transition: color 0.3s ease;
 }
 
-a:visited,
+/* a:visited, */
 a:hover {
   color: #0ec9b3;
 }
@@ -284,7 +284,7 @@ a:hover {
 
 .post-card__date {
   font-size: 0.875rem;
-  color: #718096;
+  color: #323842;
 }
 
 /* Hover effect for the entire card making it clickable */
@@ -401,7 +401,7 @@ a:hover {
 }
 
 .featured-excerpt {
-  color: #718096;
+  color: #2d3436;
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
@@ -435,7 +435,7 @@ a:hover {
 
 .post-date {
   font-size: 0.875rem;
-  color: #718096;
+  color: #4a5568;
   display: flex;
   align-items: center;
   gap: 0.5rem;

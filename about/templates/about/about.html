@@ -10,9 +10,9 @@
 <!-- Hero Section -->
 <section id="about-hero" class="about-hero">
   {% if about.hero_image %}
-      <img src="{{ about.hero_image.url }}" alt="Hero background" class="hero-background">
+      <img src="{{ about.hero_image.url }}" alt="Hero background" class="hero-background" SameSite=Lax>
   {% else %}
-      <img src="{% static 'images/heroabout.jpg' %}" alt="Default hero" class="hero-background">
+      <img src="{% static 'images/heroabout.jpg' %}" alt="Default hero" class="hero-background" SameSite=Lax>
   {% endif %}
   <div class="hero-overlay"></div>
   <div class="hero-content container">
@@ -99,7 +99,7 @@
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="member-image">
-                            <img src="{% static 'images/team-1.jpg' %}" alt="Team Member">
+                            <img src="{% static 'images/team-1.jpg' %}" alt="Team Member" SameSite=Lax>
                         </div>
                         <div class="member-info">
                             <h3>Kim Hanlon</h3>
@@ -134,7 +134,7 @@
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="member-image">
-                            <img src="{% static 'images/team-2.jpg' %}" alt="Team Member">
+                            <img src="{% static 'images/team-2.jpg' %}" alt="Team Member" SameSite=Lax>
                         </div>
                         <div class="member-info">
                             <h3>Mike Reef</h3>
@@ -169,7 +169,7 @@
                 <div class="card-inner">
                     <div class="card-front">
                         <div class="member-image">
-                            <img src="{% static 'images/team-4.jpeg' %}" alt="Team Member">
+                            <img src="{% static 'images/team-4.jpeg' %}" alt="Team Member" SameSite=Lax>
                         </div>
                         <div class="member-info">
                             <h3>Lisa Deep</h3>
