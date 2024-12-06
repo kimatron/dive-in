@@ -462,7 +462,7 @@ This document provides detailed testing documentation for the Dive In blog platf
 | File | Result | Evidence | Notes |
 |------|---------|-----------|-------|
 | script.js | Pass | ![Main JS](static/images/documentation/validation-js-main.png) | No major issues |
-| comments.js | Pass | ![Comments JS](static/images/documentation/validation-js-comments.png) | No major issues |
+| comments.js | Pass | ![Comments JS](static/images/documentation/validation-js-comments.png) | Some issues |
 | about.js | Pass | ![About JS](static/images/documentation/validation-js-about.png) | No major issues |
 
 ### Python Validation (PEP8)
@@ -516,6 +516,12 @@ This document provides detailed testing documentation for the Dive In blog platf
    - **Actual:** Different styles in Safari
    - **Status:** ⚠️ Minor Issue
    - **Evidence:** ![Validation Bug](static/images/documentation/bug-form-validation.png)
+
+   4. **Login/Register**
+   - Showing text in top left hand corner of the register/login in form, unsure what's causing it
+
+5. **Newsletter scubscription not functioning**
+- Subscription form in footer, not showing error, but not functioning as a working feature
 
 ### Fixed Bugs
 

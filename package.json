@@ -1,0 +1,17 @@
+{
+  "name": "dive-in",
+  "version": "1.0.0",
+  "description": "Dive In is a dynamic blog platform dedicated to scuba diving, travel, and the lifestyle that accompanies these adventures. The site provides a vibrant community where users can read engaging blog posts, share their own experiences, participate in discussions, and connect with other diving enthusiasts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0"
+  }
+}

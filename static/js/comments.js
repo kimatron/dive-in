@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if Bootstrap is available
+    if (typeof bootstrap === 'undefined') {
+        console.error('Bootstrap is not loaded. Please ensure bootstrap.bundle.min.js is properly included.');
+        return;
+    }
+
     // Get CSRF token
     function getCookie(name) {
         let cookieValue = null;
@@ -20,9 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!postSlugElement) return;
     const postSlug = postSlugElement.getAttribute('data-slug');
 
-    // Initialize the modals
-    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    // Safely initialize modals
+    let editModal, deleteModal;
+    try {
+        const editModalElement = document.getElementById('editModal');
+        const deleteModalElement = document.getElementById('deleteModal');
+        
+        if (editModalElement) {
+            editModal = new bootstrap.Modal(editModalElement);
+        }
+        if (deleteModalElement) {
+            deleteModal = new bootstrap.Modal(deleteModalElement);
+        }
+    } catch (error) {
+        console.error('Error initializing modals:', error);
+        return;
+    }
 
     let currentCommentId = null;
 
@@ -30,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const commentsList = document.querySelector('.comments-list');
     if (commentsList) {
         commentsList.addEventListener('click', (e) => {
-            if (e.target.closest('.btn-edit')) {
+            if (e.target.closest('.btn-edit') && editModal) {
                 const editButton = e.target.closest('.btn-edit');
                 currentCommentId = editButton.getAttribute('comment_id');
                 const commentElement = document.querySelector(`#comment${currentCommentId}`);
@@ -39,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 editModal.show();
             }
             
-            if (e.target.closest('.btn-delete')) {
+            if (e.target.closest('.btn-delete') && deleteModal) {
                 const deleteButton = e.target.closest('.btn-delete');
                 currentCommentId = deleteButton.getAttribute('comment_id');
                 deleteModal.show();
@@ -51,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveEditButton = document.getElementById('saveEdit');
     if (saveEditButton) {
         saveEditButton.addEventListener('click', async () => {
-            if (!currentCommentId) return;
+            if (!currentCommentId || !editModal) return;
             
             const updatedText = document.getElementById('editCommentText').value;
             try {
@@ -96,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (deleteConfirmButton) {
         deleteConfirmButton.addEventListener('click', async (e) => {
             e.preventDefault();
-            if (!currentCommentId) return;
+            if (!currentCommentId || !deleteModal) return;
 
             try {
                 const response = await fetch(`/post/${postSlug}/comment_delete/${currentCommentId}/`, {
@@ -121,39 +140,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to show toast notifications
     function showToast(message, type) {
-        const toast = document.createElement('div');
-        toast.className = `toast align-items-center text-white border-0 bg-${type}`;
-        toast.setAttribute('role', 'alert');
-        toast.setAttribute('aria-live', 'assertive');
-        toast.setAttribute('aria-atomic', 'true');
-        
-        toast.innerHTML = `
-            <div class="d-flex">
-                <div class="toast-body">
-                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
-                    ${message}
+        try {
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-white border-0 bg-${type}`;
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        `;
+            `;
 
-        const toastContainer = document.querySelector('.toast-container');
-        if (toastContainer) {
-            toastContainer.appendChild(toast);
-            const bsToast = new bootstrap.Toast(toast, { autohide: true, delay: 3000 });
-            bsToast.show();
+            const toastContainer = document.querySelector('.toast-container');
+            if (toastContainer) {
+                toastContainer.appendChild(toast);
+                const bsToast = new bootstrap.Toast(toast, { autohide: true, delay: 3000 });
+                bsToast.show();
 
-            toast.addEventListener('hidden.bs.toast', () => {
-                toast.remove();
-            });
+                toast.addEventListener('hidden.bs.toast', () => {
+                    toast.remove();
+                });
+            }
+        } catch (error) {
+            console.error('Error showing toast:', error);
         }
     }
 
-    // Initialize any existing Django messages as Bootstrap toasts
-    document.querySelectorAll('.toast').forEach(toastElement => {
-        const toast = new bootstrap.Toast(toastElement, { autohide: true, delay: 3000 });
-        toast.show();
-    });
+    // Safely initialize existing toasts
+    try {
+        document.querySelectorAll('.toast').forEach(toastElement => {
+            const toast = new bootstrap.Toast(toastElement, { autohide: true, delay: 3000 });
+            toast.show();
+        });
+    } catch (error) {
+        console.error('Error initializing existing toasts:', error);
+    }
 });
