@@ -6,6 +6,15 @@
 <link rel="stylesheet" href="{% static 'css/about.css' %}">
 {% endblock %}
 
+{% block extra_head %}
+<meta name="description" content="Dive In - Your premier destination for diving guides, underwater photography tips, and marine conservation news. Join our community of passionate divers.">
+<meta name="keywords" content="diving, scuba diving, underwater photography, marine conservation, diving community">
+<meta property="og:title" content="About Dive In - Your Diving Community">
+<meta property="og:description" content="Learn about Dive In's mission to connect divers and promote marine conservation through our comprehensive guides and community platform.">
+<meta property="og:image" content="{% static 'images/heroabout.jpg' %}">
+<meta property="og:type" content="website">
+{% endblock %}
+
 {% block content %}
 <!-- Hero Section -->
 <section id="about-hero" class="about-hero">
@@ -120,9 +129,15 @@
                                 </div>
                             </div>
                             <div class="social-links">
-                                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="social-link" aria-label="Follow us on Instagram">
+                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://www.facebook.com/blogdivein" class="social-link" aria-label="Follow us on Twitter">
+                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Connect on LinkedIn">
+                                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -155,9 +170,15 @@
                                 </div>
                             </div>
                             <div class="social-links">
-                                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="social-link" aria-label="Follow us on Instagram">
+                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Follow us on Twitter">
+                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Connect on LinkedIn">
+                                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -332,20 +353,21 @@
                     </div>
 
                     <div class="form-group floating">
-                        <input type="text" name="name" id="id_name" class="form-control" required>
+                        <input type="text" name="name" id="id_name" class="form-control" required aria-label="Your Name">
                         <label for="id_name">Your Name</label>
-                        <div class="line"></div>
+                        <div class="line" aria-hidden="true"></div>
                     </div>
 
                     <div class="form-group floating">
-                        <input type="email" name="email" id="id_email" class="form-control" required>
+                        <input type="email" name="email" id="id_email" class="form-control" required aria-label="E-mail Address">
                         <label for="id_email">Email Address</label>
                         <div class="line"></div>
                     </div>
 
                     <div class="form-group">
+                        <label for="id_collaboration_type">Collaboration Type</label>
                         <select name="collaboration_type" id="id_collaboration_type" class="form-control" required>
-                            <option value="">Select Collaboration Type</option>
+                            <option value="" disabled selected>Select Collaboration Type</option>
                             <option value="content">Content Creation</option>
                             <option value="photography">Photography</option>
                             <option value="reviews">Location Reviews</option>
