@@ -1,29 +1,48 @@
 {% extends "base.html" %}
-
 {% load i18n %}
+{% load static %}
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
-            <h3>{% trans "Sign Out" %}</h3>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card logout-card">
+                <div class="card-body text-center">
+                    <!-- Icon -->
+                    <div class="logout-icon mb-4">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
 
-            <p>{% trans "We'll miss having you around, are you sure you wanna go?" %}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
+                    <!-- Title -->
+                    <h2 class="card-title mb-4">{% trans "Diving Out?" %}</h2>
 
-            <form method="post" action="{% url 'account_logout' %}">
-                {% csrf_token %}
-                {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <button class="btn btn-signup right" type="submit">{% trans 'Sign Out' %}</button>
-            </form>
+                    <!-- Message -->
+                    <p class="card-text mb-4">
+                        {% trans "We'll miss having you around. Are you sure you want to surface?" %}
+                    </p>
+
+                    <!-- Form -->
+                    <form method="post" action="{% url 'account_logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Stay Diving
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sign-out-alt me-2"></i>Surface Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 {% endblock %}
